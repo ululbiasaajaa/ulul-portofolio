@@ -1,529 +1,541 @@
-import sys
-import os
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from pptx.dml.color import RGBColor
+from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.oxml.ns import qn
+from PIL import Image
 
-try:
-    from pptx import Presentation
-    from pptx.util import Inches, Pt
-    from pptx.dml.color import RGBColor
-    from pptx.enum.text import PP_ALIGN
-    from pptx.enum.shapes import MSO_SHAPE
-except ImportError:
-    print("Library python-pptx belum terinstall!")
-    print("Silakan jalankan perintah ini di terminal VS Code/CMD:")
-    print("pip install python-pptx")
-    sys.exit(1)
+UP = "/mnt/user-data/uploads/"
+IMG = {
+    "clinical": "project1.jpg",
+    "podlearn": "project2.jpg",
+    "cloudinv": "project3.jpg",
+    "scentdna": "project4.jpg",
+    "lume":     "project5.jpg",
+    "ldr":      "project6.jpg",
+    "schoolcom":"project7.jpg",
+    "profile":  "profile_circle.png",
+}
 
-def create_portfolio_pptx():
-    prs = Presentation()
-    # Set Slide Size to Widescreen 16:9 (13.33 x 7.5 inches)
-    prs.slide_width = Inches(13.333)
-    prs.slide_height = Inches(7.5)
-    
-    blank_layout = prs.slide_layouts[6] # Blank Layout
+prs = Presentation()
+prs.slide_width = Inches(13.333)
+prs.slide_height = Inches(7.5)
+BLANK = prs.slide_layouts[6]
 
-    # Color Palette (Dark Theme Modern)
-    BG_COLOR = RGBColor(15, 23, 42)       # Slate 900 (#0F172A)
-    CARD_BG = RGBColor(30, 41, 59)        # Slate 800 (#1E293B)
-    CARD_BORDER = RGBColor(51, 65, 85)    # Slate 700 (#334155)
-    PRIMARY_TEXT = RGBColor(248, 250, 252)# Slate 50 (#F8FAFC)
-    SECONDARY_TEXT = RGBColor(148, 163, 184) # Slate 400 (#94A3B8)
-    
-    CYAN_ACCENT = RGBColor(6, 182, 212)   # Cyan 500 (#06B6D4)
-    ROSE_ACCENT = RGBColor(244, 63, 94)   # Rose 500 (#F43F5E)
-    ORANGE_ACCENT = RGBColor(249, 115, 22) # Orange 500 (#F97316)
-    SKY_ACCENT = RGBColor(2, 132, 199)    # Sky 600 (#0284C7)
-    PURPLE_ACCENT = RGBColor(139, 92, 246) # Purple 500 (#8B5CF6)
-    EMERALD_ACCENT = RGBColor(16, 185, 129) # Emerald 500 (#10B981)
-    BLUE_ACCENT = RGBColor(37, 99, 235)   # Blue 600 (#2563EB) - SchoolCom Accent
+BG          = RGBColor(0xFB, 0xF8, 0xF3)
+CARD_BG     = RGBColor(0xFF, 0xFF, 0xFF)
+TEXT_DARK   = RGBColor(0x33, 0x2F, 0x2B)
+TEXT_MUTED  = RGBColor(0x8A, 0x84, 0x7C)
 
-    def set_slide_background(slide):
-        background = slide.background
-        fill = background.fill
-        fill.solid()
-        fill.fore_color.rgb = BG_COLOR
+ROSE   = RGBColor(0xC4, 0x74, 0x8C); ROSE_BG = RGBColor(0xFB, 0xE9, 0xED)
+SAGE   = RGBColor(0x5B, 0x8A, 0x72); SAGE_BG = RGBColor(0xE6, 0xF0, 0xE8)
+LAV    = RGBColor(0x7C, 0x6D, 0xA8); LAV_BG  = RGBColor(0xEC, 0xE7, 0xF6)
+TERRA  = RGBColor(0xC1, 0x7A, 0x4A); TERRA_BG= RGBColor(0xFB, 0xEC, 0xDF)
+TEAL   = RGBColor(0x3F, 0x8B, 0x8C); TEAL_BG = RGBColor(0xE3, 0xF1, 0xEF)
 
-    def add_header(slide, title_text, category_text="PORTOFOLIO DIGITAL"):
-        # Header Box
-        header_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.5), Inches(11.733), Inches(1.0))
-        tf = header_box.text_frame
-        tf.word_wrap = True
-        
-        p_cat = tf.paragraphs[0]
-        p_cat.text = category_text.upper()
-        p_cat.font.size = Pt(11)
-        p_cat.font.bold = True
-        p_cat.font.color.rgb = CYAN_ACCENT
-        p_cat.font.name = "Arial"
-        
-        p_title = tf.add_paragraph()
-        p_title.text = title_text
-        p_title.font.size = Pt(26)
-        p_title.font.bold = True
-        p_title.font.color.rgb = PRIMARY_TEXT
-        p_title.font.name = "Arial"
+FONT = "Arial"
 
-    # ==========================================
-    # SLIDE 1: COVER
-    # ==========================================
-    slide1 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide1)
-    
-    # Decorative Accent Bar
-    bar = slide1.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(2.2), Inches(0.15), Inches(3.2))
-    bar.fill.solid()
-    bar.fill.fore_color.rgb = CYAN_ACCENT
-    bar.line.color.rgb = CYAN_ACCENT
-    
-    # Title Text Box
-    tb1 = slide1.shapes.add_textbox(Inches(1.2), Inches(2.0), Inches(11), Inches(3.5))
-    tf1 = tb1.text_frame
-    tf1.word_wrap = True
-    
-    p = tf1.paragraphs[0]
-    p.text = "AVAILABLE FOR FREELANCE & COLLABORATION"
-    p.font.size = Pt(12)
-    p.font.bold = True
-    p.font.color.rgb = CYAN_ACCENT
-    
-    p2 = tf1.add_paragraph()
-    p2.text = "Muhammad Ulul Albab"
-    p2.font.size = Pt(44)
-    p2.font.bold = True
-    p2.font.color.rgb = PRIMARY_TEXT
-    
-    p3 = tf1.add_paragraph()
-    p3.text = "Fullstack & AI Application Developer"
-    p3.font.size = Pt(22)
-    p3.font.color.rgb = SECONDARY_TEXT
-    
-    p4 = tf1.add_paragraph()
-    p4.text = "Perpaduan Ketelitian Analisis Farmasi & Rekayasa Perangkat Lunak Modern"
-    p4.font.size = Pt(14)
-    p4.font.italic = True
-    p4.font.color.rgb = CYAN_ACCENT
+def set_bg(slide, color=BG):
+    f = slide.background.fill
+    f.solid(); f.fore_color.rgb = color
 
-    # ==========================================
-    # SLIDE 2: ABOUT ME & BACKGROUND
-    # ==========================================
-    slide2 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide2)
-    add_header(slide2, "Tentang Saya & Latar Belakang Analitis", "Profil Profesional")
+def add_shadow(shape, blur=Inches(0.14), dist=Inches(0.05), alpha=18):
+    sp = shape._element.spPr
+    effectLst = sp.makeelement(qn('a:effectLst'), {})
+    shadow = sp.makeelement(qn('a:outerShdw'), {
+        'blurRad': str(blur), 'dist': str(dist), 'dir': '5400000', 'rotWithShape': '0'
+    })
+    clr = sp.makeelement(qn('a:srgbClr'), {'val': '4A4038'})
+    alpha_el = sp.makeelement(qn('a:alpha'), {'val': str(alpha*1000)})
+    clr.append(alpha_el); shadow.append(clr); effectLst.append(shadow)
+    sp.append(effectLst)
 
-    # Left Box (Farmasi Background)
-    shape_left = slide2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    shape_left.fill.solid()
-    shape_left.fill.fore_color.rgb = CARD_BG
-    shape_left.line.color.rgb = CARD_BORDER
-    
-    tf_l = shape_left.text_frame
-    tf_l.word_wrap = True
-    tf_l.margin_left = Inches(0.3)
-    tf_l.margin_top = Inches(0.3)
-    
-    p = tf_l.paragraphs[0]
-    p.text = "Pendidikan & Fondasi Eksakta"
-    p.font.bold = True
-    p.font.size = Pt(18)
-    p.font.color.rgb = CYAN_ACCENT
-    
-    p = tf_l.add_paragraph()
-    p.text = "• Universitas Pakuan — Program Studi Farmasi"
-    p.font.size = Pt(14)
-    p.font.color.rgb = PRIMARY_TEXT
-    
-    p = tf_l.add_paragraph()
-    p.text = "\nLatar belakang Farmasi membentuk ketelitian tinggi, logika eksploratif, serta pola pikir analitis eksakta yang kuat dalam memecahkan masalah kompleks."
-    p.font.size = Pt(13)
-    p.font.color.rgb = SECONDARY_TEXT
+def card(slide, x, y, w, h, fill=CARD_BG, radius=0.06, shadow=True):
+    c = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
+    c.fill.solid(); c.fill.fore_color.rgb = fill
+    c.line.fill.background()
+    c.adjustments[0] = radius
+    if shadow: add_shadow(c)
+    c.text_frame.margin_left = Inches(0.35); c.text_frame.margin_right = Inches(0.35)
+    c.text_frame.margin_top = Inches(0.3)
+    c.text_frame.vertical_anchor = MSO_ANCHOR.TOP
+    return c
 
-    # Right Box (Developer Edge)
-    shape_right = slide2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    shape_right.fill.solid()
-    shape_right.fill.fore_color.rgb = CARD_BG
-    shape_right.line.color.rgb = CARD_BORDER
-    
-    tf_r = shape_right.text_frame
-    tf_r.word_wrap = True
-    tf_r.margin_left = Inches(0.3)
-    tf_r.margin_top = Inches(0.3)
-    
-    p = tf_r.paragraphs[0]
-    p.text = "Transisi Ke Software Engineering"
-    p.font.bold = True
-    p.font.size = Pt(18)
-    p.font.color.rgb = ROSE_ACCENT
-    
-    points = [
-        "Fokus pada pembentukan arsitektur sistem yang bersih, efisien, dan siap pakai di lingkungan cloud.",
-        "Menguasai pemecahan masalah teknis end-to-end: dari profil memori PyTorch/Docker hingga optimasi database.",
-        "Komitmen pada pembelajaran berkelanjutan tanpa ragu menghadapi tantangan teknologi baru."
-    ]
-    for pt in points:
-        p = tf_r.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(13)
-        p.font.color.rgb = SECONDARY_TEXT
-
-    # ==========================================
-    # SLIDE 3: TECH STACK MATRIX
-    # ==========================================
-    slide3 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide3)
-    add_header(slide3, "Keahlian & Ekosistem Teknologi", "Technical Stack")
-
-    stacks = [
-        ("Frontend & Mobile", "React, React Native, Expo SDK 54, Tailwind CSS, Vite, HTML/JS", CYAN_ACCENT, 0.8, 1.8),
-        ("Backend & API", "FastAPI (Python), Laravel 11 (PHP), Node.js / Express, Firebase", ROSE_ACCENT, 6.8, 1.8),
-        ("AI & Data Intelligence", "Gemini RAG API, PyTorch, SentenceTransformers, pgvector", PURPLE_ACCENT, 0.8, 4.3),
-        ("Database & Cloud", "PostgreSQL, MySQL, Firebase Firestore, SQLite, Docker, Vercel", EMERALD_ACCENT, 6.8, 4.3)
-    ]
-
-    for title, desc, color, x, y in stacks:
-        card = slide3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(5.7), Inches(2.2))
-        card.fill.solid()
-        card.fill.fore_color.rgb = CARD_BG
-        card.line.color.rgb = CARD_BORDER
-        
-        tf = card.text_frame
-        tf.word_wrap = True
-        tf.margin_left = Inches(0.3)
-        tf.margin_top = Inches(0.2)
-        
-        p = tf.paragraphs[0]
-        p.text = title
-        p.font.bold = True
-        p.font.size = Pt(16)
-        p.font.color.rgb = color
-        
-        p2 = tf.add_paragraph()
-        p2.text = desc
-        p2.font.size = Pt(13)
-        p2.font.color.rgb = PRIMARY_TEXT
-
-    # ==========================================
-    # SLIDE 4: FEATURED SYSTEM - SCHOOLCOM MVP
-    # ==========================================
-    slide4 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide4)
-    add_header(slide4, "SchoolCom — School Management & Communication System", "Featured Enterprise & Mobile Project")
-
-    card = slide4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.8), Inches(11.733), Inches(4.8))
-    card.fill.solid()
-    card.fill.fore_color.rgb = CARD_BG
-    card.line.color.rgb = BLUE_ACCENT
-
-    tf = card.text_frame
-    tf.word_wrap = True
-    tf.margin_left = Inches(0.4)
-    tf.margin_top = Inches(0.3)
-
+def icon_chip(slide, x, y, symbol, color, size=0.6):
+    chip = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches(x), Inches(y), Inches(size), Inches(size))
+    chip.fill.solid(); chip.fill.fore_color.rgb = color
+    chip.line.fill.background()
+    tf = chip.text_frame
+    tf.margin_left=0; tf.margin_right=0; tf.margin_top=0; tf.margin_bottom=0
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
-    p.text = "Sistem Pengelolaan & Komunikasi Sekolah Terpadu 3 Peran (Android & Web)"
-    p.font.bold = True
-    p.font.size = Pt(18)
-    p.font.color.rgb = BLUE_ACCENT
+    p.text = symbol; p.alignment = PP_ALIGN.CENTER
+    p.font.size = Pt(18); p.font.color.rgb = RGBColor(0xFF,0xFF,0xFF)
+    return chip
 
-    p = tf.add_paragraph()
-    p.text = "Tech Stack: React Native (Expo SDK 54), Firebase Firestore/Auth, React, Vite, Tailwind CSS v4, Vercel\n"
-    p.font.size = Pt(12)
-    p.font.bold = True
-    p.font.color.rgb = CYAN_ACCENT
-
-    highlights_schoolcom = [
-        "Role-Based Architecture (RBAC): Tiga antarmuka terpisah khusus untuk Admin Sekolah, Guru Kelas, dan Orang Tua.",
-        "Module Auditability: 40 modul teraudit mencakup presensi harian batch, penginputan nilai rapor, & rekapitulasi.",
-        "Parent-Child Scoping: Transparansi pemantauan kehadiran dan catatan insiden/perilaku siswa secara aman.",
-        "Landing Page & Conversion: Landing page khusus Vercel terintegrasi ke WhatsApp (+62895414781707) untuk permintaan demo."
-    ]
-    for h in highlights_schoolcom:
-        p = tf.add_paragraph()
-        p.text = f"✓  {h}"
-        p.font.size = Pt(13)
-        p.font.color.rgb = PRIMARY_TEXT
-
-    # ==========================================
-    # SLIDE 5: PROJECT 2 - SCENTDNA
-    # ==========================================
-    slide5 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide5)
-    add_header(slide5, "ScentDNA — AI Fragrance Discovery Engine", "Featured AI Project")
-
-    card = slide5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.8), Inches(11.733), Inches(4.8))
-    card.fill.solid()
-    card.fill.fore_color.rgb = CARD_BG
-    card.line.color.rgb = ROSE_ACCENT
-
-    tf = card.text_frame
-    tf.word_wrap = True
-    tf.margin_left = Inches(0.4)
-    tf.margin_top = Inches(0.3)
-
+def header(slide, title_text, eyebrow, color=ROSE):
+    tb = slide.shapes.add_textbox(Inches(0.8), Inches(0.55), Inches(11.7), Inches(1.15))
+    tf = tb.text_frame; tf.word_wrap = True
     p = tf.paragraphs[0]
-    p.text = "Mesin Rekomendasi Aroma Vector Search & RAG AI (Dockerized)"
-    p.font.bold = True
-    p.font.size = Pt(18)
-    p.font.color.rgb = ROSE_ACCENT
+    p.text = eyebrow.upper(); p.font.size = Pt(11); p.font.bold = True
+    p.font.color.rgb = color; p.font.name = FONT
+    p2 = tf.add_paragraph()
+    p2.text = title_text; p2.font.size = Pt(27); p2.font.bold = True
+    p2.font.color.rgb = TEXT_DARK; p2.font.name = FONT; p2.space_before = Pt(2)
 
-    p = tf.add_paragraph()
-    p.text = "Tech Stack: FastAPI (Python), PyTorch, SentenceTransformers, pgvector (PostgreSQL), Docker, Gemini 2.5 Flash API\n"
-    p.font.size = Pt(12)
-    p.font.bold = True
-    p.font.color.rgb = CYAN_ACCENT
+def fit_image(path, box_w, box_h):
+    im = Image.open(path); iw, ih = im.size; ratio = iw/ih
+    if box_w/box_h > ratio:
+        h = box_h; w = h*ratio
+    else:
+        w = box_w; h = w/ratio
+    return w, h
 
-    highlights = [
-        "Semantic Vector Search: Menggunakan pembacaan kemiripan kosinus (<=>) berbasis pgvector PostgreSQL.",
-        "RAG Gemini Consultant: Rekomendasi kontekstual terstruktur dari hasil pencarian vektor produk.",
-        "Singleton Pattern (Dependency Injection): Restrukturisasi lifespan FastAPI untuk hemat alokasi RAM.",
-        "Memory Hardening: Optimasi PyTorch CPU single-threading & garbage collection aktif untuk stabilitas cloud deployment."
-    ]
-    for h in highlights:
-        p = tf.add_paragraph()
-        p.text = f"✓  {h}"
-        p.font.size = Pt(13)
-        p.font.color.rgb = PRIMARY_TEXT
+def place_image_framed(slide, path, x, y, box_w, box_h, pad=0.12, border=True):
+    """White frame card with image fit centered inside, subtle shadow + thin border."""
+    w, h = fit_image(path, box_w - 2*pad, box_h - 2*pad)
+    frame_w, frame_h = w + 2*pad, h + 2*pad
+    fx = x + (box_w - frame_w)/2
+    fy = y + (box_h - frame_h)/2
+    frame = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(fx), Inches(fy), Inches(frame_w), Inches(frame_h))
+    frame.fill.solid(); frame.fill.fore_color.rgb = CARD_BG
+    frame.line.fill.background()
+    frame.adjustments[0] = 0.04
+    add_shadow(frame, blur=Inches(0.12), dist=Inches(0.04), alpha=22)
+    pic = slide.shapes.add_picture(path, Inches(fx+pad), Inches(fy+pad), width=Inches(w), height=Inches(h))
+    return frame, pic
 
-    # ==========================================
-    # SLIDE 6: PROJECT 3 - PODLEARN AI & TELEGRAM BOT
-    # ==========================================
-    slide6 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide6)
-    add_header(slide6, "AI Solutions: PodLearn AI & Telegram Assistant", "Featured AI Projects")
+def place_image_plain(slide, path, x, y, box_w, box_h, border_color=None):
+    """Just the picture, fit inside box, centered, no frame card (for compact thumbnails)."""
+    w, h = fit_image(path, box_w, box_h)
+    px = x + (box_w - w)/2
+    py = y + (box_h - h)/2
+    pic = slide.shapes.add_picture(path, Inches(px), Inches(py), width=Inches(w), height=Inches(h))
+    if border_color:
+        pic.line.color.rgb = border_color
+        pic.line.width = Pt(1)
+    add_shadow(pic, blur=Inches(0.08), dist=Inches(0.03), alpha=20)
+    return pic
 
-    # Podlearn
-    c1 = slide6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    c1.fill.solid()
-    c1.fill.fore_color.rgb = CARD_BG
-    c1.line.color.rgb = PURPLE_ACCENT
-    tf1 = c1.text_frame
-    tf1.word_wrap = True
-    tf1.margin_left = Inches(0.3)
-    tf1.margin_top = Inches(0.3)
+# ============================================================
+# SLIDE 1 — COVER
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
 
-    p = tf1.paragraphs[0]
-    p.text = "PodLearn AI — Podcast & Quiz"
-    p.font.bold = True
-    p.font.size = Pt(16)
-    p.font.color.rgb = PURPLE_ACCENT
+blob = s.shapes.add_shape(MSO_SHAPE.OVAL, Inches(8.6), Inches(-2.2), Inches(7.2), Inches(7.2))
+blob.fill.solid(); blob.fill.fore_color.rgb = ROSE_BG; blob.line.fill.background()
+sp = blob._element; sp.getparent().remove(sp); s.shapes._spTree.insert(2, sp)
 
-    p = tf1.add_paragraph()
-    p.text = "Mengubah file PDF/teks menjadi audio podcast 2 orang (Host & Expert) secara otomatis.\n"
-    p.font.size = Pt(12)
-    p.font.color.rgb = SECONDARY_TEXT
+blob2 = s.shapes.add_shape(MSO_SHAPE.OVAL, Inches(10.8), Inches(3.5), Inches(4), Inches(4))
+blob2.fill.solid(); blob2.fill.fore_color.rgb = SAGE_BG; blob2.line.fill.background()
+sp2 = blob2._element; sp2.getparent().remove(sp2); s.shapes._spTree.insert(3, sp2)
 
-    pts = [
-        "Integrasi Gemini AI untuk naskah dialog.",
-        "Microsoft Edge Neural TTS multi-suara.",
-        "FFmpeg Concat untuk penggabungan audio.",
-        "Generator 10 kuis evaluasi interaktif."
-    ]
-    for pt in pts:
-        p = tf1.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(12)
-        p.font.color.rgb = PRIMARY_TEXT
+# profile photo, circular, sitting on top of the blobs
+photo_d = 3.3
+s.shapes.add_picture(IMG["profile"], Inches(9.85), Inches(1.55), width=Inches(photo_d), height=Inches(photo_d))
 
-    # Telegram Bot
-    c2 = slide6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    c2.fill.solid()
-    c2.fill.fore_color.rgb = CARD_BG
-    c2.line.color.rgb = PURPLE_ACCENT
-    tf2 = c2.text_frame
-    tf2.word_wrap = True
-    tf2.margin_left = Inches(0.3)
-    tf2.margin_top = Inches(0.3)
+tb = s.shapes.add_textbox(Inches(1.0), Inches(2.5), Inches(8.6), Inches(3.3))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "AVAILABLE FOR FREELANCE & COLLABORATION"
+p.font.size = Pt(12); p.font.bold = True; p.font.color.rgb = ROSE; p.font.name = FONT
+p2 = tf.add_paragraph()
+p2.text = "Muhammad Ulul Albab"
+p2.font.size = Pt(48); p2.font.bold = True; p2.font.color.rgb = TEXT_DARK; p2.font.name = FONT
+p2.space_before = Pt(10)
+p3 = tf.add_paragraph()
+p3.text = "Fullstack & AI Application Developer"
+p3.font.size = Pt(22); p3.font.color.rgb = TEXT_MUTED; p3.font.name = FONT
+p3.space_before = Pt(4)
+p4 = tf.add_paragraph()
+p4.text = "Perpaduan ketelitian analisis farmasi & rekayasa perangkat lunak modern"
+p4.font.size = Pt(14); p4.font.italic = True; p4.font.color.rgb = SAGE; p4.font.name = FONT
+p4.space_before = Pt(14)
 
-    p = tf2.paragraphs[0]
-    p.text = "Telegram AI Assistant (Live 24/7)"
-    p.font.bold = True
-    p.font.size = Pt(16)
-    p.font.color.rgb = PURPLE_ACCENT
+# ============================================================
+# SLIDE 2 — ABOUT ME
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "Tentang Saya & Latar Belakang Analitis", "Profil Profesional", ROSE)
 
-    p = tf2.add_paragraph()
-    p.text = "Bot Telegram personal cerdas yang aktif 24/7 di cloud server tanpa henti.\n"
-    p.font.size = Pt(12)
-    p.font.color.rgb = SECONDARY_TEXT
+card(s, 0.8, 1.9, 5.6, 4.7, ROSE_BG)
+icon_chip(s, 1.1, 2.2, "\u2697", ROSE)
+tb1 = s.shapes.add_textbox(Inches(1.9), Inches(2.15), Inches(4.2), Inches(0.7))
+tf1 = tb1.text_frame; tf1.word_wrap = True
+p = tf1.paragraphs[0]
+p.text = "Pendidikan & Fondasi Eksakta"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
 
-    pts2 = [
-        "Model LLM Llama-3.3 70B via Groq API.",
-        "Respon cerdas multibahasa real-time.",
-        "System prompt kustom untuk persona unik.",
-        "Deployed 24/7 di Railway Cloud."
-    ]
-    for pt in pts2:
-        p = tf2.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(12)
-        p.font.color.rgb = PRIMARY_TEXT
+body1 = s.shapes.add_textbox(Inches(1.15), Inches(3.05), Inches(4.9), Inches(3.3))
+tfb1 = body1.text_frame; tfb1.word_wrap = True
+p = tfb1.paragraphs[0]
+p.text = "Universitas Pakuan — Program Studi Farmasi"
+p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = ROSE; p.font.name = FONT
+p2 = tfb1.add_paragraph()
+p2.text = "Latar belakang Farmasi membentuk ketelitian tinggi, logika eksploratif, serta pola pikir analitis eksakta yang kuat dalam memecahkan masalah kompleks."
+p2.font.size = Pt(13); p2.font.color.rgb = TEXT_MUTED; p2.font.name = FONT
+p2.space_before = Pt(10)
 
-    # ==========================================
-    # SLIDE 7: PROJECT 4 - LDR ANCHOR & CLINICAL SUITE
-    # ==========================================
-    slide7 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide7)
-    add_header(slide7, "Mobile & Web Dashboard Systems", "Functional Systems")
+card(s, 6.9, 1.9, 5.6, 4.7, SAGE_BG)
+icon_chip(s, 7.2, 2.2, "\u2699", SAGE)
+tb2 = s.shapes.add_textbox(Inches(8.0), Inches(2.15), Inches(4.2), Inches(0.7))
+tf2 = tb2.text_frame; tf2.word_wrap = True
+p = tf2.paragraphs[0]
+p.text = "Transisi ke Software Engineering"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
 
-    # LDR Anchor
-    c1 = slide7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    c1.fill.solid()
-    c1.fill.fore_color.rgb = CARD_BG
-    c1.line.color.rgb = ORANGE_ACCENT
-    tf1 = c1.text_frame
-    tf1.word_wrap = True
-    tf1.margin_left = Inches(0.3)
-    tf1.margin_top = Inches(0.3)
+points = [
+    "Fokus pada pembentukan arsitektur sistem yang bersih, efisien, dan siap pakai di lingkungan cloud.",
+    "Menguasai pemecahan masalah teknis end-to-end: dari profil memori PyTorch/Docker hingga optimasi database.",
+    "Komitmen pada pembelajaran berkelanjutan tanpa ragu menghadapi tantangan teknologi baru.",
+]
+body2 = s.shapes.add_textbox(Inches(7.25), Inches(3.05), Inches(4.9), Inches(3.3))
+tfb2 = body2.text_frame; tfb2.word_wrap = True
+first = True
+for pt in points:
+    p = tfb2.paragraphs[0] if first else tfb2.add_paragraph()
+    first = False
+    p.text = f"\u2022  {pt}"
+    p.font.size = Pt(13); p.font.color.rgb = TEXT_MUTED; p.font.name = FONT
+    p.space_after = Pt(10)
 
-    p = tf1.paragraphs[0]
-    p.text = "LDR Anchor (React Native App)"
-    p.font.bold = True
-    p.font.size = Pt(16)
-    p.font.color.rgb = ORANGE_ACCENT
+# ============================================================
+# SLIDE 3 — TECH STACK
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "Keahlian & Ekosistem Teknologi", "Technical Stack", LAV)
 
-    pts = [
-        "Aplikasi mobile Android khusus pasangan jarak jauh (LDR).",
-        "Fitur Mood sharing real-time & pelukan virtual interaktif.",
-        "Integrasi FCM V1 Push Notification via Expo.",
-        "Firebase Firestore & Auth backend integration."
-    ]
-    for pt in pts:
-        p = tf1.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(12)
-        p.font.color.rgb = PRIMARY_TEXT
-
-    # Clinical Suite
-    c2 = slide7.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    c2.fill.solid()
-    c2.fill.fore_color.rgb = CARD_BG
-    c2.line.color.rgb = CYAN_ACCENT
-    tf2 = c2.text_frame
-    tf2.word_wrap = True
-    tf2.margin_left = Inches(0.3)
-    tf2.margin_top = Inches(0.3)
-
-    p = tf2.paragraphs[0]
-    p.text = "Clinical Suite Dashboard"
-    p.font.bold = True
-    p.font.size = Pt(16)
-    p.font.color.rgb = CYAN_ACCENT
-
-    pts2 = [
-        "Sistem rekapitulasi data medis & manajemen klinis.",
-        "Kalkulator parameter medis fungsional otomatis.",
-        "Antarmuka bersih & presisi tinggi berbasis Tailwind.",
-        "Dirancang khusus untuk efisiensi operasional medis."
-    ]
-    for pt in pts2:
-        p = tf2.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(12)
-        p.font.color.rgb = PRIMARY_TEXT
-
-    # ==========================================
-    # SLIDE 8: PROJECT 5 - CLOUD INVENTORY & DOMAIN EXPLORER
-    # ==========================================
-    slide8 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide8)
-    add_header(slide8, "Enterprise Serverless & Laravel Systems", "Web Applications")
-
-    # Cloud Inventory
-    c1 = slide8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    c1.fill.solid()
-    c1.fill.fore_color.rgb = CARD_BG
-    c1.line.color.rgb = SKY_ACCENT
-    tf1 = c1.text_frame
-    tf1.word_wrap = True
-    tf1.margin_left = Inches(0.3)
-    tf1.margin_top = Inches(0.3)
-
-    p = tf1.paragraphs[0]
-    p.text = "Cloud Inventory System (Serverless)"
-    p.font.bold = True
-    p.font.size = Pt(16)
-    p.font.color.rgb = SKY_ACCENT
-
-    pts = [
-        "Sistem inventaris berbasis Google Apps Script.",
-        "Concurrency Protection via LockService.",
-        "Role-Based Access Control (RBAC) & Anti-XSS.",
-        "Audit Trail log & snapshot auto-backup ke Drive."
-    ]
-    for pt in pts:
-        p = tf1.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(12)
-        p.font.color.rgb = PRIMARY_TEXT
-
-    # Domain Explorer
-    c2 = slide8.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    c2.fill.solid()
-    c2.fill.fore_color.rgb = CARD_BG
-    c2.line.color.rgb = EMERALD_ACCENT
-    tf2 = c2.text_frame
-    tf2.word_wrap = True
-    tf2.margin_left = Inches(0.3)
-    tf2.margin_top = Inches(0.3)
-
-    p = tf2.paragraphs[0]
-    p.text = "Domain Explorer (Laravel 11)"
-    p.font.bold = True
-    p.font.size = Pt(16)
-    p.font.color.rgb = EMERALD_ACCENT
-
-    pts2 = [
-        "Aplikasi manajemen domain berbasis Laravel 11.",
-        "Arsitektur MVC bersih dengan Blade views.",
-        "Penggunaan SQLite database untuk performa ringan.",
-        "Database Migrations & Seeders otomatis."
-    ]
-    for pt in pts2:
-        p = tf2.add_paragraph()
-        p.text = f"• {pt}"
-        p.font.size = Pt(12)
-        p.font.color.rgb = PRIMARY_TEXT
-
-    # ==========================================
-    # SLIDE 9: CONTACT & CLOSING
-    # ==========================================
-    slide9 = prs.slides.add_slide(blank_layout)
-    set_slide_background(slide9)
-    
-    card = slide9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.5), Inches(1.5), Inches(10.333), Inches(4.5))
-    card.fill.solid()
-    card.fill.fore_color.rgb = CARD_BG
-    card.line.color.rgb = CYAN_ACCENT
-
-    tf = card.text_frame
-    tf.word_wrap = True
-    tf.margin_left = Inches(0.5)
-    tf.margin_top = Inches(0.5)
-
+stacks = [
+    ("\u25A3", "Frontend & Mobile", "React, React Native, Expo SDK 54, Tailwind CSS, Vite, HTML/JS", TEAL, TEAL_BG, 0.8, 2.0),
+    ("\u25A2", "Backend & API", "FastAPI (Python), Laravel 11 (PHP), Node.js/Express, Firebase", ROSE, ROSE_BG, 6.9, 2.0),
+    ("\u25C8", "AI & Data Intelligence", "Gemini RAG API, PyTorch, SentenceTransformers, pgvector", LAV, LAV_BG, 0.8, 4.5),
+    ("\u25C9", "Database & Cloud", "PostgreSQL, MySQL, Firebase Firestore, SQLite, Docker, Vercel", SAGE, SAGE_BG, 6.9, 4.5),
+]
+for icon, title, desc, color, bgcol, x, y in stacks:
+    card(s, x, y, 5.6, 2.15, bgcol)
+    icon_chip(s, x+0.3, y+0.3, icon, color)
+    tb = s.shapes.add_textbox(Inches(x+1.05), Inches(y+0.22), Inches(4.3), Inches(1.7))
+    tf = tb.text_frame; tf.word_wrap = True
     p = tf.paragraphs[0]
-    p.text = "Mari Berkolaborasi!"
-    p.font.bold = True
-    p.font.size = Pt(28)
-    p.font.color.rgb = CYAN_ACCENT
+    p.text = title; p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p2 = tf.add_paragraph()
+    p2.text = desc; p2.font.size = Pt(12.5); p2.font.color.rgb = TEXT_MUTED; p2.font.name = FONT
+    p2.space_before = Pt(6)
 
+# ============================================================
+# SLIDE 4 — SCHOOLCOM (split: text left, phone mockup right)
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "SchoolCom — School Management & Communication System", "Featured Enterprise & Mobile Project", TEAL)
+
+img_box_w = 3.4
+text_w = 11.733 - img_box_w - 0.3
+card(s, 0.8, 1.9, text_w, 4.7, TEAL_BG)
+icon_chip(s, 1.1, 2.15, "\u2317", TEAL, size=0.55)
+tb = s.shapes.add_textbox(Inches(1.85), Inches(2.12), Inches(text_w-1.1), Inches(0.85))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "Sistem Pengelolaan & Komunikasi Sekolah Terpadu 3 Peran (Android & Web)"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+body = s.shapes.add_textbox(Inches(1.15), Inches(3.15), Inches(text_w-0.6), Inches(3.3))
+tfb = body.text_frame; tfb.word_wrap = True
+p = tfb.paragraphs[0]
+p.text = "Tech Stack: React Native (Expo SDK 54), Firebase Firestore/Auth, React, Vite, Tailwind CSS v4, Vercel"
+p.font.size = Pt(11.5); p.font.bold = True; p.font.color.rgb = TEAL; p.font.name = FONT
+p.space_after = Pt(8)
+hi = [
+    "Role-Based Architecture (RBAC): Tiga antarmuka terpisah khusus untuk Admin Sekolah, Guru Kelas, dan Orang Tua.",
+    "Module Auditability: 40 modul teraudit mencakup presensi harian batch, penginputan nilai rapor, & rekapitulasi.",
+    "Parent-Child Scoping: Transparansi pemantauan kehadiran dan catatan insiden/perilaku siswa secara aman.",
+    "Landing Page & Conversion: Landing page khusus Vercel terintegrasi ke WhatsApp untuk permintaan demo.",
+]
+for h in hi:
+    p = tfb.add_paragraph()
+    p.text = f"\u2713  {h}"
+    p.font.size = Pt(12); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(7)
+
+place_image_framed(s, IMG["schoolcom"], 0.8+text_w+0.3, 1.9, img_box_w, 4.7)
+
+# ============================================================
+# SLIDE 5 — SCENTDNA (split: text left, web mockup right)
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "ScentDNA — AI Fragrance Discovery Engine", "Featured AI Project", ROSE)
+
+img_box_w = 4.6
+text_w = 11.733 - img_box_w - 0.3
+card(s, 0.8, 1.9, text_w, 4.7, ROSE_BG)
+icon_chip(s, 1.1, 2.15, "\u2699", ROSE, size=0.55)
+tb = s.shapes.add_textbox(Inches(1.85), Inches(2.12), Inches(text_w-1.1), Inches(0.6))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "Mesin Rekomendasi Aroma Vector Search & RAG AI (Dockerized)"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+body = s.shapes.add_textbox(Inches(1.15), Inches(2.95), Inches(text_w-0.6), Inches(3.5))
+tfb = body.text_frame; tfb.word_wrap = True
+p = tfb.paragraphs[0]
+p.text = "Tech Stack: FastAPI (Python), PyTorch, SentenceTransformers, pgvector (PostgreSQL), Docker, Gemini 2.5 Flash API"
+p.font.size = Pt(11.5); p.font.bold = True; p.font.color.rgb = ROSE; p.font.name = FONT
+p.space_after = Pt(8)
+hi = [
+    "Semantic Vector Search: Menggunakan pembacaan kemiripan kosinus (<=>) berbasis pgvector PostgreSQL.",
+    "RAG Gemini Consultant: Rekomendasi kontekstual terstruktur dari hasil pencarian vektor produk.",
+    "Singleton Pattern (Dependency Injection): Restrukturisasi lifespan FastAPI untuk hemat alokasi RAM.",
+    "Memory Hardening: Optimasi PyTorch CPU single-threading & garbage collection aktif untuk stabilitas cloud deployment.",
+]
+for h in hi:
+    p = tfb.add_paragraph()
+    p.text = f"\u2713  {h}"
+    p.font.size = Pt(12); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(7)
+
+place_image_framed(s, IMG["scentdna"], 0.8+text_w+0.3, 1.9, img_box_w, 4.7)
+
+# ============================================================
+# SLIDE 6 — PODLEARN & TELEGRAM (split cards, podlearn has thumbnail)
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "AI Solutions: PodLearn AI & Telegram Assistant", "Featured AI Projects", LAV)
+
+c1 = card(s, 0.8, 1.9, 5.6, 4.7, LAV_BG)
+icon_chip(s, 1.1, 2.2, "\u266B", LAV)
+tb = s.shapes.add_textbox(Inches(1.9), Inches(2.15), Inches(4.3), Inches(0.6))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "PodLearn AI — Podcast & Quiz"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+place_image_plain(s, IMG["podlearn"], 1.15, 2.95, 4.9, 1.55)
+
+body1 = s.shapes.add_textbox(Inches(1.15), Inches(4.65), Inches(4.9), Inches(1.8))
+tfb1 = body1.text_frame; tfb1.word_wrap = True
+pts = [
+    "Integrasi Gemini AI untuk naskah dialog.",
+    "Microsoft Edge Neural TTS multi-suara.",
+    "FFmpeg Concat untuk penggabungan audio.",
+    "Generator 10 kuis evaluasi interaktif.",
+]
+first = True
+for pt in pts:
+    p = tfb1.paragraphs[0] if first else tfb1.add_paragraph()
+    first = False
+    p.text = f"\u2713  {pt}"
+    p.font.size = Pt(11.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(4)
+
+c2 = card(s, 6.9, 1.9, 5.6, 4.7, TEAL_BG)
+icon_chip(s, 7.2, 2.2, "\u2708", TEAL)
+tb2 = s.shapes.add_textbox(Inches(8.0), Inches(2.15), Inches(4.3), Inches(0.6))
+tf2 = tb2.text_frame; tf2.word_wrap = True
+p = tf2.paragraphs[0]
+p.text = "Telegram AI Assistant (Live 24/7)"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+body2 = s.shapes.add_textbox(Inches(7.25), Inches(2.95), Inches(4.9), Inches(3.3))
+tfb2 = body2.text_frame; tfb2.word_wrap = True
+p = tfb2.paragraphs[0]
+p.text = "Bot Telegram personal cerdas yang aktif 24/7 di cloud server tanpa henti."
+p.font.size = Pt(12); p.font.color.rgb = TEXT_MUTED; p.font.name = FONT
+p.space_after = Pt(8)
+pts2 = [
+    "Model LLM Llama-3.3 70B via Groq API.",
+    "Respon cerdas multibahasa real-time.",
+    "System prompt kustom untuk persona unik.",
+    "Deployed 24/7 di Railway Cloud.",
+]
+for pt in pts2:
+    p = tfb2.add_paragraph()
+    p.text = f"\u2713  {pt}"
+    p.font.size = Pt(12.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(6)
+
+# ============================================================
+# SLIDE 7 — LDR ANCHOR & CLINICAL SUITE (both have phone thumbnails)
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "Mobile & Web Dashboard Systems", "Functional Systems", TERRA)
+
+card(s, 0.8, 1.9, 5.6, 4.7, TERRA_BG)
+icon_chip(s, 1.1, 2.2, "\u2764", TERRA)
+tb = s.shapes.add_textbox(Inches(1.9), Inches(2.15), Inches(4.3), Inches(0.6))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "LDR Anchor (React Native App)"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+place_image_plain(s, IMG["ldr"], 4.55, 2.95, 1.55, 3.35)
+
+body1 = s.shapes.add_textbox(Inches(1.15), Inches(2.95), Inches(3.15), Inches(3.4))
+tfb1 = body1.text_frame; tfb1.word_wrap = True
+pts = [
+    "Aplikasi mobile Android khusus pasangan jarak jauh (LDR).",
+    "Fitur Mood sharing real-time & pelukan virtual interaktif.",
+    "Integrasi FCM V1 Push Notification via Expo.",
+    "Firebase Firestore & Auth backend integration.",
+]
+first = True
+for pt in pts:
+    p = tfb1.paragraphs[0] if first else tfb1.add_paragraph()
+    first = False
+    p.text = f"\u2713  {pt}"
+    p.font.size = Pt(11.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(8)
+
+card(s, 6.9, 1.9, 5.6, 4.7, SAGE_BG)
+icon_chip(s, 7.2, 2.2, "\u2695", SAGE)
+tb2 = s.shapes.add_textbox(Inches(8.0), Inches(2.15), Inches(4.3), Inches(0.6))
+tf2 = tb2.text_frame; tf2.word_wrap = True
+p = tf2.paragraphs[0]
+p.text = "Clinical Suite Dashboard"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+place_image_plain(s, IMG["clinical"], 10.65, 2.95, 1.4, 3.35)
+
+body2 = s.shapes.add_textbox(Inches(7.25), Inches(2.95), Inches(3.15), Inches(3.4))
+tfb2 = body2.text_frame; tfb2.word_wrap = True
+pts2 = [
+    "Sistem rekapitulasi data medis & manajemen klinis.",
+    "Kalkulator parameter medis fungsional otomatis.",
+    "Antarmuka bersih & presisi tinggi berbasis Tailwind.",
+    "Dirancang khusus untuk efisiensi operasional medis.",
+]
+first = True
+for pt in pts2:
+    p = tfb2.paragraphs[0] if first else tfb2.add_paragraph()
+    first = False
+    p.text = f"\u2713  {pt}"
+    p.font.size = Pt(11.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(8)
+
+# ============================================================
+# SLIDE 8 — CLOUD INVENTORY (thumbnail) & DOMAIN EXPLORER
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "Enterprise Serverless & Laravel Systems", "Web Applications", SAGE)
+
+card(s, 0.8, 1.9, 5.6, 4.7, SAGE_BG)
+icon_chip(s, 1.1, 2.2, "\u2601", SAGE)
+tb = s.shapes.add_textbox(Inches(1.9), Inches(2.15), Inches(4.3), Inches(0.6))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "Cloud Inventory System (Serverless)"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+place_image_plain(s, IMG["cloudinv"], 1.15, 2.95, 4.9, 1.55)
+
+body1 = s.shapes.add_textbox(Inches(1.15), Inches(4.65), Inches(4.9), Inches(1.8))
+tfb1 = body1.text_frame; tfb1.word_wrap = True
+pts = [
+    "Sistem inventaris berbasis Google Apps Script.",
+    "Concurrency Protection via LockService.",
+    "Role-Based Access Control (RBAC) & Anti-XSS.",
+    "Audit Trail log & snapshot auto-backup ke Drive.",
+]
+first = True
+for pt in pts:
+    p = tfb1.paragraphs[0] if first else tfb1.add_paragraph()
+    first = False
+    p.text = f"\u2713  {pt}"
+    p.font.size = Pt(11.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(4)
+
+card(s, 6.9, 1.9, 5.6, 4.7, TERRA_BG)
+icon_chip(s, 7.2, 2.2, "\u2318", TERRA)
+tb2 = s.shapes.add_textbox(Inches(8.0), Inches(2.15), Inches(4.3), Inches(0.6))
+tf2 = tb2.text_frame; tf2.word_wrap = True
+p = tf2.paragraphs[0]
+p.text = "Domain Explorer (Laravel 11)"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+body2 = s.shapes.add_textbox(Inches(7.25), Inches(2.95), Inches(4.9), Inches(3.3))
+tfb2 = body2.text_frame; tfb2.word_wrap = True
+pts2 = [
+    "Aplikasi manajemen domain berbasis Laravel 11.",
+    "Arsitektur MVC bersih dengan Blade views.",
+    "Penggunaan SQLite database untuk performa ringan.",
+    "Database Migrations & Seeders otomatis.",
+]
+first = True
+for pt in pts2:
+    p = tfb2.paragraphs[0] if first else tfb2.add_paragraph()
+    first = False
+    p.text = f"\u2713  {pt}"
+    p.font.size = Pt(12.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(8)
+
+# ============================================================
+# SLIDE 9 — LUME (Undangan Digital) — NEW
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+header(s, "LUME — Wedding Invitation", "Undangan Digital", ROSE)
+
+img_box_w = 3.0
+text_w = 11.733 - img_box_w - 0.3
+card(s, 0.8, 1.9, text_w, 4.7, ROSE_BG)
+icon_chip(s, 1.1, 2.15, "\u2661", ROSE, size=0.55)
+tb = s.shapes.add_textbox(Inches(1.85), Inches(2.12), Inches(text_w-1.1), Inches(0.6))
+tf = tb.text_frame; tf.word_wrap = True
+p = tf.paragraphs[0]
+p.text = "Jasa Pembuatan Undangan Digital Pernikahan"
+p.font.bold = True; p.font.size = Pt(16); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+
+body = s.shapes.add_textbox(Inches(1.15), Inches(2.95), Inches(text_w-0.6), Inches(3.5))
+tfb = body.text_frame; tfb.word_wrap = True
+p = tfb.paragraphs[0]
+p.text = "Layanan custom undangan pernikahan digital yang bisa dibagikan lewat link pribadi."
+p.font.size = Pt(12); p.font.color.rgb = TEXT_MUTED; p.font.name = FONT
+p.space_after = Pt(8)
+hi = [
+    "Countdown Pernikahan Real-Time: hitung mundur hari, jam, menit, & detik menuju hari-H.",
+    "Desain Hero Elegan: foto pasangan dengan overlay gelap & tipografi serif premium.",
+    "Custom Nama & Tanggal: setiap undangan dipersonalisasi sesuai identitas pasangan.",
+    "Dibagikan via Link Pribadi: mudah disebar lewat WhatsApp maupun media sosial.",
+]
+for h in hi:
+    p = tfb.add_paragraph()
+    p.text = f"\u2713  {h}"
+    p.font.size = Pt(12.5); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.space_after = Pt(8)
+
+place_image_framed(s, IMG["lume"], 0.8+text_w+0.3, 1.9, img_box_w, 4.7)
+
+# ============================================================
+# SLIDE 10 — CONTACT
+# ============================================================
+s = prs.slides.add_slide(BLANK); set_bg(s)
+
+blob = s.shapes.add_shape(MSO_SHAPE.OVAL, Inches(-2.5), Inches(-2.5), Inches(6), Inches(6))
+blob.fill.solid(); blob.fill.fore_color.rgb = LAV_BG; blob.line.fill.background()
+sp = blob._element; sp.getparent().remove(sp); s.shapes._spTree.insert(2, sp)
+
+c = card(s, 1.9, 1.6, 9.53, 4.4, CARD_BG)
+tf = c.text_frame
+p = tf.paragraphs[0]
+p.text = "Mari Berkolaborasi!"
+p.font.bold = True; p.font.size = Pt(30); p.font.color.rgb = ROSE; p.font.name = FONT
+p.alignment = PP_ALIGN.CENTER
+p2 = tf.add_paragraph()
+p2.text = "Terbuka untuk proyek freelance, pengembangan sistem kustom, maupun posisi software engineer."
+p2.font.size = Pt(14); p2.font.color.rgb = TEXT_MUTED; p2.font.name = FONT
+p2.alignment = PP_ALIGN.CENTER
+p2.space_before = Pt(8); p2.space_after = Pt(20)
+
+contacts = [
+    "WhatsApp   : +62 895-4147-81707",
+    "Email          : ulula2812@gmail.com",
+    "Portofolio    : ulul-portofolio-3odd.vercel.app",
+    "Lokasi         : Bogor, Jawa Barat, Indonesia",
+]
+for cline in contacts:
     p = tf.add_paragraph()
-    p.text = "Terbuka untuk proyek freelance, pengembangan sistem kustom, maupun posisi software engineer.\n"
-    p.font.size = Pt(14)
-    p.font.color.rgb = PRIMARY_TEXT
+    p.text = cline
+    p.font.size = Pt(15); p.font.color.rgb = TEXT_DARK; p.font.name = FONT
+    p.alignment = PP_ALIGN.CENTER
+    p.space_after = Pt(6)
 
-    contacts = [
-        "📱 WhatsApp : +62 895-4147-81707",
-        "✉️ Email    : ulula2812@gmail.com",
-        "🌐 Portofolio: https://ulul-portofolio-3odd.vercel.app/",
-        "📍 Lokasi   : Bogor, Jawa Barat, Indonesia"
-    ]
-    for c in contacts:
-        p = tf.add_paragraph()
-        p.text = c
-        p.font.size = Pt(15)
-        p.font.color.rgb = SECONDARY_TEXT
-
-    # Save
-    output_filename = "Portfolio_Muhammad_Ulul_Albab.pptx"
-    prs.save(output_filename)
-    print(f"SUKSES! Slide PPT Portofolio berhasil diperbarui ke file: {output_filename}")
-
-if __name__ == "__main__":
-    create_portfolio_pptx()
+prs.save("Portfolio_Muhammad_Ulul_Albab.pptx")
+print("SAVED")
