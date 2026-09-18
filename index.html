@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
         /* ===== Design tokens ===== */
@@ -37,8 +37,12 @@
             position: relative;
         }
 
-        .font-display { font-family: 'Space Grotesk', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        /* Lora everywhere for headings/labels/body accents — warmer & less "template dev" than the old geometric sans */
+        .font-display { font-family: 'Lora', serif; font-weight: 500; }
+        .font-accent { font-family: 'Lora', serif; font-style: italic; font-weight: 500; }
+        .font-mono { font-family: 'Lora', serif; }
+        /* JetBrains Mono kept only for the "prescription label" contact card — a deliberate accent, not the default */
+        .font-label { font-family: 'JetBrains Mono', monospace; }
 
         /* ===== Grain texture (biar dark-nya ga flat polos) ===== */
         body::before {
@@ -99,6 +103,7 @@
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity: 1; transform: none; transition: none; }
             #molecule-canvas { display: none; }
+            .hero-float, .card-tilt:hover { animation: none !important; transform: none !important; }
         }
 
         /* ===== Nav underline ===== */
@@ -113,7 +118,7 @@
         }
         .nav-link:hover::after { width: 100%; }
 
-        /* ===== Gradient text ===== */
+        /* ===== Gradient text (kept as a fallback accent, headline itself now uses .font-accent) ===== */
         .grad-text {
             background: linear-gradient(90deg, var(--accent-teal), var(--accent-violet) 65%, var(--accent-amber));
             -webkit-background-clip: text;
@@ -121,8 +126,8 @@
             color: transparent;
         }
 
-        /* ===== Card sheen on hover ===== */
-        .project-card { position: relative; overflow: hidden; }
+        /* ===== Card sheen + 3D tilt on hover ===== */
+        .project-card { position: relative; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.2s ease; }
         .project-card::before {
             content: "";
             position: absolute;
@@ -132,8 +137,64 @@
             transform: skewX(-15deg);
             transition: left 0.7s ease;
             pointer-events: none;
+            z-index: 1;
         }
         .project-card:hover::before { left: 130%; }
+        .project-card:hover {
+            transform: perspective(800px) rotateX(1.4deg) rotateY(-1.6deg) translateY(-4px) scale(1.012);
+            box-shadow: 0 30px 60px -24px rgba(0,0,0,0.55);
+        }
+
+        /* ===== Hero: full-bleed render + scrims ===== */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.92) brightness(0.8);
+            z-index: 0;
+        }
+        .hero-scrim-x {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(100deg, #0a0e17 0%, rgba(10,14,23,0.94) 26%, rgba(10,14,23,0.68) 50%, rgba(10,14,23,0.28) 74%, rgba(10,14,23,0.08) 100%);
+        }
+        .hero-scrim-y {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(10,14,23,0.55) 0%, rgba(10,14,23,0) 140px, rgba(10,14,23,0) 80%, rgba(10,14,23,0.6) 100%);
+        }
+        .hero-grade {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(135deg, rgba(34,230,181,0.2) 0%, transparent 35%, transparent 65%, rgba(139,127,255,0.2) 100%);
+            mix-blend-mode: overlay;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .hero-float { animation: heroFloat 7s ease-in-out infinite; }
+        .hero-tagline-chip {
+            padding: 6px 14px;
+            border-radius: 9999px;
+            background: rgba(10,14,23,0.55);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* ===== About: molecule → circuit panel + photo medallion ===== */
+        .molecule-panel { border-radius: 24px; border: 1px solid var(--border); background: var(--surface); }
+        .photo-medallion {
+            padding: 4px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-violet));
+            box-shadow: 0 12px 30px -8px rgba(0,0,0,0.6);
+        }
+        .photo-medallion img { border: 3px solid var(--bg); }
     </style>
 </head>
 <body class="antialiased selection:bg-teal-400 selection:text-slate-950">
@@ -147,70 +208,155 @@
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 backdrop-blur-md" style="background: rgba(10,14,23,0.82); border-bottom: 1px solid var(--border);">
         <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <span class="font-display font-bold text-lg tracking-wider" style="color: var(--accent-teal);">ULUL<span style="color: var(--text-secondary);">.</span>DEV</span>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium font-mono" style="color: var(--text-secondary);">
+            <span class="font-display text-base md:text-lg" style="font-weight: 600;">Muhammad Ulul Albab</span>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-mono" style="color: var(--text-secondary);">
                 <a href="#about" class="nav-link hover:text-white transition">Tentang</a>
                 <a href="#projects" class="nav-link hover:text-white transition">Portofolio</a>
                 <a href="#contact" class="nav-link hover:text-white transition">Kontak</a>
+                <a href="#contact" class="font-display font-semibold px-4 py-2 rounded-full transition" style="background: var(--text-primary); color: var(--bg);">Hubungi Saya</a>
             </nav>
         </div>
     </header>
 
     <main>
-    <!-- Hero Section -->
-    <section class="max-w-5xl mx-auto px-6 py-16 md:py-28 grid md:grid-cols-12 gap-12 items-center">
-        <!-- Kolom Teks (Kiri) -->
-        <div class="md:col-span-7 flex flex-col items-start justify-center reveal">
-            <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full font-mono text-xs font-semibold uppercase tracking-wider mb-5" style="background: var(--accent-teal-dim); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background: var(--accent-teal);"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2" style="background: var(--accent-teal);"></span>
+    <!-- Hero Section: full-bleed 3D render, badge, headline dengan aksen serif italic, stat row -->
+    <section class="hero-section">
+        <img src="hero-render.png" alt="3D render: erlenmeyer flask, molekul, dan laptop dengan kode di atas meja kerja" class="hero-bg">
+        <div class="hero-scrim-x"></div>
+        <div class="hero-scrim-y"></div>
+        <div class="hero-grade"></div>
+
+        <div class="hero-content max-w-5xl mx-auto px-6 py-20 md:py-32">
+            <div class="max-w-xl reveal">
+                <span class="font-mono inline-flex items-center gap-2 text-xs uppercase tracking-wider" style="color: var(--text-secondary);">
+                    <span style="color: var(--accent-teal);">◆</span> Pharmacy <span style="color: var(--text-muted);">×</span> Technology
                 </span>
-                Available for Freelance Project
-            </span>
-            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-                Halo, Saya <span class="grad-text">Muhammad Ulul Albab</span>
-            </h1>
-            <p class="text-base md:text-lg mb-8 leading-relaxed" style="color: var(--text-secondary);">
-                Berangkat dari latar belakang <strong style="color: var(--accent-teal);" class="font-semibold">Farmasi</strong> yang membentuk ketelitian dan daya analisis eksakta tingkat tinggi, saya bertransisi menjadi seorang <strong class="text-white font-semibold">Fullstack & AI Application Developer</strong>. Berfokus pada pembangunan aplikasi web, mobile lintas platform, serta arsitektur backend berkinerja tinggi yang terintegrasi dengan teknologi kecerdasan buatan.
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="#projects" class="font-semibold px-6 py-3 rounded-xl transition shadow-lg" style="background: var(--accent-teal); color: #06120e; box-shadow: 0 10px 30px -10px rgba(34,230,181,0.45);">
-                    Lihat Portofolio
-                </a>
-                <a href="#contact" class="font-medium px-6 py-3 rounded-xl transition" style="border: 1px solid var(--border-hover); background: rgba(255,255,255,0.02); color: var(--text-primary);">
-                    Hubungi Saya
-                </a>
+
+                <h1 class="font-display text-4xl md:text-5xl lg:text-[52px] mt-5 mb-6 leading-[1.16]">
+                    Mengubah Ilmu<br>
+                    Jadi <span class="font-accent" style="color: var(--accent-teal);">Solusi Nyata.</span>
+                </h1>
+
+                <p class="text-base md:text-lg mb-8 leading-relaxed" style="color: #c6cbdb;">
+                    Saya Muhammad Ulul Albab, mahasiswa farmasi yang membangun aplikasi web &amp; AI. Ketelitian ilmu eksakta, diterjemahkan jadi kode yang presisi dan berdampak.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <a href="#projects" class="font-display font-semibold px-6 py-3 rounded-xl transition shadow-lg" style="background: var(--accent-teal); color: #06120e; box-shadow: 0 10px 30px -10px rgba(34,230,181,0.45);">
+                        Lihat Portofolio
+                    </a>
+                    <a href="#contact" class="font-display px-6 py-3 rounded-xl transition" style="border: 1px solid var(--border-hover); background: rgba(255,255,255,0.02); color: var(--text-primary);">
+                        Hubungi Saya
+                    </a>
+                </div>
+
+                <!-- stat row -->
+                <div class="font-display flex gap-10 pt-6" style="border-top: 1px solid var(--border);">
+                    <div>
+                        <div class="text-2xl" style="font-weight: 600;">10+</div>
+                        <div class="font-mono text-[11px] uppercase tracking-wider mt-1" style="color: var(--text-muted);">Proyek</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl" style="font-weight: 600;">2+</div>
+                        <div class="font-mono text-[11px] uppercase tracking-wider mt-1" style="color: var(--text-muted);">Bulan Belajar</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl" style="font-weight: 600;">100%</div>
+                        <div class="font-mono text-[11px] uppercase tracking-wider mt-1" style="color: var(--text-muted);">Problem Solving</div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Kolom Foto Profil (Kanan) -->
-        <div class="md:col-span-5 flex justify-center reveal" style="transition-delay: 120ms;">
-            <div class="relative w-64 h-64 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-2xl group" style="border: 2px solid rgba(34,230,181,0.25); box-shadow: 0 25px 60px -20px rgba(34,230,181,0.15);">
-                <!-- Efek Glow Background -->
-                <div class="absolute inset-0 opacity-50 group-hover:opacity-100 transition duration-500" style="background: linear-gradient(135deg, rgba(34,230,181,0.2), rgba(139,127,255,0.2));"></div>
-
-                <!-- Menggunakan nama file asli dengan spasi -->
-                <img src="Ulul Foto Formal.jpg" alt="Muhammad Ulul Albab" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-            </div>
+        <div class="hero-content font-accent hero-tagline-chip absolute bottom-6 right-6 text-sm hidden md:block" style="color: #c6cbdb;">
+            From molecules to meaningful code.
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20" style="border-top: 1px solid var(--border); background: rgba(13,18,32,0.4);">
         <div class="max-w-5xl mx-auto px-6">
-            <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--accent-teal);">// 01 &nbsp;tentang</span>
-            <h2 class="font-display text-2xl md:text-3xl font-bold mt-2 mb-6 text-white reveal">Tentang Saya</h2>
-            <div class="leading-relaxed text-base md:text-lg max-w-3xl space-y-4 reveal" style="color: var(--text-secondary);">
-                <p>
-                    Berlatar belakang pendidikan <strong style="color: var(--accent-teal);" class="font-semibold">Farmasi</strong>, saya memiliki fondasi ketelitian, metode sistematis, dan pola pikir analitis eksakta yang sangat kuat dalam memecahkan masalah. Kemampuan analitis ini saya transformasikan ke dunia pengkodingan untuk merancang solusi digital <em class="text-white font-medium not-italic">end-to-end</em> yang presisi, efisien, dan andal.
-                </p>
-                <p>
-                    Saya berpengalaman dalam merancang antarmuka web modern (<span class="text-white font-medium">React / Tailwind</span>), aplikasi mobile Android (<span class="text-white font-medium">React Native / Expo</span>), hingga membangun arsitektur backend berskala produksi menggunakan <span class="text-white font-medium">Laravel, Node.js, dan FastAPI</span>.
-                </p>
-                <p>
-                    Keahlian saya juga mencakup integrasi teknologi AI modern seperti <span class="text-white font-medium">RAG Engine (Gemini API)</span>, pencarian berbasis vektor (<span class="text-white font-medium">PostgreSQL pgvector</span>), otomatisasi cloud, serta pengemasan aplikasi terisolasi menggunakan <span class="text-white font-medium">Docker</span>. Saya terbiasa menangani tantangan teknis—mulai dari profil memori hingga keamanan aplikasi—dengan pendekatan yang terstruktur dan berfokus pada kualitas hasil akhir.
-                </p>
+            <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2" style="color: var(--text-secondary);">
+                <span style="color: var(--accent-teal);">◆</span> Rx-01 <span style="color: var(--text-muted);">—</span> Tentang Saya
+            </span>
+
+            <div class="mt-9 flex flex-col md:flex-row gap-14 items-center">
+
+                <!-- molecule → circuit visual + photo medallion -->
+                <div class="reveal relative flex-shrink-0 w-full md:w-[420px]">
+                    <div class="molecule-panel p-8 flex flex-col items-center">
+                        <svg width="100%" height="auto" viewBox="0 0 416 420" fill="none" style="max-width: 340px;">
+                            <g stroke="var(--accent-violet)" stroke-opacity="0.6" stroke-width="1.6">
+                                <line x1="208" y1="24" x2="300" y2="80"></line>
+                                <line x1="300" y1="80" x2="300" y2="160"></line>
+                                <line x1="300" y1="160" x2="208" y2="200"></line>
+                                <line x1="208" y1="200" x2="116" y2="160"></line>
+                                <line x1="116" y1="160" x2="116" y2="80"></line>
+                                <line x1="116" y1="80" x2="208" y2="24"></line>
+                            </g>
+                            <g fill="var(--accent-teal)">
+                                <circle cx="208" cy="24" r="6"></circle>
+                                <circle cx="300" cy="80" r="5" fill="var(--accent-violet)"></circle>
+                                <circle cx="300" cy="160" r="5" fill="var(--accent-amber)"></circle>
+                                <circle cx="208" cy="200" r="6"></circle>
+                                <circle cx="116" cy="160" r="5" fill="var(--accent-violet)"></circle>
+                                <circle cx="116" cy="80" r="5" fill="var(--accent-amber)"></circle>
+                            </g>
+                            <line x1="208" y1="200" x2="208" y2="230" stroke="var(--text-primary)" stroke-opacity="0.35" stroke-width="1.6" stroke-dasharray="3 4"></line>
+                            <g stroke="var(--accent-teal)" stroke-opacity="0.55" stroke-width="1.6">
+                                <path d="M208 230 V 270 H 320 V 330"></path>
+                                <path d="M208 270 H 96 V 340"></path>
+                                <path d="M208 270 V 396"></path>
+                                <path d="M96 340 H 160 V 396"></path>
+                                <path d="M320 330 H 260 V 396"></path>
+                            </g>
+                            <g fill="var(--accent-amber)">
+                                <rect x="202" y="264" width="12" height="12" rx="2"></rect>
+                                <rect x="90" y="334" width="12" height="12" rx="2"></rect>
+                                <rect x="314" y="324" width="12" height="12" rx="2"></rect>
+                            </g>
+                            <g fill="var(--text-primary)">
+                                <rect x="154" y="390" width="12" height="12" rx="2"></rect>
+                                <rect x="254" y="390" width="12" height="12" rx="2"></rect>
+                                <rect x="202" y="390" width="12" height="12" rx="2"></rect>
+                            </g>
+                        </svg>
+                        <span class="font-accent mt-2 text-sm" style="color: var(--text-secondary);">Dari struktur molekul, ke struktur data.</span>
+                    </div>
+
+                    <!-- signature medallion: personal photo pinned to the corner -->
+                    <div class="photo-medallion absolute -left-4 -bottom-4 w-24 h-24 md:w-28 md:h-28">
+                        <img src="Ulul Foto Formal.jpg" alt="Muhammad Ulul Albab" class="w-full h-full rounded-full object-cover object-top">
+                    </div>
+                </div>
+
+                <!-- copy -->
+                <div class="reveal flex-1">
+                    <h2 class="font-display text-3xl md:text-[38px] mb-5 leading-[1.22]">
+                        Dari Bangku Farmasi,<br>
+                        <span class="font-accent" style="color: var(--accent-teal);">ke Baris Kode.</span>
+                    </h2>
+
+                    <div class="leading-relaxed text-[15.5px] space-y-4" style="color: #c6cbdb;">
+                        <p>
+                            Berlatar belakang pendidikan <strong style="color: var(--accent-teal);" class="font-semibold">Farmasi</strong>, saya memiliki fondasi ketelitian, metode sistematis, dan pola pikir analitis eksakta yang sangat kuat dalam memecahkan masalah. Kemampuan analitis ini saya transformasikan ke dunia pengkodingan untuk merancang solusi digital <em class="text-white font-medium not-italic">end-to-end</em> yang presisi, efisien, dan andal.
+                        </p>
+                        <p>
+                            Saya berpengalaman dalam merancang antarmuka web modern (<span class="text-white font-medium">React / Tailwind</span>), aplikasi mobile Android (<span class="text-white font-medium">React Native / Expo</span>), hingga membangun arsitektur backend berskala produksi menggunakan <span class="text-white font-medium">Laravel, Node.js, dan FastAPI</span>.
+                        </p>
+                        <p>
+                            Keahlian saya juga mencakup integrasi teknologi AI modern seperti <span class="text-white font-medium">RAG Engine (Gemini API)</span>, pencarian berbasis vektor (<span class="text-white font-medium">PostgreSQL pgvector</span>), otomatisasi cloud, serta pengemasan aplikasi terisolasi menggunakan <span class="text-white font-medium">Docker</span>.
+                        </p>
+                    </div>
+
+                    <!-- skill chips -->
+                    <div class="flex flex-wrap gap-2.5 mt-7 pt-6" style="border-top: 1px solid var(--border);">
+                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(34,230,181,0.1); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">React &amp; Tailwind</span>
+                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(139,127,255,0.1); color: var(--accent-violet); border: 1px solid rgba(139,127,255,0.25);">Laravel / Node / FastAPI</span>
+                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(255,184,77,0.1); color: var(--accent-amber); border: 1px solid rgba(255,184,77,0.25);">Gemini AI &amp; RAG</span>
+                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(233,237,245,0.06); color: var(--text-primary); border: 1px solid var(--border-hover);">Docker</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -218,8 +364,10 @@
     <!-- Projects Section -->
     <section id="projects" class="py-20" style="border-top: 1px solid var(--border);">
         <div class="max-w-5xl mx-auto px-6">
-            <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--accent-teal);">// 02 &nbsp;portofolio</span>
-            <h2 class="font-display text-2xl md:text-3xl font-bold mt-2 mb-4 text-white reveal">Portofolio Pilihan</h2>
+            <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2" style="color: var(--text-secondary);">
+                <span style="color: var(--accent-teal);">◆</span> Rx-02 <span style="color: var(--text-muted);">—</span> Portofolio Pilihan
+            </span>
+            <h2 class="font-display text-2xl md:text-3xl mt-3 mb-4 text-white reveal">Proyek yang <span class="font-accent" style="color: var(--accent-teal);">Bicara Sendiri.</span></h2>
             <p class="text-sm mb-10 reveal" style="color: var(--text-muted);">Klik pada kartu proyek di bawah untuk melihat detail lengkap dan tautan uji coba aplikasi secara langsung.</p>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -238,7 +386,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">Mobile & Web App</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">Expo / Firebase</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-blue-400 transition">SchoolCom MVP</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-blue-400 transition">SchoolCom MVP</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Sistem manajemen & komunikasi sekolah terpadu 3-role (Admin, Guru, Orang Tua) berbasis React Native/Expo & Firebase dengan 40 modul teraudit.
                         </p>
@@ -269,7 +417,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/20">Frontend App</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">React / Vite</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-pink-400 transition">Digital Wedding Invitation</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-pink-400 transition">Digital Wedding Invitation</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Prototipe platform undangan pernikahan digital premium, modern, & responsive berbasis reusable component architecture siap komersialisasi.
                         </p>
@@ -300,7 +448,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20">AI & RAG Engine</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">FastAPI / Docker</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-rose-400 transition">ScentDNA</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-rose-400 transition">ScentDNA</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Mesin rekomendasi & semantic search wewangian ter-containerize (Docker) berbasis Vector Embeddings dan RAG Gemini AI dengan optimasi alokasi RAM.
                         </p>
@@ -331,7 +479,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full border border-orange-500/20">Mobile App</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">React Native / FCM V1</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-orange-400 transition">LDR Anchor</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-orange-400 transition">LDR Anchor</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Aplikasi mobile interaktif khusus pasangan LDR dengan fitur pembagian suasana hati real-time, pelukan virtual, dan sistem Push Notification otomatis via FCM V1.
                         </p>
@@ -362,7 +510,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20">Web App</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">Dashboard</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-cyan-400 transition">Clinical Suite Dashboard</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-cyan-400 transition">Clinical Suite Dashboard</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Sistem manajemen klinis fungsional dengan fitur pencatatan data dan kalkulator parameter terstruktur.
                         </p>
@@ -392,7 +540,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-sky-500/10 text-sky-400 rounded-full border border-sky-500/20">Web Application</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">Apps Script</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-sky-400 transition">Cloud Inventory System</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-sky-400 transition">Cloud Inventory System</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Sistem manajemen inventaris serverless skala produksi dengan dashboard real-time, RBAC, dan proteksi concurrency.
                         </p>
@@ -422,7 +570,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full border border-violet-500/20">AI Podcast</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">Fullstack AI</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-violet-400 transition">PodLearn AI</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-violet-400 transition">PodLearn AI</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Generator podcast audio interaktif 2 pembicara dari dokumen PDF/materi teks lengkap dengan 10 kuis evaluasi otomatis.
                         </p>
@@ -447,7 +595,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20">AI Bot</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">Python / Railway</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-purple-400 transition">Telegram AI Assistant</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-purple-400 transition">Telegram AI Assistant</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Bot Telegram cerdas berbasis Llama-3.3 70B yang aktif di cloud 24/7, siap merespons percakapan multibahasa secara instan.
                         </p>
@@ -465,7 +613,7 @@
                             <span class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Web Application</span>
                             <span class="text-xs font-mono" style="color: var(--text-muted);">Laravel / MySQL</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-white group-hover:text-emerald-400 transition">Domain Explorer</h3>
+                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-emerald-400 transition">Domain Explorer</h3>
                         <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
                             Aplikasi penjelajah dan manajemen domain web berbasis Laravel untuk riset ketersediaan, status, serta pengelolaan database domain.
                         </p>
@@ -752,22 +900,46 @@
         </div>
     </div>
 
-    <!-- Contact Section -->
+    <!-- Contact Section: "prescription label" treatment -->
     <section id="contact" class="py-20 text-center" style="border-top: 1px solid var(--border); background: rgba(13,18,32,0.4);">
-        <div class="max-w-3xl mx-auto px-6">
-            <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--accent-teal);">// 03 &nbsp;kontak</span>
-            <h2 class="font-display text-2xl md:text-3xl font-bold mt-2 mb-4 text-white reveal">Tertarik Bekerjasama?</h2>
+        <div class="max-w-xl mx-auto px-6">
+            <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2" style="color: var(--text-secondary);">
+                <span style="color: var(--accent-teal);">◆</span> Rx-03 <span style="color: var(--text-muted);">—</span> Mari Terhubung
+            </span>
+            <h2 class="font-display text-2xl md:text-[32px] mt-3 mb-3 text-white reveal">Punya Ide untuk <span class="font-accent" style="color: var(--accent-teal);">Dikembangkan?</span></h2>
             <p class="mb-8 reveal" style="color: var(--text-secondary);">
-                Mari diskusikan kebutuhan proyek atau pembuatan aplikasi custom Anda bersama saya.
+                Terbuka untuk proyek freelance, kolaborasi, maupun ngobrol soal farmasi &amp; teknologi.
             </p>
-            <div class="flex flex-wrap justify-center gap-4 reveal">
-                <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-3.5 rounded-xl transition shadow-lg shadow-emerald-600/20">
+
+            <!-- the "prescription label" info box -->
+            <div class="reveal text-left rounded-2xl p-7" style="border: 1px solid var(--border); background: var(--surface);">
+                <div class="flex justify-between items-center pb-3.5 mb-3.5" style="border-bottom: 1px dashed var(--border-hover);">
+                    <span class="font-label text-xs tracking-wider" style="color: var(--text-muted);">℞ CONTACT LABEL</span>
+                    <span class="font-label text-[11px] px-2.5 py-1 rounded-full" style="background: rgba(34,230,181,0.12); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">● Available</span>
+                </div>
+                <div class="grid grid-cols-[110px_1fr] gap-y-2.5 text-sm">
+                    <span class="font-label" style="color: var(--text-muted);">Nama</span>
+                    <span class="font-display" style="color: var(--text-primary);">Muhammad Ulul Albab</span>
+
+                    <span class="font-label" style="color: var(--text-muted);">Kontak</span>
+                    <span class="font-display" style="color: var(--text-primary);">sfarmlul@gmail.com</span>
+
+                    <span class="font-label" style="color: var(--text-muted);">GitHub</span>
+                    <span class="font-display" style="color: var(--text-primary);">github.com/ululbiasaajaa</span>
+
+                    <span class="font-label" style="color: var(--text-muted);">Respons</span>
+                    <span class="font-display" style="color: var(--text-primary);">&lt; 24 jam</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mt-8 reveal">
+                <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg shadow-emerald-600/20" style="background: #059669; color: white;">
                     Hubungi via WhatsApp
                 </a>
-                <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="inline-block font-bold px-8 py-3.5 rounded-xl transition shadow-lg" style="background: var(--accent-teal); color: #06120e;">
+                <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg" style="background: var(--accent-teal); color: #06120e;">
                     Download Portofolio (PPT)
                 </a>
-                <a href="CV - Muhammad Ulul Albab 2.pdf" download class="inline-block font-bold px-8 py-3.5 rounded-xl transition shadow-lg" style="background: var(--surface-hover); border: 1px solid var(--border-hover); color: var(--accent-teal);">
+                <a href="CV - Muhammad Ulul Albab 2.pdf" download class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg" style="background: var(--surface-hover); border: 1px solid var(--border-hover); color: var(--accent-teal);">
                     Download CV (PDF)
                 </a>
             </div>
@@ -776,8 +948,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 text-center text-xs" style="border-top: 1px solid var(--border); color: var(--text-muted);">
-        <p>&copy; 2026 Muhammad Ulul Albab. Built with passion & precision.</p>
+    <footer class="py-8 text-center text-xs flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6" style="border-top: 1px solid var(--border); color: var(--text-muted);">
+        <p class="font-label">&copy; 2026 Muhammad Ulul Albab. Built with passion &amp; precision.</p>
+        <span class="font-accent hidden md:inline" style="color: var(--text-muted);">From molecules to meaningful code.</span>
     </footer>
 
     <!-- JavaScript for Modal Interaction -->
