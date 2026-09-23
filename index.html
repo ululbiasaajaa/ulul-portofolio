@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
     <style>
         /* ===== Design tokens ===== */
@@ -34,7 +37,7 @@
             --accent-teal-dim: rgba(34, 230, 181, 0.12);
             --accent-amber: #ffb84d;
             --accent-violet: #8b7fff;
-            --header-bg: rgba(10,14,23,0.82);
+            --header-bg: rgba(10, 14, 23, 0.82);
             --grain-opacity: 0.035;
             --canvas-opacity: 0.55;
             --blob-opacity-mult: 1;
@@ -55,7 +58,7 @@
             --accent-teal-dim: rgba(14, 156, 120, 0.12);
             --accent-amber: #c17a0d;
             --accent-violet: #6a5acd;
-            --header-bg: rgba(247,245,240,0.85);
+            --header-bg: rgba(247, 245, 240, 0.85);
             --grain-opacity: 0.025;
             --canvas-opacity: 0.28;
             --blob-opacity-mult: 0.55;
@@ -72,9 +75,13 @@
             --border-hover: #2c3654;
         }
 
-        * { scroll-behavior: smooth; }
+        * {
+            scroll-behavior: smooth;
+        }
 
-        body { transition: background-color 0.3s ease, color 0.3s ease; }
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
         body {
             background-color: var(--bg);
@@ -83,10 +90,24 @@
             position: relative;
         }
 
-        .font-display { font-family: 'Lora', serif; font-weight: 500; }
-        .font-accent { font-family: 'Lora', serif; font-style: italic; font-weight: 500; }
-        .font-mono { font-family: 'Lora', serif; }
-        .font-label { font-family: 'JetBrains Mono', monospace; }
+        .font-display {
+            font-family: 'Lora', serif;
+            font-weight: 500;
+        }
+
+        .font-accent {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .font-mono {
+            font-family: 'Lora', serif;
+        }
+
+        .font-label {
+            font-family: 'JetBrains Mono', monospace;
+        }
 
         /* ===== Grain texture ===== */
         body::before {
@@ -121,8 +142,11 @@
 
         /* ===== Theme toggle button ===== */
         .theme-toggle {
-            width: 36px; height: 36px;
-            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 9999px;
             border: 1px solid var(--border-hover);
             background: var(--surface-hover);
@@ -131,28 +155,72 @@
             transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
             flex-shrink: 0;
         }
-        .theme-toggle:hover { border-color: var(--accent-teal); transform: rotate(-8deg); }
-        .theme-toggle svg { width: 17px; height: 17px; }
-        .theme-toggle .icon-sun { display: none; }
-        :root[data-theme="light"] .theme-toggle .icon-moon { display: none; }
-        :root[data-theme="light"] .theme-toggle .icon-sun { display: block; }
 
-        :root[data-theme="light"] .text-white:not(a) { color: var(--text-primary); }
+        .theme-toggle:hover {
+            border-color: var(--accent-teal);
+            transform: rotate(-8deg);
+        }
+
+        .theme-toggle svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .theme-toggle .icon-sun {
+            display: none;
+        }
+
+        :root[data-theme="light"] .theme-toggle .icon-moon {
+            display: none;
+        }
+
+        :root[data-theme="light"] .theme-toggle .icon-sun {
+            display: block;
+        }
+
+        :root[data-theme="light"] .text-white:not(a) {
+            color: var(--text-primary);
+        }
+
         :root[data-theme="light"] .nav-link.hover\:text-white:hover,
-        :root[data-theme="light"] a.hover\:text-white:hover { color: var(--text-primary) !important; }
+        :root[data-theme="light"] a.hover\:text-white:hover {
+            color: var(--text-primary) !important;
+        }
 
-        main, header, footer, section { position: relative; z-index: 2; }
+        main,
+        header,
+        footer,
+        section {
+            position: relative;
+            z-index: 2;
+        }
 
         /* ===== Custom scrollbar ===== */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 6px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-teal); }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-        ::selection { background: var(--accent-teal); color: #06120e; }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-hover);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-teal);
+        }
+
+        ::selection {
+            background: var(--accent-teal);
+            color: #06120e;
+        }
 
         /* ===== Focus visibility ===== */
-        a:focus-visible, button:focus-visible {
+        a:focus-visible,
+        button:focus-visible {
             outline: 2px solid var(--accent-teal);
             outline-offset: 3px;
             border-radius: 4px;
@@ -164,26 +232,53 @@
             transform: translateY(22px);
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.is-visible { opacity: 1; transform: translateY(0); }
-        .reveal-stagger.is-visible { transition-delay: var(--reveal-delay, 0ms); }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-stagger.is-visible {
+            transition-delay: var(--reveal-delay, 0ms);
+        }
 
         @media (prefers-reduced-motion: reduce) {
-            .reveal { opacity: 1; transform: none; transition: none; }
-            #molecule-canvas { display: none; }
-            .hero-float, .card-tilt:hover { animation: none !important; transform: none !important; }
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            #molecule-canvas {
+                display: none;
+            }
+
+            .hero-float,
+            .card-tilt:hover {
+                animation: none !important;
+                transform: none !important;
+            }
         }
 
         /* ===== Nav underline ===== */
-        .nav-link { position: relative; }
+        .nav-link {
+            position: relative;
+        }
+
         .nav-link::after {
             content: "";
             position: absolute;
-            left: 0; bottom: -4px;
-            width: 0; height: 1px;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 1px;
             background: var(--accent-teal);
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after { width: 100%; }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
         /* ===== Gradient text ===== */
         .grad-text {
@@ -194,22 +289,33 @@
         }
 
         /* ===== Card sheen + 3D tilt on hover ===== */
-        .project-card { position: relative; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.2s ease; }
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.2s ease;
+        }
+
         .project-card::before {
             content: "";
             position: absolute;
-            top: 0; left: -60%;
-            width: 40%; height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.05), transparent);
+            top: 0;
+            left: -60%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             transform: skewX(-15deg);
             transition: left 0.7s ease;
             pointer-events: none;
             z-index: 1;
         }
-        .project-card:hover::before { left: 130%; }
+
+        .project-card:hover::before {
+            left: 130%;
+        }
+
         .project-card:hover {
             transform: perspective(800px) rotateX(1.4deg) rotateY(-1.6deg) translateY(-4px) scale(1.012);
-            box-shadow: 0 30px 60px -24px rgba(0,0,0,0.55);
+            box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55);
         }
 
         /* ===== Hero ===== */
@@ -218,6 +324,7 @@
             overflow: hidden;
             border-bottom: 1px solid var(--border);
         }
+
         .hero-bg {
             position: absolute;
             inset: 0;
@@ -227,44 +334,79 @@
             filter: saturate(0.92) brightness(0.8);
             z-index: 0;
         }
+
         .hero-scrim-x {
-            position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(100deg, #0a0e17 0%, rgba(10,14,23,0.94) 26%, rgba(10,14,23,0.68) 50%, rgba(10,14,23,0.28) 74%, rgba(10,14,23,0.08) 100%);
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(100deg, #0a0e17 0%, rgba(10, 14, 23, 0.94) 26%, rgba(10, 14, 23, 0.68) 50%, rgba(10, 14, 23, 0.28) 74%, rgba(10, 14, 23, 0.08) 100%);
         }
+
         .hero-scrim-y {
-            position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(180deg, rgba(10,14,23,0.55) 0%, rgba(10,14,23,0) 140px, rgba(10,14,23,0) 80%, rgba(10,14,23,0.6) 100%);
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(10, 14, 23, 0.55) 0%, rgba(10, 14, 23, 0) 140px, rgba(10, 14, 23, 0) 80%, rgba(10, 14, 23, 0.6) 100%);
         }
+
         .hero-grade {
-            position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(135deg, rgba(34,230,181,0.2) 0%, transparent 35%, transparent 65%, rgba(139,127,255,0.2) 100%);
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(34, 230, 181, 0.2) 0%, transparent 35%, transparent 65%, rgba(139, 127, 255, 0.2) 100%);
             mix-blend-mode: overlay;
         }
-        .hero-content { position: relative; z-index: 2; }
-        @keyframes heroFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
-        .hero-float { animation: heroFloat 7s ease-in-out infinite; }
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .hero-float {
+            animation: heroFloat 7s ease-in-out infinite;
+        }
+
         .hero-tagline-chip {
             padding: 6px 14px;
             border-radius: 9999px;
-            background: rgba(10,14,23,0.55);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(10, 14, 23, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         /* ===== About ===== */
-        .molecule-panel { border-radius: 24px; border: 1px solid var(--border); background: var(--surface); overflow: hidden; }
+        .molecule-panel {
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            overflow: hidden;
+        }
+
         .photo-medallion {
             padding: 4px;
             border-radius: 9999px;
             background: linear-gradient(135deg, var(--accent-teal), var(--accent-violet));
-            box-shadow: 0 12px 30px -8px rgba(0,0,0,0.6);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6);
             z-index: 10;
         }
-        .photo-medallion img { border: 3px solid var(--bg); }
+
+        .photo-medallion img {
+            border: 3px solid var(--bg);
+        }
     </style>
 </head>
+
 <body class="antialiased selection:bg-teal-400 selection:text-slate-950">
 
     <!-- Signature background: molecule network + glow mesh -->
@@ -274,720 +416,1201 @@
     <div class="glow-blob w-[26rem] h-[26rem] bg-[#ffb84d] bottom-0 left-1/3" style="--blob-base-opacity: 0.06;"></div>
 
     <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 backdrop-blur-md" style="background: var(--header-bg); border-bottom: 1px solid var(--border);">
+    <header class="sticky top-0 z-50 backdrop-blur-md"
+        style="background: var(--header-bg); border-bottom: 1px solid var(--border);">
         <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
             <span class="font-display text-base md:text-lg" style="font-weight: 600;">Muhammad Ulul Albab</span>
             <div class="flex items-center gap-5">
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-mono" style="color: var(--text-secondary);">
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-mono"
+                    style="color: var(--text-secondary);">
                     <a href="#about" class="nav-link hover:text-white transition">Tentang</a>
                     <a href="#projects" class="nav-link hover:text-white transition">Portofolio</a>
                     <a href="#contact" class="nav-link hover:text-white transition">Kontak</a>
-                    <a href="#contact" class="font-display font-semibold px-4 py-2 rounded-full transition" style="background: var(--text-primary); color: var(--bg);">Hubungi Saya</a>
+                    <a href="#contact" class="font-display font-semibold px-4 py-2 rounded-full transition"
+                        style="background: var(--text-primary); color: var(--bg);">Hubungi Saya</a>
                 </nav>
-                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema terang/gelap" title="Ganti tema">
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"></path></svg>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema terang/gelap"
+                    title="Ganti tema">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4.2"></circle>
+                        <path
+                            d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7">
+                        </path>
+                    </svg>
                 </button>
             </div>
         </div>
     </header>
 
     <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <img src="hero-render.png" alt="3D render: erlenmeyer flask, molekul, dan laptop dengan kode di atas meja kerja" class="hero-bg">
-        <div class="hero-scrim-x"></div>
-        <div class="hero-scrim-y"></div>
-        <div class="hero-grade"></div>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <img src="hero-render.png"
+                alt="3D render: erlenmeyer flask, molekul, dan laptop dengan kode di atas meja kerja" class="hero-bg">
+            <div class="hero-scrim-x"></div>
+            <div class="hero-scrim-y"></div>
+            <div class="hero-grade"></div>
 
-        <div class="hero-content max-w-5xl mx-auto px-6 py-20 md:py-32">
-            <div class="max-w-xl reveal">
-                <span class="font-mono inline-flex items-center gap-2 text-xs uppercase tracking-wider" style="color: var(--text-secondary);">
-                    <span style="color: var(--accent-teal);">◆</span> Pharmacy <span style="color: var(--text-muted);">×</span> Technology
+            <div class="hero-content max-w-5xl mx-auto px-6 py-20 md:py-32">
+                <div class="max-w-xl reveal">
+                    <span class="font-mono inline-flex items-center gap-2 text-xs uppercase tracking-wider"
+                        style="color: var(--text-secondary);">
+                        <span style="color: var(--accent-teal);">◆</span> Pharmacy <span
+                            style="color: var(--text-muted);">×</span> Technology
+                    </span>
+
+                    <h1 class="font-display text-4xl md:text-5xl lg:text-[52px] mt-5 mb-6 leading-[1.16]">
+                        Mengubah Ilmu<br>
+                        Jadi <span class="font-accent" style="color: var(--accent-teal);">Solusi Nyata.</span>
+                    </h1>
+
+                    <p class="text-base md:text-lg mb-8 leading-relaxed" style="color: #c6cbdb;">
+                        Saya Muhammad Ulul Albab, mahasiswa farmasi yang membangun aplikasi web &amp; AI. Ketelitian
+                        ilmu eksakta, diterjemahkan jadi kode yang presisi dan berdampak.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#projects" class="font-display font-semibold px-6 py-3 rounded-xl transition shadow-lg"
+                            style="background: var(--accent-teal); color: #06120e; box-shadow: 0 10px 30px -10px rgba(34,230,181,0.45);">
+                            Lihat Portofolio
+                        </a>
+                        <a href="#contact" class="font-display px-6 py-3 rounded-xl transition"
+                            style="border: 1px solid var(--border-hover); background: rgba(255,255,255,0.02); color: var(--text-primary);">
+                            Hubungi Saya
+                        </a>
+                    </div>
+
+                    <!-- stat row -->
+                    <div class="font-display flex gap-10 pt-6" style="border-top: 1px solid var(--border);">
+                        <div>
+                            <div class="text-2xl" style="font-weight: 600;">10+</div>
+                            <div class="font-mono text-[11px] uppercase tracking-wider mt-1"
+                                style="color: var(--text-muted);">Proyek</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl" style="font-weight: 600;">2+</div>
+                            <div class="font-mono text-[11px] uppercase tracking-wider mt-1"
+                                style="color: var(--text-muted);">Bulan Belajar</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl" style="font-weight: 600;">100%</div>
+                            <div class="font-mono text-[11px] uppercase tracking-wider mt-1"
+                                style="color: var(--text-muted);">Problem Solving</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-content font-accent hero-tagline-chip absolute bottom-6 right-6 text-sm hidden md:block"
+                style="color: #c6cbdb;">
+                From molecules to meaningful code.
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20" style="border-top: 1px solid var(--border); background: var(--bg-alt);">
+            <div class="max-w-5xl mx-auto px-6">
+                <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2"
+                    style="color: var(--text-secondary);">
+                    <span style="color: var(--accent-teal);">◆</span> Rx-01 <span
+                        style="color: var(--text-muted);">—</span> Tentang Saya
                 </span>
 
-                <h1 class="font-display text-4xl md:text-5xl lg:text-[52px] mt-5 mb-6 leading-[1.16]">
-                    Mengubah Ilmu<br>
-                    Jadi <span class="font-accent" style="color: var(--accent-teal);">Solusi Nyata.</span>
-                </h1>
+                <div class="mt-9 flex flex-col md:flex-row gap-14 items-center">
 
-                <p class="text-base md:text-lg mb-8 leading-relaxed" style="color: #c6cbdb;">
-                    Saya Muhammad Ulul Albab, mahasiswa farmasi yang membangun aplikasi web &amp; AI. Ketelitian ilmu eksakta, diterjemahkan jadi kode yang presisi dan berdampak.
+                    <!-- molecule → circuit visual + photo medallion -->
+                    <div class="reveal relative flex-shrink-0 w-full md:w-[420px]">
+                        <div class="molecule-panel p-2 flex flex-col items-center">
+                            <img src="struktur-kimia.png" alt="Struktur Molekul ke Data"
+                                class="w-full h-auto rounded-2xl object-cover">
+                        </div>
+
+                        <!-- signature medallion: personal photo pinned to the corner -->
+                        <div class="photo-medallion absolute -left-4 -top-4 w-24 h-24 md:w-36 md:h-36">
+                            <img src="Ulul Foto Formal.jpg" alt="Muhammad Ulul Albab"
+                                class="w-full h-full rounded-full object-cover object-top">
+                        </div>
+                    </div>
+
+                    <!-- copy -->
+                    <div class="reveal flex-1">
+                        <h2 class="font-display text-3xl md:text-[38px] mb-5 leading-[1.22]">
+                            Dari Bangku Farmasi,<br>
+                            <span class="font-accent" style="color: var(--accent-teal);">ke Baris Kode.</span>
+                        </h2>
+
+                        <div class="leading-relaxed text-[15.5px] space-y-4" style="color: var(--text-secondary);">
+                            <p>
+                                Berlatar belakang pendidikan <strong style="color: var(--accent-teal);"
+                                    class="font-semibold">Farmasi</strong>, saya memiliki fondasi ketelitian, metode
+                                sistematis, dan pola pikir analitis eksakta yang sangat kuat dalam memecahkan masalah.
+                                Kemampuan analitis ini saya transformasikan ke dunia pengkodingan untuk merancang solusi
+                                digital <em class="text-white font-medium not-italic">end-to-end</em> yang presisi,
+                                efisien, dan andal.
+                            </p>
+                            <p>
+                                Saya berpengalaman dalam merancang antarmuka web modern (<span
+                                    class="text-white font-medium">React / Tailwind</span>), aplikasi mobile Android
+                                (<span class="text-white font-medium">React Native / Expo</span>), hingga membangun
+                                arsitektur backend berskala produksi menggunakan <span
+                                    class="text-white font-medium">Laravel, Node.js, dan FastAPI</span>.
+                            </p>
+                            <p>
+                                Keahlian saya juga mencakup integrasi teknologi AI modern seperti <span
+                                    class="text-white font-medium">RAG Engine (Gemini API)</span>, pencarian berbasis
+                                vektor (<span class="text-white font-medium">PostgreSQL pgvector</span>), otomatisasi
+                                cloud, serta pengemasan aplikasi terisolasi menggunakan <span
+                                    class="text-white font-medium">Docker</span>.
+                            </p>
+                        </div>
+
+                        <!-- skill chips -->
+                        <div class="flex flex-wrap gap-2.5 mt-7 pt-6" style="border-top: 1px solid var(--border);">
+                            <span class="font-mono text-xs px-4 py-2 rounded-full"
+                                style="background: rgba(34,230,181,0.1); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">React
+                                &amp; Tailwind</span>
+                            <span class="font-mono text-xs px-4 py-2 rounded-full"
+                                style="background: rgba(139,127,255,0.1); color: var(--accent-violet); border: 1px solid rgba(139,127,255,0.25);">Laravel
+                                / Node / FastAPI</span>
+                            <span class="font-mono text-xs px-4 py-2 rounded-full"
+                                style="background: rgba(255,184,77,0.1); color: var(--accent-amber); border: 1px solid rgba(255,184,77,0.25);">Gemini
+                                AI &amp; RAG</span>
+                            <span class="font-mono text-xs px-4 py-2 rounded-full"
+                                style="background: var(--surface-hover); color: var(--text-primary); border: 1px solid var(--border-hover);">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20" style="border-top: 1px solid var(--border);">
+            <div class="max-w-5xl mx-auto px-6">
+                <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2"
+                    style="color: var(--text-secondary);">
+                    <span style="color: var(--accent-teal);">◆</span> Rx-02 <span
+                        style="color: var(--text-muted);">—</span> Portofolio Pilihan
+                </span>
+                <h2 class="font-display text-2xl md:text-3xl mt-3 mb-4 text-white reveal">Proyek yang <span
+                        class="font-accent" style="color: var(--accent-teal);">Bicara Sendiri.</span></h2>
+                <p class="text-sm mb-10 reveal" style="color: var(--text-muted);">Klik pada kartu proyek di bawah untuk
+                    melihat detail lengkap dan tautan uji coba aplikasi secara langsung.</p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Project NEW: SchoolCom (Mobile App & Management System) -->
+                    <div onclick="openModal('modalSchoolCom')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-blue-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-blue-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live
+                            Web & App</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project7.jpg" alt="SchoolCom Management System"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-blue-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">Mobile
+                                    & Web App</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">Expo / Firebase</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-blue-400 transition">
+                                SchoolCom MVP</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Sistem manajemen & komunikasi sekolah terpadu 3-role (Admin, Guru, Orang Tua) berbasis
+                                React Native/Expo & Firebase dengan 40 modul teraudit.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Expo</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Firebase</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">RBAC</span>
+                            </div>
+                            <a href="https://landing-page-schoolcom.vercel.app/" target="_blank"
+                                onclick="event.stopPropagation()"
+                                class="text-xs bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-bold px-2.5 py-1 rounded-lg border border-blue-500/30 transition flex items-center gap-1">
+                                🚀 Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project: Premium Digital Wedding Invitation -->
+                    <div onclick="openModal('modalWedding')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-pink-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-pink-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Commercial
+                            Prototype</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project5.jpg" alt="Premium Digital Wedding Invitation"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-pink-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/20">Frontend
+                                    App</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">React / Vite</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-pink-400 transition">
+                                Digital Wedding Invitation</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Prototipe platform undangan pernikahan digital premium, modern, & responsive berbasis
+                                reusable component architecture siap komersialisasi.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">React</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Tailwind</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Vite</span>
+                            </div>
+                            <a href="https://lume-landing-page-theta.vercel.app/" target="_blank"
+                                onclick="event.stopPropagation()"
+                                class="text-xs bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 font-bold px-2.5 py-1 rounded-lg border border-pink-500/30 transition flex items-center gap-1">
+                                🚀 Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project: ScentDNA (AI Fragrance Engine) -->
+                    <div onclick="openModal('modalScentDNA')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-rose-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-rose-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">AI
+                            & Containerized Engine</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project4.jpg" alt="ScentDNA AI Fragrance Discovery Engine"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-rose-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20">AI
+                                    & RAG Engine</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">FastAPI /
+                                    Docker</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-rose-400 transition">
+                                ScentDNA</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Mesin rekomendasi & semantic search wewangian ter-containerize (Docker) berbasis Vector
+                                Embeddings dan RAG Gemini AI dengan optimasi alokasi RAM.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">FastAPI</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Docker</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">pgvector</span>
+                            </div>
+                            <a href="https://scentdna-5646.vercel.app" target="_blank" onclick="event.stopPropagation()"
+                                class="text-xs bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold px-2.5 py-1 rounded-lg border border-rose-500/30 transition flex items-center gap-1">
+                                🚀 Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 1 Card: LDR Anchor (Mobile App) -->
+                    <div onclick="openModal('modalLdr')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-orange-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-orange-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Landing
+                            Page Live</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project6.jpg" alt="LDR Anchor Mobile App"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-orange-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full border border-orange-500/20">Mobile
+                                    App</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">React Native / FCM
+                                    V1</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-orange-400 transition">LDR
+                                Anchor</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Aplikasi mobile interaktif khusus pasangan LDR dengan fitur pembagian suasana hati
+                                real-time, pelukan virtual, dan sistem Push Notification otomatis via FCM V1.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap items-center gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">React
+                                    Native</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Firebase</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">FCM
+                                    V1</span>
+                            </div>
+                            <a href="https://landing-page-my-ldr-app.vercel.app/" target="_blank"
+                                onclick="event.stopPropagation()"
+                                class="text-xs bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold px-2.5 py-1 rounded-lg border border-orange-500/30 transition flex items-center gap-1">
+                                🚀 Landing Page
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 Card: Clinical Suite Dashboard -->
+                    <div onclick="openModal('modal1')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-cyan-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Landing
+                            Page Live</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project1.jpg" alt="Clinical Suite Dashboard"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-cyan-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20">Web
+                                    App</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">Dashboard</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-cyan-400 transition">
+                                Clinical Suite Dashboard</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Sistem manajemen klinis fungsional dengan fitur pencatatan data dan kalkulator parameter
+                                terstruktur.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">HTML/JS</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Tailwind</span>
+                            </div>
+                            <a href="https://landing-page-ulul.vercel.app/" target="_blank"
+                                onclick="event.stopPropagation()"
+                                class="text-xs bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-bold px-2.5 py-1 rounded-lg border border-cyan-500/30 transition flex items-center gap-1">
+                                🚀 Landing Page
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 Card: Cloud Inventory System -->
+                    <div onclick="openModal('modalInventory')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-sky-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-sky-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live
+                            Web App</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project3.jpg" alt="Cloud Inventory System"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-sky-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-sky-500/10 text-sky-400 rounded-full border border-sky-500/20">Web
+                                    Application</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">Apps Script</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-sky-400 transition">Cloud
+                                Inventory System</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Sistem manajemen inventaris serverless skala produksi dengan dashboard real-time, RBAC,
+                                dan proteksi concurrency.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex gap-1.5 font-mono">
+                                <span class="text-xs px-2 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Google
+                                    Workspace</span>
+                                <span class="text-xs px-2 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">JS/HTML</span>
+                            </div>
+                            <a href="https://script.google.com/macros/s/AKfycbyW7R5AyM4FYccVJZsCxH4YcUwK6uwme2urJjglOF2WjfA5tUI7lgKViLY4vz7sBXg/exec"
+                                target="_blank" onclick="event.stopPropagation()"
+                                class="text-xs bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-bold px-2.5 py-1 rounded-lg border border-sky-500/30 transition flex items-center gap-1">
+                                🚀 Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 Card: PodLearn AI -->
+                    <div onclick="openModal('modalPodlearn')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-violet-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-violet-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live
+                            Web App</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project2.jpg" alt="PodLearn AI Podcast Generator"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-violet-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full border border-violet-500/20">AI
+                                    Podcast</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">Fullstack AI</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-violet-400 transition">
+                                PodLearn AI</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Generator podcast audio interaktif 2 pembicara dari dokumen PDF/materi teks lengkap
+                                dengan 10 kuis evaluasi otomatis.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Gemini
+                                    AI</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Edge
+                                    TTS</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">FFmpeg</span>
+                            </div>
+                            <a href="https://podlearn-backend-production-f411.up.railway.app" target="_blank"
+                                onclick="event.stopPropagation()"
+                                class="text-xs bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 font-bold px-2.5 py-1 rounded-lg border border-violet-500/30 transition flex items-center gap-1">
+                                🚀 Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 Card: Telegram AI Assistant -->
+                    <div onclick="openModal('modalTelegram')"
+                        class="project-card reveal rounded-2xl p-6 hover:border-purple-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative overflow-hidden"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-purple-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">Live
+                            24/7</span>
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20">AI
+                                    Bot</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">Python /
+                                    Railway</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-purple-400 transition">
+                                Telegram AI Assistant</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Bot Telegram cerdas berbasis Llama-3.3 70B yang aktif di cloud 24/7, siap merespons
+                                percakapan multibahasa secara instan.
+                            </p>
+                        </div>
+                        <div class="px-0 pb-0 flex items-center gap-3 font-mono">
+                            <span class="text-xs px-2.5 py-1 rounded"
+                                style="background: var(--surface-hover); color: var(--text-secondary);">Python</span>
+                            <span class="text-xs px-2.5 py-1 rounded"
+                                style="background: var(--surface-hover); color: var(--text-secondary);">Groq API</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 Card: Domain Explorer -->
+                    <div onclick="openModal('modalDomain')"
+                        class="project-card reveal rounded-2xl p-6 hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between group shadow-lg"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Web
+                                    Application</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">Laravel / MySQL</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-emerald-400 transition">
+                                Domain Explorer</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Aplikasi penjelajah dan manajemen domain web berbasis Laravel untuk riset ketersediaan,
+                                status, serta pengelolaan database domain.
+                            </p>
+                        </div>
+                        <div class="px-0 pb-0 flex items-center gap-3 font-mono">
+                            <span class="text-xs px-2.5 py-1 rounded"
+                                style="background: var(--surface-hover); color: var(--text-secondary);">Laravel</span>
+                            <span class="text-xs px-2.5 py-1 rounded"
+                                style="background: var(--surface-hover); color: var(--text-secondary);">Tailwind</span>
+                        </div>
+                    </div>
+                    <!-- Project 8 Card: n8n Automation Suite -->
+                    <div onclick="openModal('modalN8n')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-amber-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live
+                            24/7 on Cloud</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project8.jpg" alt="n8n Automation Suite"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-amber-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">AI
+                                    Workflow Automation</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">n8n / GCP</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-amber-400 transition">n8n
+                                Automation Suite</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Rangkaian workflow otomatisasi self-hosted di Google Cloud: AI content idea generator,
+                                LinkedIn job matcher berbasis AI scoring, dan asisten pribadi terintegrasi
+                                Gmail/Calendar/Tasks/Telegram.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">n8n</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Gemini
+                                    API</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Google
+                                    Cloud</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL POPUP SCHOOLCOM MVP -->
+        <div id="modalSchoolCom"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalSchoolCom')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 inline-block mb-3">Mobile
+                    & Web Management System</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">SchoolCom — School Management System</h3>
+
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project7.jpg" alt="SchoolCom Dashboard Screenshot"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Aplikasi sistem pengelolaan & komunikasi sekolah terintegrasi berbasis React Native / Expo SDK 54
+                    dan Firebase. Dirancang untuk menghubungkan Admin, Guru, dan Orang Tua dalam satu ekosistem yang
+                    terstruktur melalui kontrol akses ketat (RBAC) dan 40 modul teraudit.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-blue-400 mb-2">FITUR UTAMA
+                        & ARSITEKTUR SIKLUS PROSES:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ <span class="text-white font-semibold">Admin Control Center:</span> Manajemen akun
+                            pengguna, alokasi kelas guru, dan pendelegasian hubungan siswa-orang tua.</li>
+                        <li>✓ <span class="text-white font-semibold">Presensi & Assessment Guru:</span> Pencatatan
+                            kehadiran sekelas sekali sentuh, input nilai rapor, dan pencatatan insiden/perilaku.</li>
+                        <li>✓ <span class="text-white font-semibold">Parent Portal Visibility:</span> Pemantauan
+                            statistik kehadiran anak, riwayat nilai, dan catatan insiden secara transparan.</li>
+                        <li>✓ <span class="text-white font-semibold">Role-Based Security & Audit:</span> Pengamanan
+                            backend dengan Firestore Security Rules dan 40 modul teruji.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalSchoolCom')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://landing-page-schoolcom.vercel.app/" target="_blank"
+                        class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Landing Page Live
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP WEDDING INVITATION -->
+        <div id="modalWedding"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalWedding')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/20 inline-block mb-3">Frontend
+                    Prototype Project</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">Digital Wedding Invitation Premium</h3>
+
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project5.jpg" alt="Digital Wedding Invitation Screenshot"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Prototipe aplikasi undangan pernikahan digital premium berbasis React & Tailwind CSS. Dirancang
+                    dengan pendekatan <i>Mobile-First Design</i>, tata letak elegan & romantis, serta arsitektur
+                    komponen modular yang siap dikembangkan menjadi platform generator template undangan digital
+                    komersialisasi.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-pink-400 mb-2">HIGHLIGHT
+                        FITUR & TEKNIS:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ <span class="text-white font-semibold">Opening Screen & Cover:</span> Tampilan pembuka
+                            personalisasi nama tamu undangan.</li>
+                        <li>✓ <span class="text-white font-semibold">Hero & Real-Time Countdown:</span> Timer hitung
+                            mundur otomatis menuju hari H pernikahan.</li>
+                        <li>✓ <span class="text-white font-semibold">Interactive Section:</span> Timeline perjalanan
+                            cinta (Our Story), integrasi Google Maps lokasi acara, dan Pre-wedding Gallery Grid.</li>
+                        <li>✓ <span class="text-white font-semibold">Simulasi RSVP & Digital Wishes:</span> Form
+                            konfirmasi kehadiran & papan ucapan doa restu interaktif.</li>
+                        <li>✓ <span class="text-white font-semibold">Wedding Gift & Copy Action:</span> Fitur salin
+                            nomor rekening bank otomatis untuk kado pernikahan.</li>
+                        <li>✓ <span class="text-white font-semibold">Reusable Data Architecture:</span> Seluruh data
+                            terpusat di `weddingData.js` untuk kemudahan kustomisasi antar klien.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalWedding')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://wedding-invitation-gamma-nine-24.vercel.app/" target="_blank"
+                        class="bg-pink-600 hover:bg-pink-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Live App
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP N8N AUTOMATION SUITE -->
+        <div id="modalN8n"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalN8n')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20 inline-block mb-3">AI
+                    Workflow Automation</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">n8n Automation Suite</h3>
+
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project8.jpg" alt="n8n Automation Suite Screenshot"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Rangkaian workflow otomatisasi berbasis n8n yang di-hosting mandiri (self-hosted) di Google Cloud VM
+                    dengan HTTPS penuh. Dibangun untuk mengurangi kerjaan repetitif dan mempercepat pencarian kerja
+                    sehari-hari.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-amber-400 mb-2">WORKFLOW
+                        YANG DIBANGUN:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ <span class="text-white font-semibold">AI Content Idea Generator:</span> Otomatis membuat
+                            ide konten harian via Gemini AI, tersimpan ke Google Sheets, dan terkirim ke Telegram
+                            terjadwal.</li>
+                        <li>✓ <span class="text-white font-semibold">LinkedIn Job Search Matcher:</span> Scraping
+                            lowongan LinkedIn, penilaian kecocokan resume via AI (skor 0-100) plus cover letter
+                            otomatis, dan notifikasi Telegram real-time.</li>
+                        <li>✓ <span class="text-white font-semibold">Personal AI Assistant:</span> Asisten percakapan
+                            terintegrasi Gmail, Google Calendar, dan Google Tasks lewat Telegram, aktif 24/7 di cloud.
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalN8n')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP SCENTDNA -->
+        <div id="modalScentDNA"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalScentDNA')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20 inline-block mb-3">AI
+                    & Vector Search Project</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">ScentDNA — AI Fragrance Discovery Engine
+                </h3>
+
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project4.jpg" alt="ScentDNA Discovery Engine"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Platform penemu aroma parfum berbasis AI dan pencarian berbasis vektor (Semantic Search).
+                    Menggabungkan model transformer NLP untuk mengubah teks deskripsi aroma menjadi representasi numerik
+                    L2-normalized vector, serta dipadukan dengan RAG Gemini 2.5 Flash sebagai konsultan parfum virtual.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-rose-400 mb-2">HIGHLIGHT
+                        ARSITEKTUR & PENGEMBANGAN:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ <span class="text-white font-semibold">Containerization:</span> Pengemasan backend FastAPI
+                            ke dalam lingkungan <span class="text-white font-semibold">Docker</span> terisolasi untuk
+                            deployment cloud konsisten.</li>
+                        <li>✓ <span class="text-white font-semibold">Semantic Vector Search:</span> Pencarian kemiripan
+                            kosinus (<code class="text-xs px-1 rounded"
+                                style="background: var(--surface-hover);">&lt;=&gt;</code>) berbasis PostgreSQL <span
+                                class="text-white font-semibold">pgvector</span>.</li>
+                        <li>✓ <span class="text-white font-semibold">RAG AI Advisor:</span> Integrasi <span
+                                class="text-white font-semibold">Gemini API</span> untuk racikan rekomendasi deskriptif
+                            real-time.</li>
+                        <li>✓ <span class="text-white font-semibold">Singleton Pattern (Dependency Injection):</span>
+                            Restrukturisasi FastAPI <code class="text-xs px-1 rounded"
+                                style="background: var(--surface-hover);">lifespan</code> untuk mencegah duplikasi model
+                            HuggingFace di RAM.</li>
+                        <li>✓ <span class="text-white font-semibold">Memory Hardening (OOM Prevention):</span> Profiling
+                            memori Linux cgroups, optimasi PyTorch CPU single-threading, dan garbage collection aktif.
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalScentDNA')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://scentdna-5646.vercel.app" target="_blank"
+                        class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Live App
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP LDR ANCHOR -->
+        <div id="modalLdr"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalLdr')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full border border-orange-500/20 inline-block mb-3">Mobile
+                    Application Project</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">LDR Anchor — Hubungan Jarak Jauh</h3>
+
+                <!-- Box Tampilan QR Code APK -->
+                <div class="mb-6 p-4 rounded-xl flex flex-col md:flex-row items-center gap-4"
+                    style="background: var(--bg); border: 1px solid var(--border);">
+                    <img src="qrcodeapk.jpg" alt="QR Code Download APK LDR Anchor"
+                        class="w-32 h-32 object-contain bg-white p-2 rounded-lg shadow-md"
+                        style="border: 1px solid var(--border-hover);">
+                    <div class="text-center md:text-left">
+                        <span
+                            class="text-xs font-bold font-mono text-orange-400 uppercase tracking-wider block mb-1">Scan
+                            untuk Download APK</span>
+                        <p class="text-xs leading-relaxed" style="color: var(--text-muted);">
+                            Arahkan kamera HP Anda ke QR Code ini untuk langsung mengunduh dan menginstal berkas APK
+                            Android terbaru di perangkat Anda.
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Aplikasi mobile berbasis Android yang dikembangkan menggunakan React Native, Firebase Firestore, dan
+                    Expo Notifications. Dirancang khusus untuk membantu pasangan jarak jauh (LDR) tetap terhubung secara
+                    emosional melalui fitur sinkronisasi suasana hati (Mood) real-time, pelukan virtual interaktif,
+                    serta integrasi Push Notification langsung saat pesan/interaksi dikirim.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-orange-400 mb-2">FITUR
+                        UTAMA & INFRASTRUCTURE:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ Sistem pairing akun unik antar pasangan secara aman via Firebase Auth & Firestore.</li>
+                        <li>✓ Berbagi status suasana hati (Mood) real-time dengan catatan khusus.</li>
+                        <li>✓ Fitur kirim pelukan virtual interaktif antar perangkat.</li>
+                        <li>✓ Integrasi <span class="text-white font-semibold">Firebase Cloud Messaging (FCM V1
+                                API)</span> via <span class="text-white font-semibold">Expo Push Service</span>.</li>
+                        <li>✓ Manajemen kredensial native Android terintegrasi menggunakan <span
+                                class="text-white font-semibold">EAS Build Credentials</span>.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalLdr')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://landing-page-my-ldr-app.vercel.app/" target="_blank"
+                        class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Landing Page
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP CLINICAL SUITE DASHBOARD -->
+        <div id="modal1"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modal1')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20 inline-block mb-3">Detail
+                    Proyek & Screenshot Full</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">Clinical Suite Dashboard</h3>
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project1.jpg" alt="Full Screenshot Clinical Suite Dashboard"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Sistem manajemen klinis berbasis web yang dirancang khusus untuk mempercepat rekapitulasi data medis
+                    pasien dan menyediakan alat hitung parameter fungsional secara otomatis.
+                </p>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modal1')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://landing-page-ulul.vercel.app/" target="_blank"
+                        class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Landing Page
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP INVENTORY SYSTEM -->
+        <div id="modalInventory"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalInventory')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-sky-500/10 text-sky-400 rounded-full border border-sky-500/20 inline-block mb-3">Enterprise-Grade
+                    Web App</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">Cloud Inventory Management System</h3>
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project3.jpg" alt="Full Screenshot Inventory System"
+                        class="w-full h-auto max-h-[75vh] object-cover object-top rounded-lg">
+                </div>
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Aplikasi manajemen inventaris serverless berskala produksi. Memanfaatkan <b>Google Apps Script</b>
+                    sebagai backend engine dan Google Sheets sebagai database. Sistem ini dirancang untuk ketahanan
+                    tinggi dengan proteksi tingkat lanjut layaknya aplikasi skala enterprise.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-sky-400 mb-2">Fitur &
+                        Arsitektur Utama:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li><span class="text-sky-400 font-bold">✓ Interactive Dashboard:</span> Real-time filtering,
+                            search, & client-side pagination.</li>
+                        <li><span class="text-sky-400 font-bold">✓ Concurrency Protection:</span> Implementasi <code
+                                class="text-xs px-1 rounded"
+                                style="background: var(--surface-hover);">LockService</code> untuk mencegah <i>race
+                                condition</i> stok minus.</li>
+                        <li><span class="text-sky-400 font-bold">✓ Security Hardening:</span> Role-Based Access Control
+                            (RBAC) & Anti-XSS Sanitization.</li>
+                        <li><span class="text-sky-400 font-bold">✓ Immutable Audit Trail:</span> Pencatatan otomatis log
+                            aktivitas & riwayat transaksi pengguna.</li>
+                        <li><span class="text-sky-400 font-bold">✓ Data Recovery:</span> Trigger otomatis penjadwalan
+                            snapshot full backup ke Google Drive.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalInventory')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://script.google.com/macros/s/AKfycbyW7R5AyM4FYccVJZsCxH4YcUwK6uwme2urJjglOF2WjfA5tUI7lgKViLY4vz7sBXg/exec"
+                        target="_blank"
+                        class="bg-sky-600 hover:bg-sky-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Web App Live
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP PODLEARN AI -->
+        <div id="modalPodlearn"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalPodlearn')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full border border-violet-500/20 inline-block mb-3">AI
+                    Application • Fullstack Project</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">PodLearn — AI Podcast & Interactive Quiz
+                    Generator</h3>
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project2.jpg" alt="Full Screenshot PodLearn AI"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Aplikasi kecerdasan buatan end-to-end yang mengubah dokumen PDF/materi teks panjang menjadi audio
+                    percakapan podcast 2 orang (Host & Expert) secara otomatis dengan teknologi Neural Text-to-Speech,
+                    penggabungan audio FFmpeg, serta 10 kuis evaluasi interaktif secara dinamis.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-violet-400 mb-2">Arsitektur
+                        & Fitur Utama:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ Parsing dokumen otomatis dari file `.pdf` & `.txt`.</li>
+                        <li>✓ Naskah percakapan santai Rian (Host) & Maya (Expert) via Gemini AI.</li>
+                        <li>✓ Pengisian suara multi-karakter realistis menggunakan Microsoft Edge Neural TTS.</li>
+                        <li>✓ Penggabungan otomatis berkas MP3 di server menggunakan FFmpeg Concat.</li>
+                        <li>✓ Evaluasi kuis 10 soal interaktif dengan perhitungan skor dinamis.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalPodlearn')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://podlearn-backend-production-f411.up.railway.app" target="_blank"
+                        class="bg-violet-600 hover:bg-violet-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🚀 Buka Live App
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP TELEGRAM AI ASSISTANT -->
+        <div id="modalTelegram"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalTelegram')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20 inline-block mb-3">AI
+                    Bot Project • Live on Cloud</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">Telegram AI Personal Assistant</h3>
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Asisten virtual Telegram interaktif yang dikembangkan menggunakan Python, memanfaatkan model AI
+                    canggih Llama-3.3 70B via Groq API, dan di-hosting secara permanen di Railway (24/7 online).
+                    Dilengkapi system prompt kustom agar responsif, cerdas, dan santai.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-purple-400 mb-2">Arsitektur
+                        & Fitur:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ Integrasi real-time Telegram Bot API (pyTelegramBotAPI).</li>
+                        <li>✓ Performa tinggi berkat integrasi model LLM Llama-3.3.</li>
+                        <li>✓ Aktif 24/7 di cloud server tanpa henti.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalTelegram')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://t.me/BotasikBot" target="_blank"
+                        class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🤖 Coba Langsung (@BotasikBot)
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL POPUP DOMAIN EXPLORER -->
+        <div id="modalDomain"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalDomain')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 inline-block mb-3">Fullstack
+                    Web Project</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">Domain Explorer — Laravel App</h3>
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Aplikasi manajemen dan eksplorasi domain yang dibangun menggunakan framework Laravel dan Tailwind
+                    CSS. Dirancang untuk mengelola data domain, mengecek status ketersediaan/ekstensi, serta membantu
+                    riset infrastruktur website secara terstruktur.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-400 mb-2">Fitur
+                        Utama:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ Manajemen basis data domain lokal (CRUD interaktif).</li>
+                        <li>✓ Integrasi tautan langsung ke URL eksternal secara real-time.</li>
+                        <li>✓ Desain antarmuka modern menggunakan Tailwind CSS.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalDomain')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="#contact" onclick="closeModal('modalDomain')"
+                        class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md">Diskusikan
+                        Proyek</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 text-center"
+            style="border-top: 1px solid var(--border); background: var(--bg-alt);">
+            <div class="max-w-xl mx-auto px-6">
+                <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2"
+                    style="color: var(--text-secondary);">
+                    <span style="color: var(--accent-teal);">◆</span> Rx-03 <span
+                        style="color: var(--text-muted);">—</span> Mari Terhubung
+                </span>
+                <h2 class="font-display text-2xl md:text-[32px] mt-3 mb-3 text-white reveal">Punya Ide untuk <span
+                        class="font-accent" style="color: var(--accent-teal);">Dikembangkan?</span></h2>
+                <p class="mb-8 reveal" style="color: var(--text-secondary);">
+                    Terbuka untuk proyek freelance, kolaborasi, maupun ngobrol soal farmasi &amp; teknologi.
                 </p>
 
-                <div class="flex flex-wrap gap-4 mb-10">
-                    <a href="#projects" class="font-display font-semibold px-6 py-3 rounded-xl transition shadow-lg" style="background: var(--accent-teal); color: #06120e; box-shadow: 0 10px 30px -10px rgba(34,230,181,0.45);">
-                        Lihat Portofolio
+                <div class="reveal text-left rounded-2xl p-7"
+                    style="border: 1px solid var(--border); background: var(--surface);">
+                    <div class="flex justify-between items-center pb-3.5 mb-3.5"
+                        style="border-bottom: 1px dashed var(--border-hover);">
+                        <span class="font-label text-xs tracking-wider" style="color: var(--text-muted);">℞ CONTACT
+                            LABEL</span>
+                        <span class="font-label text-[11px] px-2.5 py-1 rounded-full"
+                            style="background: rgba(34,230,181,0.12); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">●
+                            Available</span>
+                    </div>
+                    <div class="grid grid-cols-[110px_1fr] gap-y-2.5 text-sm">
+                        <span class="font-label" style="color: var(--text-muted);">Nama</span>
+                        <span class="font-display" style="color: var(--text-primary);">Muhammad Ulul Albab</span>
+
+                        <span class="font-label" style="color: var(--text-muted);">Kontak</span>
+                        <span class="font-display" style="color: var(--text-primary);">sfarmlul@gmail.com</span>
+
+                        <span class="font-label" style="color: var(--text-muted);">GitHub</span>
+                        <span class="font-display" style="color: var(--text-primary);">github.com/ululbiasaajaa</span>
+
+                        <span class="font-label" style="color: var(--text-muted);">Respons</span>
+                        <span class="font-display" style="color: var(--text-primary);">&lt; 24 jam</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 mt-8 reveal">
+                    <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda."
+                        target="_blank"
+                        class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg shadow-emerald-600/20"
+                        style="background: #059669; color: white;">
+                        Hubungi via WhatsApp
                     </a>
-                    <a href="#contact" class="font-display px-6 py-3 rounded-xl transition" style="border: 1px solid var(--border-hover); background: rgba(255,255,255,0.02); color: var(--text-primary);">
-                        Hubungi Saya
+                    <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download
+                        class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg"
+                        style="background: var(--accent-teal); color: #06120e;">
+                        Download Portofolio (PPT)
+                    </a>
+                    <a href="CV_MuhammadUlulAlbab (1).pdf" download
+                        class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg"
+                        style="background: var(--surface-hover); border: 1px solid var(--border-hover); color: var(--accent-teal);">
+                        Download CV (PDF)
                     </a>
                 </div>
-
-                <!-- stat row -->
-                <div class="font-display flex gap-10 pt-6" style="border-top: 1px solid var(--border);">
-                    <div>
-                        <div class="text-2xl" style="font-weight: 600;">10+</div>
-                        <div class="font-mono text-[11px] uppercase tracking-wider mt-1" style="color: var(--text-muted);">Proyek</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl" style="font-weight: 600;">2+</div>
-                        <div class="font-mono text-[11px] uppercase tracking-wider mt-1" style="color: var(--text-muted);">Bulan Belajar</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl" style="font-weight: 600;">100%</div>
-                        <div class="font-mono text-[11px] uppercase tracking-wider mt-1" style="color: var(--text-muted);">Problem Solving</div>
-                    </div>
-                </div>
             </div>
-        </div>
-
-        <div class="hero-content font-accent hero-tagline-chip absolute bottom-6 right-6 text-sm hidden md:block" style="color: #c6cbdb;">
-            From molecules to meaningful code.
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20" style="border-top: 1px solid var(--border); background: var(--bg-alt);">
-        <div class="max-w-5xl mx-auto px-6">
-            <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2" style="color: var(--text-secondary);">
-                <span style="color: var(--accent-teal);">◆</span> Rx-01 <span style="color: var(--text-muted);">—</span> Tentang Saya
-            </span>
-
-            <div class="mt-9 flex flex-col md:flex-row gap-14 items-center">
-
-                <!-- molecule → circuit visual + photo medallion -->
-                <div class="reveal relative flex-shrink-0 w-full md:w-[420px]">
-                    <div class="molecule-panel p-2 flex flex-col items-center">
-                        <img src="struktur-kimia.png" alt="Struktur Molekul ke Data" class="w-full h-auto rounded-2xl object-cover">
-                    </div>
-
-                    <!-- signature medallion: personal photo pinned to the corner -->
-                    <div class="photo-medallion absolute -left-4 -top-4 w-24 h-24 md:w-36 md:h-36">
-                        <img src="Ulul Foto Formal.jpg" alt="Muhammad Ulul Albab" class="w-full h-full rounded-full object-cover object-top">
-                    </div>
-                </div>
-
-                <!-- copy -->
-                <div class="reveal flex-1">
-                    <h2 class="font-display text-3xl md:text-[38px] mb-5 leading-[1.22]">
-                        Dari Bangku Farmasi,<br>
-                        <span class="font-accent" style="color: var(--accent-teal);">ke Baris Kode.</span>
-                    </h2>
-
-                    <div class="leading-relaxed text-[15.5px] space-y-4" style="color: var(--text-secondary);">
-                        <p>
-                            Berlatar belakang pendidikan <strong style="color: var(--accent-teal);" class="font-semibold">Farmasi</strong>, saya memiliki fondasi ketelitian, metode sistematis, dan pola pikir analitis eksakta yang sangat kuat dalam memecahkan masalah. Kemampuan analitis ini saya transformasikan ke dunia pengkodingan untuk merancang solusi digital <em class="text-white font-medium not-italic">end-to-end</em> yang presisi, efisien, dan andal.
-                        </p>
-                        <p>
-                            Saya berpengalaman dalam merancang antarmuka web modern (<span class="text-white font-medium">React / Tailwind</span>), aplikasi mobile Android (<span class="text-white font-medium">React Native / Expo</span>), hingga membangun arsitektur backend berskala produksi menggunakan <span class="text-white font-medium">Laravel, Node.js, dan FastAPI</span>.
-                        </p>
-                        <p>
-                            Keahlian saya juga mencakup integrasi teknologi AI modern seperti <span class="text-white font-medium">RAG Engine (Gemini API)</span>, pencarian berbasis vektor (<span class="text-white font-medium">PostgreSQL pgvector</span>), otomatisasi cloud, serta pengemasan aplikasi terisolasi menggunakan <span class="text-white font-medium">Docker</span>.
-                        </p>
-                    </div>
-
-                    <!-- skill chips -->
-                    <div class="flex flex-wrap gap-2.5 mt-7 pt-6" style="border-top: 1px solid var(--border);">
-                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(34,230,181,0.1); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">React &amp; Tailwind</span>
-                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(139,127,255,0.1); color: var(--accent-violet); border: 1px solid rgba(139,127,255,0.25);">Laravel / Node / FastAPI</span>
-                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: rgba(255,184,77,0.1); color: var(--accent-amber); border: 1px solid rgba(255,184,77,0.25);">Gemini AI &amp; RAG</span>
-                        <span class="font-mono text-xs px-4 py-2 rounded-full" style="background: var(--surface-hover); color: var(--text-primary); border: 1px solid var(--border-hover);">Docker</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20" style="border-top: 1px solid var(--border);">
-        <div class="max-w-5xl mx-auto px-6">
-            <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2" style="color: var(--text-secondary);">
-                <span style="color: var(--accent-teal);">◆</span> Rx-02 <span style="color: var(--text-muted);">—</span> Portofolio Pilihan
-            </span>
-            <h2 class="font-display text-2xl md:text-3xl mt-3 mb-4 text-white reveal">Proyek yang <span class="font-accent" style="color: var(--accent-teal);">Bicara Sendiri.</span></h2>
-            <p class="text-sm mb-10 reveal" style="color: var(--text-muted);">Klik pada kartu proyek di bawah untuk melihat detail lengkap dan tautan uji coba aplikasi secara langsung.</p>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- Project NEW: SchoolCom (Mobile App & Management System) -->
-                <div onclick="openModal('modalSchoolCom')" class="project-card reveal rounded-2xl overflow-hidden hover:border-blue-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-blue-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live Web & App</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project7.jpg" alt="SchoolCom Management System" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-blue-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">Mobile & Web App</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">Expo / Firebase</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-blue-400 transition">SchoolCom MVP</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Sistem manajemen & komunikasi sekolah terpadu 3-role (Admin, Guru, Orang Tua) berbasis React Native/Expo & Firebase dengan 40 modul teraudit.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex flex-wrap gap-1.5 font-mono">
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Expo</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Firebase</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">RBAC</span>
-                        </div>
-                        <a href="https://landing-page-schoolcom.vercel.app/" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-bold px-2.5 py-1 rounded-lg border border-blue-500/30 transition flex items-center gap-1">
-                            🚀 Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project: Premium Digital Wedding Invitation -->
-                <div onclick="openModal('modalWedding')" class="project-card reveal rounded-2xl overflow-hidden hover:border-pink-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-pink-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Commercial Prototype</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project5.jpg" alt="Premium Digital Wedding Invitation" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-pink-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/20">Frontend App</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">React / Vite</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-pink-400 transition">Digital Wedding Invitation</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Prototipe platform undangan pernikahan digital premium, modern, & responsive berbasis reusable component architecture siap komersialisasi.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex flex-wrap gap-1.5 font-mono">
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">React</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Tailwind</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Vite</span>
-                        </div>
-                        <a href="https://lume-landing-page-theta.vercel.app/" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 font-bold px-2.5 py-1 rounded-lg border border-pink-500/30 transition flex items-center gap-1">
-                            🚀 Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project: ScentDNA (AI Fragrance Engine) -->
-                <div onclick="openModal('modalScentDNA')" class="project-card reveal rounded-2xl overflow-hidden hover:border-rose-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-rose-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">AI & Containerized Engine</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project4.jpg" alt="ScentDNA AI Fragrance Discovery Engine" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-rose-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20">AI & RAG Engine</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">FastAPI / Docker</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-rose-400 transition">ScentDNA</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Mesin rekomendasi & semantic search wewangian ter-containerize (Docker) berbasis Vector Embeddings dan RAG Gemini AI dengan optimasi alokasi RAM.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex flex-wrap gap-1.5 font-mono">
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">FastAPI</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Docker</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">pgvector</span>
-                        </div>
-                        <a href="https://scentdna-5646.vercel.app" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold px-2.5 py-1 rounded-lg border border-rose-500/30 transition flex items-center gap-1">
-                            🚀 Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 1 Card: LDR Anchor (Mobile App) -->
-                <div onclick="openModal('modalLdr')" class="project-card reveal rounded-2xl overflow-hidden hover:border-orange-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-orange-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Landing Page Live</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project6.jpg" alt="LDR Anchor Mobile App" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-orange-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full border border-orange-500/20">Mobile App</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">React Native / FCM V1</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-orange-400 transition">LDR Anchor</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Aplikasi mobile interaktif khusus pasangan LDR dengan fitur pembagian suasana hati real-time, pelukan virtual, dan sistem Push Notification otomatis via FCM V1.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex flex-wrap items-center gap-1.5 font-mono">
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">React Native</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Firebase</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">FCM V1</span>
-                        </div>
-                        <a href="https://landing-page-my-ldr-app.vercel.app/" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold px-2.5 py-1 rounded-lg border border-orange-500/30 transition flex items-center gap-1">
-                            🚀 Landing Page
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 Card: Clinical Suite Dashboard -->
-                <div onclick="openModal('modal1')" class="project-card reveal rounded-2xl overflow-hidden hover:border-cyan-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Landing Page Live</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project1.jpg" alt="Clinical Suite Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-cyan-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20">Web App</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">Dashboard</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-cyan-400 transition">Clinical Suite Dashboard</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Sistem manajemen klinis fungsional dengan fitur pencatatan data dan kalkulator parameter terstruktur.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex items-center gap-1.5 font-mono">
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">HTML/JS</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Tailwind</span>
-                        </div>
-                        <a href="https://landing-page-ulul.vercel.app/" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-bold px-2.5 py-1 rounded-lg border border-cyan-500/30 transition flex items-center gap-1">
-                            🚀 Landing Page
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3 Card: Cloud Inventory System -->
-                <div onclick="openModal('modalInventory')" class="project-card reveal rounded-2xl overflow-hidden hover:border-sky-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-sky-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live Web App</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project3.jpg" alt="Cloud Inventory System" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-sky-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-sky-500/10 text-sky-400 rounded-full border border-sky-500/20">Web Application</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">Apps Script</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-sky-400 transition">Cloud Inventory System</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Sistem manajemen inventaris serverless skala produksi dengan dashboard real-time, RBAC, dan proteksi concurrency.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex gap-1.5 font-mono">
-                            <span class="text-xs px-2 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Google Workspace</span>
-                            <span class="text-xs px-2 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">JS/HTML</span>
-                        </div>
-                        <a href="https://script.google.com/macros/s/AKfycbyW7R5AyM4FYccVJZsCxH4YcUwK6uwme2urJjglOF2WjfA5tUI7lgKViLY4vz7sBXg/exec" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-bold px-2.5 py-1 rounded-lg border border-sky-500/30 transition flex items-center gap-1">
-                            🚀 Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 4 Card: PodLearn AI -->
-                <div onclick="openModal('modalPodlearn')" class="project-card reveal rounded-2xl overflow-hidden hover:border-violet-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-violet-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Live Web App</span>
-                    <div class="h-36 overflow-hidden relative" style="background: var(--bg); border-bottom: 1px solid var(--border);">
-                        <img src="project2.jpg" alt="PodLearn AI Podcast Generator" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center" style="background: rgba(10,14,23,0.5);">
-                            <span class="bg-violet-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat Detail</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full border border-violet-500/20">AI Podcast</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">Fullstack AI</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-violet-400 transition">PodLearn AI</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Generator podcast audio interaktif 2 pembicara dari dokumen PDF/materi teks lengkap dengan 10 kuis evaluasi otomatis.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 flex items-center justify-between gap-2">
-                        <div class="flex flex-wrap gap-1.5 font-mono">
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Gemini AI</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Edge TTS</span>
-                            <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">FFmpeg</span>
-                        </div>
-                        <a href="https://podlearn-backend-production-f411.up.railway.app" target="_blank" onclick="event.stopPropagation()" class="text-xs bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 font-bold px-2.5 py-1 rounded-lg border border-violet-500/30 transition flex items-center gap-1">
-                            🚀 Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 5 Card: Telegram AI Assistant -->
-                <div onclick="openModal('modalTelegram')" class="project-card reveal rounded-2xl p-6 hover:border-purple-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative overflow-hidden" style="background: var(--surface); border: 1px solid var(--border);">
-                    <span class="absolute top-0 right-0 bg-purple-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">Live 24/7</span>
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20">AI Bot</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">Python / Railway</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-purple-400 transition">Telegram AI Assistant</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Bot Telegram cerdas berbasis Llama-3.3 70B yang aktif di cloud 24/7, siap merespons percakapan multibahasa secara instan.
-                        </p>
-                    </div>
-                    <div class="px-0 pb-0 flex items-center gap-3 font-mono">
-                        <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Python</span>
-                        <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Groq API</span>
-                    </div>
-                </div>
-
-                <!-- Project 6 Card: Domain Explorer -->
-                <div onclick="openModal('modalDomain')" class="project-card reveal rounded-2xl p-6 hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between group shadow-lg" style="background: var(--surface); border: 1px solid var(--border);">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Web Application</span>
-                            <span class="text-xs font-mono" style="color: var(--text-muted);">Laravel / MySQL</span>
-                        </div>
-                        <h3 class="text-xl font-display mb-3 text-white group-hover:text-emerald-400 transition">Domain Explorer</h3>
-                        <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                            Aplikasi penjelajah dan manajemen domain web berbasis Laravel untuk riset ketersediaan, status, serta pengelolaan database domain.
-                        </p>
-                    </div>
-                    <div class="px-0 pb-0 flex items-center gap-3 font-mono">
-                        <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Laravel</span>
-                        <span class="text-xs px-2.5 py-1 rounded" style="background: var(--surface-hover); color: var(--text-secondary);">Tailwind</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL POPUP SCHOOLCOM MVP -->
-    <div id="modalSchoolCom" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalSchoolCom')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 inline-block mb-3">Mobile & Web Management System</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">SchoolCom — School Management System</h3>
-
-            <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2" style="border: 1px solid var(--border); background: var(--bg);">
-                <img src="project7.jpg" alt="SchoolCom Dashboard Screenshot" class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-            </div>
-
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Aplikasi sistem pengelolaan & komunikasi sekolah terintegrasi berbasis React Native / Expo SDK 54 dan Firebase. Dirancang untuk menghubungkan Admin, Guru, dan Orang Tua dalam satu ekosistem yang terstruktur melalui kontrol akses ketat (RBAC) dan 40 modul teraudit.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-blue-400 mb-2">FITUR UTAMA & ARSITEKTUR SIKLUS PROSES:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ <span class="text-white font-semibold">Admin Control Center:</span> Manajemen akun pengguna, alokasi kelas guru, dan pendelegasian hubungan siswa-orang tua.</li>
-                    <li>✓ <span class="text-white font-semibold">Presensi & Assessment Guru:</span> Pencatatan kehadiran sekelas sekali sentuh, input nilai rapor, dan pencatatan insiden/perilaku.</li>
-                    <li>✓ <span class="text-white font-semibold">Parent Portal Visibility:</span> Pemantauan statistik kehadiran anak, riwayat nilai, dan catatan insiden secara transparan.</li>
-                    <li>✓ <span class="text-white font-semibold">Role-Based Security & Audit:</span> Pengamanan backend dengan Firestore Security Rules dan 40 modul teruji.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalSchoolCom')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://landing-page-schoolcom.vercel.app/" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Landing Page Live
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP WEDDING INVITATION -->
-    <div id="modalWedding" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalWedding')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/20 inline-block mb-3">Frontend Prototype Project</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">Digital Wedding Invitation Premium</h3>
-
-            <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2" style="border: 1px solid var(--border); background: var(--bg);">
-                <img src="project5.jpg" alt="Digital Wedding Invitation Screenshot" class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-            </div>
-
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Prototipe aplikasi undangan pernikahan digital premium berbasis React & Tailwind CSS. Dirancang dengan pendekatan <i>Mobile-First Design</i>, tata letak elegan & romantis, serta arsitektur komponen modular yang siap dikembangkan menjadi platform generator template undangan digital komersialisasi.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-pink-400 mb-2">HIGHLIGHT FITUR & TEKNIS:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ <span class="text-white font-semibold">Opening Screen & Cover:</span> Tampilan pembuka personalisasi nama tamu undangan.</li>
-                    <li>✓ <span class="text-white font-semibold">Hero & Real-Time Countdown:</span> Timer hitung mundur otomatis menuju hari H pernikahan.</li>
-                    <li>✓ <span class="text-white font-semibold">Interactive Section:</span> Timeline perjalanan cinta (Our Story), integrasi Google Maps lokasi acara, dan Pre-wedding Gallery Grid.</li>
-                    <li>✓ <span class="text-white font-semibold">Simulasi RSVP & Digital Wishes:</span> Form konfirmasi kehadiran & papan ucapan doa restu interaktif.</li>
-                    <li>✓ <span class="text-white font-semibold">Wedding Gift & Copy Action:</span> Fitur salin nomor rekening bank otomatis untuk kado pernikahan.</li>
-                    <li>✓ <span class="text-white font-semibold">Reusable Data Architecture:</span> Seluruh data terpusat di `weddingData.js` untuk kemudahan kustomisasi antar klien.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalWedding')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://wedding-invitation-gamma-nine-24.vercel.app/" target="_blank" class="bg-pink-600 hover:bg-pink-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Live App
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP SCENTDNA -->
-    <div id="modalScentDNA" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalScentDNA')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20 inline-block mb-3">AI & Vector Search Project</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">ScentDNA — AI Fragrance Discovery Engine</h3>
-
-            <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2" style="border: 1px solid var(--border); background: var(--bg);">
-                <img src="project4.jpg" alt="ScentDNA Discovery Engine" class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-            </div>
-
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Platform penemu aroma parfum berbasis AI dan pencarian berbasis vektor (Semantic Search). Menggabungkan model transformer NLP untuk mengubah teks deskripsi aroma menjadi representasi numerik L2-normalized vector, serta dipadukan dengan RAG Gemini 2.5 Flash sebagai konsultan parfum virtual.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-rose-400 mb-2">HIGHLIGHT ARSITEKTUR & PENGEMBANGAN:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ <span class="text-white font-semibold">Containerization:</span> Pengemasan backend FastAPI ke dalam lingkungan <span class="text-white font-semibold">Docker</span> terisolasi untuk deployment cloud konsisten.</li>
-                    <li>✓ <span class="text-white font-semibold">Semantic Vector Search:</span> Pencarian kemiripan kosinus (<code class="text-xs px-1 rounded" style="background: var(--surface-hover);">&lt;=&gt;</code>) berbasis PostgreSQL <span class="text-white font-semibold">pgvector</span>.</li>
-                    <li>✓ <span class="text-white font-semibold">RAG AI Advisor:</span> Integrasi <span class="text-white font-semibold">Gemini API</span> untuk racikan rekomendasi deskriptif real-time.</li>
-                    <li>✓ <span class="text-white font-semibold">Singleton Pattern (Dependency Injection):</span> Restrukturisasi FastAPI <code class="text-xs px-1 rounded" style="background: var(--surface-hover);">lifespan</code> untuk mencegah duplikasi model HuggingFace di RAM.</li>
-                    <li>✓ <span class="text-white font-semibold">Memory Hardening (OOM Prevention):</span> Profiling memori Linux cgroups, optimasi PyTorch CPU single-threading, dan garbage collection aktif.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalScentDNA')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://scentdna-5646.vercel.app" target="_blank" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Live App
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP LDR ANCHOR -->
-    <div id="modalLdr" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalLdr')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full border border-orange-500/20 inline-block mb-3">Mobile Application Project</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">LDR Anchor — Hubungan Jarak Jauh</h3>
-
-            <!-- Box Tampilan QR Code APK -->
-            <div class="mb-6 p-4 rounded-xl flex flex-col md:flex-row items-center gap-4" style="background: var(--bg); border: 1px solid var(--border);">
-                <img src="qrcodeapk.jpg" alt="QR Code Download APK LDR Anchor" class="w-32 h-32 object-contain bg-white p-2 rounded-lg shadow-md" style="border: 1px solid var(--border-hover);">
-                <div class="text-center md:text-left">
-                    <span class="text-xs font-bold font-mono text-orange-400 uppercase tracking-wider block mb-1">Scan untuk Download APK</span>
-                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);">
-                        Arahkan kamera HP Anda ke QR Code ini untuk langsung mengunduh dan menginstal berkas APK Android terbaru di perangkat Anda.
-                    </p>
-                </div>
-            </div>
-
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Aplikasi mobile berbasis Android yang dikembangkan menggunakan React Native, Firebase Firestore, dan Expo Notifications. Dirancang khusus untuk membantu pasangan jarak jauh (LDR) tetap terhubung secara emosional melalui fitur sinkronisasi suasana hati (Mood) real-time, pelukan virtual interaktif, serta integrasi Push Notification langsung saat pesan/interaksi dikirim.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-orange-400 mb-2">FITUR UTAMA & INFRASTRUCTURE:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ Sistem pairing akun unik antar pasangan secara aman via Firebase Auth & Firestore.</li>
-                    <li>✓ Berbagi status suasana hati (Mood) real-time dengan catatan khusus.</li>
-                    <li>✓ Fitur kirim pelukan virtual interaktif antar perangkat.</li>
-                    <li>✓ Integrasi <span class="text-white font-semibold">Firebase Cloud Messaging (FCM V1 API)</span> via <span class="text-white font-semibold">Expo Push Service</span>.</li>
-                    <li>✓ Manajemen kredensial native Android terintegrasi menggunakan <span class="text-white font-semibold">EAS Build Credentials</span>.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalLdr')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://landing-page-my-ldr-app.vercel.app/" target="_blank" class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Landing Page
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP CLINICAL SUITE DASHBOARD -->
-    <div id="modal1" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modal1')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20 inline-block mb-3">Detail Proyek & Screenshot Full</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">Clinical Suite Dashboard</h3>
-            <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2" style="border: 1px solid var(--border); background: var(--bg);">
-                <img src="project1.jpg" alt="Full Screenshot Clinical Suite Dashboard" class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-            </div>
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Sistem manajemen klinis berbasis web yang dirancang khusus untuk mempercepat rekapitulasi data medis pasien dan menyediakan alat hitung parameter fungsional secara otomatis.
-            </p>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modal1')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://landing-page-ulul.vercel.app/" target="_blank" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Landing Page
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP INVENTORY SYSTEM -->
-    <div id="modalInventory" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalInventory')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-sky-500/10 text-sky-400 rounded-full border border-sky-500/20 inline-block mb-3">Enterprise-Grade Web App</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">Cloud Inventory Management System</h3>
-            <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2" style="border: 1px solid var(--border); background: var(--bg);">
-                <img src="project3.jpg" alt="Full Screenshot Inventory System" class="w-full h-auto max-h-[75vh] object-cover object-top rounded-lg">
-            </div>
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Aplikasi manajemen inventaris serverless berskala produksi. Memanfaatkan <b>Google Apps Script</b> sebagai backend engine dan Google Sheets sebagai database. Sistem ini dirancang untuk ketahanan tinggi dengan proteksi tingkat lanjut layaknya aplikasi skala enterprise.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-sky-400 mb-2">Fitur & Arsitektur Utama:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li><span class="text-sky-400 font-bold">✓ Interactive Dashboard:</span> Real-time filtering, search, & client-side pagination.</li>
-                    <li><span class="text-sky-400 font-bold">✓ Concurrency Protection:</span> Implementasi <code class="text-xs px-1 rounded" style="background: var(--surface-hover);">LockService</code> untuk mencegah <i>race condition</i> stok minus.</li>
-                    <li><span class="text-sky-400 font-bold">✓ Security Hardening:</span> Role-Based Access Control (RBAC) & Anti-XSS Sanitization.</li>
-                    <li><span class="text-sky-400 font-bold">✓ Immutable Audit Trail:</span> Pencatatan otomatis log aktivitas & riwayat transaksi pengguna.</li>
-                    <li><span class="text-sky-400 font-bold">✓ Data Recovery:</span> Trigger otomatis penjadwalan snapshot full backup ke Google Drive.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalInventory')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://script.google.com/macros/s/AKfycbyW7R5AyM4FYccVJZsCxH4YcUwK6uwme2urJjglOF2WjfA5tUI7lgKViLY4vz7sBXg/exec" target="_blank" class="bg-sky-600 hover:bg-sky-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Web App Live
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP PODLEARN AI -->
-    <div id="modalPodlearn" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalPodlearn')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full border border-violet-500/20 inline-block mb-3">AI Application • Fullstack Project</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">PodLearn — AI Podcast & Interactive Quiz Generator</h3>
-            <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2" style="border: 1px solid var(--border); background: var(--bg);">
-                <img src="project2.jpg" alt="Full Screenshot PodLearn AI" class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-            </div>
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Aplikasi kecerdasan buatan end-to-end yang mengubah dokumen PDF/materi teks panjang menjadi audio percakapan podcast 2 orang (Host & Expert) secara otomatis dengan teknologi Neural Text-to-Speech, penggabungan audio FFmpeg, serta 10 kuis evaluasi interaktif secara dinamis.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-violet-400 mb-2">Arsitektur & Fitur Utama:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ Parsing dokumen otomatis dari file `.pdf` & `.txt`.</li>
-                    <li>✓ Naskah percakapan santai Rian (Host) & Maya (Expert) via Gemini AI.</li>
-                    <li>✓ Pengisian suara multi-karakter realistis menggunakan Microsoft Edge Neural TTS.</li>
-                    <li>✓ Penggabungan otomatis berkas MP3 di server menggunakan FFmpeg Concat.</li>
-                    <li>✓ Evaluasi kuis 10 soal interaktif dengan perhitungan skor dinamis.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalPodlearn')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://podlearn-backend-production-f411.up.railway.app" target="_blank" class="bg-violet-600 hover:bg-violet-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🚀 Buka Live App
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP TELEGRAM AI ASSISTANT -->
-    <div id="modalTelegram" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalTelegram')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20 inline-block mb-3">AI Bot Project • Live on Cloud</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">Telegram AI Personal Assistant</h3>
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Asisten virtual Telegram interaktif yang dikembangkan menggunakan Python, memanfaatkan model AI canggih Llama-3.3 70B via Groq API, dan di-hosting secara permanen di Railway (24/7 online). Dilengkapi system prompt kustom agar responsif, cerdas, dan santai.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-purple-400 mb-2">Arsitektur & Fitur:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ Integrasi real-time Telegram Bot API (pyTelegramBotAPI).</li>
-                    <li>✓ Performa tinggi berkat integrasi model LLM Llama-3.3.</li>
-                    <li>✓ Aktif 24/7 di cloud server tanpa henti.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalTelegram')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="https://t.me/BotasikBot" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                    🤖 Coba Langsung (@BotasikBot)
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP DOMAIN EXPLORER -->
-    <div id="modalDomain" class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto" style="background: rgba(6,9,16,0.88);">
-        <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8" style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-            <button onclick="closeModal('modalDomain')" class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10" style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-            <span class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 inline-block mb-3">Fullstack Web Project</span>
-            <h3 class="text-2xl font-display font-bold text-white mb-4">Domain Explorer — Laravel App</h3>
-            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                Aplikasi manajemen dan eksplorasi domain yang dibangun menggunakan framework Laravel dan Tailwind CSS. Dirancang untuk mengelola data domain, mengecek status ketersediaan/ekstensi, serta membantu riset infrastruktur website secara terstruktur.
-            </p>
-            <div class="mb-6">
-                <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-emerald-400 mb-2">Fitur Utama:</h4>
-                <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                    <li>✓ Manajemen basis data domain lokal (CRUD interaktif).</li>
-                    <li>✓ Integrasi tautan langsung ke URL eksternal secara real-time.</li>
-                    <li>✓ Desain antarmuka modern menggunakan Tailwind CSS.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap justify-end gap-3">
-                <button onclick="closeModal('modalDomain')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm" style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                <a href="#contact" onclick="closeModal('modalDomain')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md">Diskusikan Proyek</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 text-center" style="border-top: 1px solid var(--border); background: var(--bg-alt);">
-        <div class="max-w-xl mx-auto px-6">
-            <span class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2" style="color: var(--text-secondary);">
-                <span style="color: var(--accent-teal);">◆</span> Rx-03 <span style="color: var(--text-muted);">—</span> Mari Terhubung
-            </span>
-            <h2 class="font-display text-2xl md:text-[32px] mt-3 mb-3 text-white reveal">Punya Ide untuk <span class="font-accent" style="color: var(--accent-teal);">Dikembangkan?</span></h2>
-            <p class="mb-8 reveal" style="color: var(--text-secondary);">
-                Terbuka untuk proyek freelance, kolaborasi, maupun ngobrol soal farmasi &amp; teknologi.
-            </p>
-
-            <div class="reveal text-left rounded-2xl p-7" style="border: 1px solid var(--border); background: var(--surface);">
-                <div class="flex justify-between items-center pb-3.5 mb-3.5" style="border-bottom: 1px dashed var(--border-hover);">
-                    <span class="font-label text-xs tracking-wider" style="color: var(--text-muted);">℞ CONTACT LABEL</span>
-                    <span class="font-label text-[11px] px-2.5 py-1 rounded-full" style="background: rgba(34,230,181,0.12); color: var(--accent-teal); border: 1px solid rgba(34,230,181,0.25);">● Available</span>
-                </div>
-                <div class="grid grid-cols-[110px_1fr] gap-y-2.5 text-sm">
-                    <span class="font-label" style="color: var(--text-muted);">Nama</span>
-                    <span class="font-display" style="color: var(--text-primary);">Muhammad Ulul Albab</span>
-
-                    <span class="font-label" style="color: var(--text-muted);">Kontak</span>
-                    <span class="font-display" style="color: var(--text-primary);">sfarmlul@gmail.com</span>
-
-                    <span class="font-label" style="color: var(--text-muted);">GitHub</span>
-                    <span class="font-display" style="color: var(--text-primary);">github.com/ululbiasaajaa</span>
-
-                    <span class="font-label" style="color: var(--text-muted);">Respons</span>
-                    <span class="font-display" style="color: var(--text-primary);">&lt; 24 jam</span>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4 mt-8 reveal">
-                <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg shadow-emerald-600/20" style="background: #059669; color: white;">
-                    Hubungi via WhatsApp
-                </a>
-                <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg" style="background: var(--accent-teal); color: #06120e;">
-                    Download Portofolio (PPT)
-                </a>
-                <a href="CV_MuhammadUlulAlbab (1).pdf" download class="font-display inline-block font-semibold px-8 py-3.5 rounded-xl transition shadow-lg" style="background: var(--surface-hover); border: 1px solid var(--border-hover); color: var(--accent-teal);">
-                    Download CV (PDF)
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 text-center text-xs flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6" style="border-top: 1px solid var(--border); color: var(--text-muted);">
+    <footer class="py-8 text-center text-xs flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6"
+        style="border-top: 1px solid var(--border); color: var(--text-muted);">
         <p class="font-label">&copy; 2026 Muhammad Ulul Albab. Built with passion &amp; precision.</p>
-        <span class="font-accent hidden md:inline" style="color: var(--text-muted);">From molecules to meaningful code.</span>
+        <span class="font-accent hidden md:inline" style="color: var(--text-muted);">From molecules to meaningful
+            code.</span>
     </footer>
 
     <!-- JavaScript for Modal Interaction -->
@@ -1104,4 +1727,5 @@
         })();
     </script>
 </body>
+
 </html>
