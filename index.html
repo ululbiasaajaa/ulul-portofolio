@@ -603,6 +603,55 @@
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
+                    <!-- Project NEW: Pharmacy 3D Simulator (Playable Web Game) -->
+                    <div onclick="openModal('modalPharmacy3D')"
+                        class="project-card reveal rounded-2xl overflow-hidden hover:border-cyan-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
+                        style="background: var(--surface); border: 1px solid var(--border);">
+                        <span
+                            class="absolute top-0 right-0 bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-10">Playable
+                            Live</span>
+                        <div class="h-36 overflow-hidden relative"
+                            style="background: var(--bg); border-bottom: 1px solid var(--border);">
+                            <img src="project9.jpg" alt="Pharmacy 3D Simulator Gameplay"
+                                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                                style="background: rgba(10,14,23,0.5);">
+                                <span
+                                    class="bg-cyan-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">Lihat
+                                    Detail</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span
+                                    class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20">3D
+                                    Web Game</span>
+                                <span class="text-xs font-mono" style="color: var(--text-muted);">React / Three.js</span>
+                            </div>
+                            <h3 class="text-xl font-display mb-3 text-white group-hover:text-cyan-400 transition">
+                                Pharmacy 3D Simulator</h3>
+                            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                                Game simulasi pengelolaan apotek 3D di browser: melayani pasien NPC, memproses resep,
+                                mengelola stok per batch (FEFO), pengadaan, racikan, pegawai, dan keuangan.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 flex items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 font-mono">
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Three.js</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">TypeScript</span>
+                                <span class="text-xs px-2.5 py-1 rounded"
+                                    style="background: var(--surface-hover); color: var(--text-secondary);">Zustand</span>
+                            </div>
+                            <a href="https://pharmacy-3-d-simulator.vercel.app/" target="_blank"
+                                rel="noopener noreferrer" onclick="event.stopPropagation()"
+                                class="text-xs bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-bold px-2.5 py-1 rounded-lg border border-cyan-500/30 transition flex items-center gap-1">
+                                🎮 Main Game
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- Project NEW: SchoolCom (Mobile App & Management System) -->
                     <div onclick="openModal('modalSchoolCom')"
                         class="project-card reveal rounded-2xl overflow-hidden hover:border-blue-500 transition cursor-pointer flex flex-col justify-between group shadow-lg relative"
@@ -1058,6 +1107,73 @@
             </div>
             </div>
         </section>
+
+        <!-- MODAL POPUP PHARMACY 3D SIMULATOR -->
+        <div id="modalPharmacy3D"
+            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
+            style="background: rgba(6,9,16,0.88);">
+            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
+                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
+                <button onclick="closeModal('modalPharmacy3D')"
+                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
+                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
+                <span
+                    class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20 inline-block mb-3">3D
+                    Web Game Project</span>
+                <h3 class="text-2xl font-display font-bold text-white mb-4">Pharmacy 3D Simulator</h3>
+
+                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
+                    style="border: 1px solid var(--border); background: var(--bg);">
+                    <img src="project9.jpg" alt="Pharmacy 3D Simulator Gameplay Screenshot"
+                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
+                </div>
+
+                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
+                    Game simulasi pengelolaan apotek 3D berbasis web yang bisa dimainkan langsung di browser. Pemain
+                    menjelajahi apotek dari sudut pandang orang pertama atau ketiga, melayani pasien, memproses resep,
+                    mengelola stok, dan mengembangkan apotek. Dibangun dengan React, TypeScript, Three.js, dan
+                    React Three Fiber (25 ribu+ baris kode TypeScript, diuji otomatis). Seluruh data obat, resep, dan
+                    pasien adalah contoh fiktif untuk simulasi.
+                </p>
+                <div class="mb-6">
+                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-cyan-400 mb-2">FITUR UTAMA
+                        & SISTEM GAMEPLAY:</h4>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li>✓ <span class="text-white font-semibold">Dunia 3D & Kontrol:</span> Apotek yang bisa
+                            dijelajahi (WASD + mouse), kamera orang pertama/ketiga, interaksi berbasis raycast, dan
+                            tabrakan dengan dinding.</li>
+                        <li>✓ <span class="text-white font-semibold">Pasien NPC & Antrean:</span> 7 kategori pasien
+                            dengan antrean berkapasitas, tingkat kesabaran, dan dialog kontekstual.</li>
+                        <li>✓ <span class="text-white font-semibold">Pelayanan Resep & Racikan:</span> Wizard resep 5
+                            langkah dengan deteksi masalah resep, plus laboratorium racik berisi mini-game
+                            penimbangan dan pencampuran.</li>
+                        <li>✓ <span class="text-white font-semibold">Inventaris & Pengadaan:</span> Stok per batch
+                            dengan FEFO, kedaluwarsa, stock opname, 4 pemasok fiktif, dan status pengiriman.</li>
+                        <li>✓ <span class="text-white font-semibold">Ekonomi & Progres:</span> Kasir, laporan
+                            keuangan, pegawai berotomatisasi, 13 peningkatan, 19 misi, dan 18 pencapaian.</li>
+                        <li>✓ <span class="text-white font-semibold">Simpan/Muat & Mode:</span> Simpan progres 3
+                            slot + autosave (IndexedDB), serta mode Karier, Pembelajaran, dan Tantangan.</li>
+                    </ul>
+                </div>
+                <p class="text-xs mb-6 font-mono" style="color: var(--text-muted);">Disarankan dibuka lewat laptop/PC
+                    dengan Chrome (kontrol keyboard &amp; mouse).</p>
+                <div class="flex flex-wrap justify-end gap-3">
+                    <button onclick="closeModal('modalPharmacy3D')"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
+                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
+                    <a href="https://github.com/ululbiasaajaa/pharmacy-3d-simulator" target="_blank"
+                        rel="noopener noreferrer"
+                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm flex items-center gap-2"
+                        style="background: var(--surface-hover); color: var(--text-primary);">
+                        💻 Source Code
+                    </a>
+                    <a href="https://pharmacy-3-d-simulator.vercel.app/" target="_blank" rel="noopener noreferrer"
+                        class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
+                        🎮 Mainkan Game Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- MODAL POPUP SCHOOLCOM MVP -->
         <div id="modalSchoolCom"
