@@ -1335,18 +1335,25 @@ body.cam-on .g-hint { display: block; }
       document.head.appendChild(s);
     });
   }
-  async function fetchProgress(url, onP) {
-    const res = await fetch(url, { mode: 'cors' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const total = +res.headers.get('content-length') || 0;
-    if (!res.body || !res.body.getReader || !total) { const b = new Uint8Array(await res.arrayBuffer()); onP(1); return b; }
-    const reader = res.body.getReader(), chunks = [];
-    let got = 0;
-    for (;;) { const r = await reader.read(); if (r.done) break; chunks.push(r.value); got += r.value.length; onP(Math.min(1, got / total)); }
-    const out = new Uint8Array(got); let o = 0;
-    for (const c of chunks) { out.set(c, o); o += c.length; }
-    return out;
+  async function fetchProgress(url, onP, stallMs) {
+    const ac = window.AbortController ? new AbortController() : null;
+    let timer = 0;
+    const arm = () => { clearTimeout(timer); if (ac) timer = setTimeout(() => ac.abort(), stallMs || 25000); };
+    arm();
+    try {
+      const res = await fetch(url, { mode: 'cors', signal: ac ? ac.signal : undefined });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const total = +res.headers.get('content-length') || 0;
+      if (!res.body || !res.body.getReader || !total) { const b = new Uint8Array(await res.arrayBuffer()); onP(1); return b; }
+      const reader = res.body.getReader(), chunks = [];
+      let got = 0;
+      for (;;) { const r = await reader.read(); if (r.done) break; arm(); chunks.push(r.value); got += r.value.length; onP(Math.min(1, got / total)); }
+      const out = new Uint8Array(got); let o = 0;
+      for (const c of chunks) { out.set(c, o); o += c.length; }
+      return out;
+    } finally { clearTimeout(timer); }
   }
+  const withTimeout = (p, ms, msg) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(msg || 'waktu habis')), ms))]);
   const Tracker = (() => {
     let impl = null, busy = false, running = false, lastT = -1, kind = '', initP = null, cost = 0, lastRun = 0;
     async function initTasks(onP) {
@@ -1359,16 +1366,19 @@ body.cam-on .g-hint { display: block; }
       onP(0.12);
       const fileset = await mod.FilesetResolver.forVisionTasks(base + '/wasm');
       onP(0.2);
-      let buf = null;
-      try { buf = await fetchProgress(CFG.MODEL_URL, (p) => onP(0.2 + p * 0.65)); } catch (e) { buf = null; }
+      const buf = await fetchProgress(CFG.MODEL_URL, (p) => onP(0.2 + p * 0.65), 25000);
       const make = (delegate) => mod.HandLandmarker.createFromOptions(fileset, {
-        baseOptions: buf ? { modelAssetBuffer: buf, delegate } : { modelAssetPath: CFG.MODEL_URL, delegate },
+        baseOptions: { modelAssetBuffer: buf, delegate },
         runningMode: 'VIDEO', numHands: 1,
         minHandDetectionConfidence: 0.55, minHandPresenceConfidence: 0.5, minTrackingConfidence: 0.5,
       });
       onP(0.9);
       let lm, delegate = 'GPU', fails = 0, switching = false;
-      try { lm = await make('GPU'); } catch (e) { console.warn('[Penyihir] GPU tidak tersedia, pakai CPU', e); delegate = 'CPU'; lm = await make('CPU'); }
+      try { lm = await withTimeout(make('GPU'), 30000, 'GPU lambat'); } catch (e) { console.warn('[Penyihir] GPU tidak tersedia, pakai CPU', e); delegate = 'CPU'; lm = await make('CPU'); }
+      // Pemanasan: deteksi pertama menyusun shader GPU (bisa beberapa detik), lakukan saat layar muat
+      onP(0.96, 'warm');
+      await new Promise((r) => setTimeout(r, 60));
+      try { const wc = makeCanvas(160, 120); wc.getContext('2d').fillRect(0, 0, 160, 120); lm.detectForVideo(wc, performance.now()); } catch (e) { /* abaikan */ }
       const impl = {
         delegate,
         detect(v, ts) {
@@ -1390,13 +1400,13 @@ body.cam-on .g-hint { display: block; }
       return impl;
     }
     async function initLegacy(onP) {
-      await loadScript(CFG.LEGACY + 'hands.js');
+      await withTimeout(loadScript(CFG.LEGACY + 'hands.js'), 30000, 'hands.js lambat');
       onP(0.4);
       const hands = new window.Hands({ locateFile: (f) => CFG.LEGACY + f });
       hands.setOptions({ maxNumHands: 1, modelComplexity: 0, minDetectionConfidence: 0.6, minTrackingConfidence: 0.5 });
       let last = null;
       hands.onResults((r) => { last = (r && r.multiHandLandmarks && r.multiHandLandmarks[0]) || null; });
-      await hands.initialize();
+      await withTimeout(hands.initialize(), 60000, 'MediaPipe Hands lambat');
       return { delegate: 'legacy', async detect(v) { await hands.send({ image: v }); const r = last; last = null; return r; } };
     }
     function init(onP) {
@@ -1894,10 +1904,11 @@ body.cam-on .g-hint { display: block; }
     setState('loading');
     let camOk = false, trackP = 0;
     setLoad('Izinkan akses kamera bila diminta…', 0.02);
-    const trackerRun = Tracker.init((p) => {
+    const trackerRun = withTimeout(Tracker.init((p, stage) => {
       trackP = p;
-      setLoad(camOk ? 'Memuat pendeteksi tangan… ' + Math.round(p * 100) + '%' : null, p);
-    }).then((k) => ({ ok: true, k }), (e) => ({ ok: false, e }));
+      if (camOk) setLoad(stage === 'warm' ? 'Menyiapkan sihir… (sekali saja)' : 'Memuat pendeteksi tangan… ' + Math.round(p * 100) + '%', p);
+      else setLoad(null, p);
+    }), 150000, 'pemuatan terlalu lama').then((k) => ({ ok: true, k }), (e) => ({ ok: false, e }));
     try { await startCamera(); }
     catch (e) { const [t, m] = cameraErrorText(e); console.warn('[Penyihir] kamera', e); showError(t, m); return; }
     camOk = true;
