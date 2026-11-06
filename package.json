@@ -1,0 +1,8 @@
+{
+  "name": "ulul-portofolio",
+  "private": true,
+  "scripts": {
+    "build:css": "npx tailwindcss@3.4.17 -i assets/src/input.css -o assets/site.css --minify",
+    "serve": "python -m http.server 8080"
+  }
+}
