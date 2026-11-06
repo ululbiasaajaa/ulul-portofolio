@@ -11,82 +11,85 @@
     <meta property="og:description" content="Mahasiswa farmasi yang membangun software untuk dunia farmasi dan pendidikan. Lihat Pharmacy 3D Simulator, ScentDNA, dan otomatisasi n8n.">
     <meta property="og:image" content="og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0b0d12">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <script>
-        document.documentElement.classList.add('js');
-        (function () {
-            try { if (localStorage.getItem('ulul-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) { }
-        })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/site.css">
 </head>
 
 <body class="antialiased">
 
-    <header class="site-header">
-        <div class="wrap h-16 flex items-center justify-between gap-4">
-            <a href="#hero" class="font-display text-base md:text-lg" style="font-weight: 600;">Muhammad Ulul Albab</a>
-            <div class="flex items-center gap-5">
-                <nav class="hidden md:flex items-center gap-7" aria-label="Navigasi utama">
-                    <a href="#projects" class="nav-link">Proyek</a>
-                    <a href="#about" class="nav-link">Kenapa Farmasi</a>
-                    <a href="#services" class="nav-link">Layanan</a>
-                    <a href="#contact" class="btn btn-sm" style="background: var(--text-primary); color: var(--bg);">Hubungi Saya</a>
-                </nav>
-                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema terang/gelap" title="Ganti tema">
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"></path></svg>
-                </button>
+    <header class="pill-wrap">
+        <nav class="pill" aria-label="Navigasi utama">
+            <a href="#hero" class="pill-brand">Ulul<span class="dot"></span></a>
+            <div class="pill-links">
+                <a href="#projects">Proyek</a>
+                <a href="#about">Kenapa Farmasi</a>
+                <a href="#services">Layanan</a>
+                <a href="#contact">Kontak</a>
             </div>
+            <a href="#contact" class="pill-cta">Hubungi saya</a>
+            <button id="menu-btn" class="pill-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Buka menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+            </button>
+        </nav>
+        <div id="menu" class="pill-panel" hidden>
+            <a href="#projects">Proyek</a>
+            <a href="#about">Kenapa Farmasi</a>
+            <a href="#services">Layanan</a>
+            <a href="#contact">Kontak</a>
         </div>
     </header>
 
     <main>
         <!-- 1. Hero -->
-        <section id="hero" class="hero">
-            <img src="hero-render.webp" width="1536" height="1024" alt="Render 3D: erlenmeyer, molekul, dan laptop dengan kode di atas meja kerja" class="hero-bg">
-            <div class="hero-scrim"></div>
-            <canvas id="molecule-canvas" class="hero-canvas" aria-hidden="true"></canvas>
-            <div class="wrap hero-inner">
-                <div class="reveal">
-                    <span class="eyebrow"><b>◆</b> Farmasi <span style="color: var(--text-muted);">×</span> Software</span>
-                    <h1>Mahasiswa farmasi yang membangun software untuk <em>dunia farmasi dan pendidikan.</em></h1>
-                    <p class="lead" style="color: var(--text-secondary);">Saya Muhammad Ulul Albab. Dari simulator apotek 3D sampai mesin pencari parfum berbasis AI, saya kerjakan end-to-end: antarmuka, backend, sampai deploy.</p>
-                    <div class="flex flex-wrap gap-3 mt-8">
-                        <a href="#projects" class="btn btn-primary">Lihat proyek</a>
-                        <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg> Chat WhatsApp</a>
+        <section id="hero" class="hero sec-dark">
+            <div class="wrap">
+                <div class="hero-top">
+                    <div class="hero-copy">
+                        <span class="eyebrow"><b>◆</b> Farmasi × Software</span>
+                        <p class="hero-position">Mahasiswa farmasi yang membangun software untuk <em>dunia farmasi dan pendidikan.</em></p>
+                        <p class="lead">Saya Muhammad Ulul Albab. Dari simulator apotek 3D sampai mesin pencari parfum berbasis AI, saya kerjakan end-to-end: antarmuka, backend, sampai deploy.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="#projects" class="btn btn-primary">Lihat proyek</a>
+                            <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg> Chat WhatsApp</a>
+                        </div>
+                        <div class="hero-links">
+                            <a href="CV_MuhammadUlulAlbab (1).pdf" download>Unduh CV</a>
+                            <a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div><div class="hero-stat-num">12</div><div class="hero-stat-label">Proyek</div></div>
+                            <div><div class="hero-stat-num">25 ribu+</div><div class="hero-stat-label">Baris TypeScript · Pharmacy 3D</div></div>
+                            <div><div class="hero-stat-num">40</div><div class="hero-stat-label">Modul · SchoolCom</div></div>
+                        </div>
+                        <p class="hero-tagline">From molecules to meaningful code.</p>
                     </div>
-                    <div class="hero-links">
-                        <a href="CV_MuhammadUlulAlbab (1).pdf" download>Unduh CV</a>
-                        <a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a>
+                    <div class="photo-frame">
+                        <img class="photo-hero" src="ulul-foto-lg.webp" width="1000" height="1250" alt="Muhammad Ulul Albab">
+                        <span class="orbit" aria-hidden="true"></span>
                     </div>
-                    <div class="hero-stats">
-                        <div><div class="hero-stat-num">12</div><div class="hero-stat-label">Proyek</div></div>
-                        <div><div class="hero-stat-num">25 ribu+</div><div class="hero-stat-label">Baris TypeScript · Pharmacy 3D</div></div>
-                        <div><div class="hero-stat-num">40</div><div class="hero-stat-label">Modul · SchoolCom</div></div>
-                    </div>
-                    <p class="hero-tagline mt-6">From molecules to meaningful code.</p>
                 </div>
+                <h1 class="hero-giant">Halo<span class="dot"></span><span class="sr-only"> — saya Muhammad Ulul Albab</span></h1>
             </div>
         </section>
 
         <!-- 2. Proyek unggulan -->
-        <section id="projects" class="section">
+        <section id="projects" class="sec-dark panel" style="border-top: 1px solid var(--line);">
             <div class="wrap">
                 <span class="eyebrow"><b>◆</b> Rx-01 — Proyek unggulan</span>
-                <h2 class="h2 reveal">Empat proyek, <em>dari ide sampai jalan.</em></h2>
-                <p class="lead reveal" style="margin-bottom: 2.5rem;">Pilihan yang paling menunjukkan cara saya bekerja: domain yang dipahami, keputusan teknis yang bisa dijelaskan, dan hasil yang bisa dicoba.</p>
-
-                <article class="case reveal" data-project="pharmacy3d">
+                <h2 class="display h-xl" style="margin: 1rem 0 1.2rem;">Empat proyek, dari ide sampai jalan<span class="dot"></span></h2>
+                <p class="lead" style="margin-bottom: 4rem;">Pilihan yang paling menunjukkan cara saya bekerja: domain yang dipahami, keputusan teknis yang bisa dijelaskan, dan hasil yang bisa dicoba.</p>
+                <article class="case" data-project="pharmacy3d">
                     <div class="case-head">
+                        <div class="case-no">01 / 04</div>
                         <span class="case-kind">Game 3D web · Simulasi apotek</span>
-                        <h3 class="case-title">Pharmacy 3D Simulator</h3>
+                        <h3 class="case-title display">Pharmacy 3D Simulator<span class="dot"></span></h3>
                         <p class="case-summary">Apotek yang bisa dijelajahi dan dikelola langsung di browser: melayani pasien, memproses resep, menjaga stok, dan mengembangkan usaha.</p>
                     </div>
                     <img class="case-media" src="project9.webp" width="1600" height="802" loading="lazy" alt="Tangkapan layar Pharmacy 3D Simulator">
@@ -118,11 +121,15 @@
                         </div>
                     </div>
                 </article>
-
-                <article class="case reveal" data-project="scentdna">
+            </div>
+        </section>
+        <section class="sec-paper panel" style="border-top: 1px solid var(--line);">
+            <div class="wrap">
+                <article class="case" data-project="scentdna">
                     <div class="case-head">
+                        <div class="case-no">02 / 04</div>
                         <span class="case-kind">AI · Pencarian vektor</span>
-                        <h3 class="case-title">ScentDNA</h3>
+                        <h3 class="case-title display">ScentDNA<span class="dot"></span></h3>
                         <p class="case-summary">Mesin penemu parfum: ketik aroma yang kamu bayangkan, dapatkan parfum yang mirip beserta rekomendasi dari konsultan virtual.</p>
                     </div>
                     <img class="case-media" src="project4.webp" width="922" height="956" loading="lazy" alt="Tangkapan layar ScentDNA">
@@ -152,11 +159,15 @@
                         </div>
                     </div>
                 </article>
-
-                <article class="case reveal" data-project="n8n">
+            </div>
+        </section>
+        <section class="sec-dark panel" style="border-top: 1px solid var(--line);">
+            <div class="wrap">
+                <article class="case" data-project="n8n">
                     <div class="case-head">
+                        <div class="case-no">03 / 04</div>
                         <span class="case-kind">Otomatisasi · AI workflow</span>
-                        <h3 class="case-title">n8n Automation Suite</h3>
+                        <h3 class="case-title display">n8n Automation Suite<span class="dot"></span></h3>
                         <p class="case-summary">Tiga workflow yang mengurangi kerjaan repetitif harian dan mempercepat pencarian kerja, berjalan 24/7 di server sendiri.</p>
                     </div>
                     <video class="case-media" src="n8n-demo.mp4" poster="project8.webp" width="1280" height="686" controls muted playsinline preload="none" aria-label="Rekaman layar canvas workflow n8n"></video>
@@ -186,11 +197,15 @@
                         </div>
                     </div>
                 </article>
-
-                <article class="case reveal" data-project="roblox">
+            </div>
+        </section>
+        <section class="sec-paper panel" style="border-top: 1px solid var(--line);">
+            <div class="wrap">
+                <article class="case" data-project="roblox">
                     <div class="case-head">
+                        <div class="case-no">04 / 04</div>
                         <span class="case-kind">Game map · Roblox Studio</span>
-                        <h3 class="case-title">Roblox City Map</h3>
+                        <h3 class="case-title display">Roblox City Map<span class="dot"></span></h3>
                         <p class="case-summary">Map kota di Roblox: gedung apartemen bertingkat, jalan, dan lingkungan, dengan HUD status pemain yang saya skrip sendiri.</p>
                     </div>
                     <img class="case-media" src="project10.webp" width="1094" height="561" loading="lazy" alt="Map kota Roblox dengan gedung apartemen bertingkat dan HUD uang, energi, lapar">
@@ -215,8 +230,12 @@
                         </div>
                     </div>
                 </article>
-
-                <div class="sub-eyebrow"><span class="eyebrow"><b>◆</b> Proyek lainnya</span></div>
+            </div>
+        </section>
+        <section id="more" class="sec-dark panel" style="border-top: 1px solid var(--line);">
+            <div class="wrap">
+                <span class="eyebrow"><b>◆</b> Proyek lainnya</span>
+                <h2 class="display h-lg" style="margin: 1rem 0 0;">Dan delapan lagi<span class="dot"></span></h2>
                 <ul class="project-list">
                     <li><button type="button" class="project-row" data-modal="modalSchoolCom">
                         <span class="name">SchoolCom MVP</span>
@@ -264,17 +283,20 @@
         </section>
 
         <!-- 3. Kenapa farmasi -->
-        <section id="about" class="section section-alt">
+        <section id="about" class="sec-paper panel">
             <div class="wrap">
                 <span class="eyebrow"><b>◆</b> Rx-02 — Kenapa farmasi</span>
-                <div class="mt-8 flex flex-col md:flex-row gap-10 md:gap-14 items-start">
-                    <img src="ulul-foto.webp" width="480" height="600" alt="Muhammad Ulul Albab" class="photo flex-shrink-0" loading="lazy">
-                    <div class="flex-1 reveal">
-                        <h2 class="h2" style="margin-top: 0;">Paham apoteknya, makanya <em>sistemnya masuk akal.</em></h2>
-                        <div class="lead" style="display: grid; gap: 1rem;">
-                            <p>Saya mahasiswa farmasi. Di Pharmacy 3D Simulator, stok dikelola per batch dengan FEFO, resep diperiksa langkah demi langkah, dan racikan ditimbang, karena begitulah apotek bekerja. Domain yang dipahami membuat software meniru proses nyata, bukan sekadar tampilan.</p>
-                            <p>Latar eksakta juga membentuk cara kerja saya: teliti, sistematis, dan terbiasa memeriksa hasil sebelum dirilis.</p>
+                <div class="about-grid" style="margin-top: 2rem;">
+                    <div class="about-photo">
+                        <div class="photo-frame">
+                            <img class="photo-about" src="ulul-foto-lg.webp" width="1000" height="1250" alt="Muhammad Ulul Albab" loading="lazy">
+                            <span class="orbit" aria-hidden="true"></span>
                         </div>
+                    </div>
+                    <div>
+                        <h2 class="display h-lg">Paham apoteknya, makanya sistemnya masuk akal<span class="dot"></span></h2>
+                        <p class="statement">Saya mahasiswa farmasi. Di Pharmacy 3D Simulator, stok dikelola per batch dengan FEFO, resep diperiksa langkah demi langkah, dan racikan ditimbang, karena begitulah apotek bekerja. Domain yang dipahami membuat software meniru proses nyata, bukan sekadar tampilan.</p>
+                        <p class="lead">Latar eksakta juga membentuk cara kerja saya: teliti, sistematis, dan terbiasa memeriksa hasil sebelum dirilis.</p>
                         <div class="skill-grid">
                             <div class="skill-group"><h3>Frontend</h3><div class="chips"><span class="chip">React</span><span class="chip">Tailwind</span><span class="chip">Vite</span><span class="chip">Three.js</span><span class="chip">React Native / Expo</span></div></div>
                             <div class="skill-group"><h3>Backend</h3><div class="chips"><span class="chip">Laravel</span><span class="chip">Node.js</span><span class="chip">FastAPI</span><span class="chip">Firebase</span></div></div>
@@ -288,23 +310,51 @@
         </section>
 
         <!-- 4. Layanan -->
-        <section id="services" class="section">
+        <section id="services" class="sec-dark panel">
             <div class="wrap">
                 <span class="eyebrow"><b>◆</b> Rx-03 — Layanan</span>
-                <h2 class="h2 reveal">Yang bisa saya <em>kerjakan untuk Anda.</em></h2>
-                <p class="lead reveal">Terbuka untuk proyek freelance. Brief singkat lewat WhatsApp sudah cukup untuk memulai.</p>
-                <div class="service-grid">
-                    <div class="service reveal"><h3>Web &amp; landing page</h3><p>React/Tailwind atau Laravel. Responsif, cepat, dan siap deploy.</p></div>
-                    <div class="service reveal"><h3>Aplikasi mobile</h3><p>React Native/Expo dengan backend Firebase atau Laravel.</p></div>
-                    <div class="service reveal"><h3>Otomatisasi &amp; AI</h3><p>Workflow n8n, integrasi Gemini/RAG, dan bot Telegram.</p></div>
-                    <div class="service reveal"><h3>Game &amp; map Roblox</h3><p>Level design di Roblox Studio dan scripting Luau.</p></div>
-                </div>
-                <ol class="process reveal">
+                <h2 class="display h-xl" style="margin: 1rem 0 1.2rem;">Yang bisa saya kerjakan untuk Anda<span class="dot"></span></h2>
+                <p class="lead">Terbuka untuk proyek freelance. Brief singkat lewat WhatsApp sudah cukup untuk memulai.</p>
+                <ul class="service-list">
+                    <li class="service"><h3>Web &amp; landing page</h3><p>React/Tailwind atau Laravel. Responsif, cepat, dan siap deploy.</p></li>
+                    <li class="service"><h3>Aplikasi mobile</h3><p>React Native/Expo dengan backend Firebase atau Laravel.</p></li>
+                    <li class="service"><h3>Otomatisasi &amp; AI</h3><p>Workflow n8n, integrasi Gemini/RAG, dan bot Telegram.</p></li>
+                    <li class="service"><h3>Game &amp; map Roblox</h3><p>Level design di Roblox Studio dan scripting Luau.</p></li>
+                </ul>
+                <ol class="process">
                     <li><b>Brief</b>Ceritakan kebutuhan lewat WhatsApp.</li>
                     <li><b>Prototipe</b>Mockup atau versi awal untuk disepakati.</li>
                     <li><b>Build &amp; revisi</b>Dikerjakan bertahap, Anda bisa mencoba di tiap tahap.</li>
                     <li><b>Rilis</b>Deploy dan serah terima.</li>
                 </ol>
+            </div>
+        </section>
+
+        <!-- 5. Kontak -->
+        <section id="contact" class="sec-paper panel">
+            <div class="wrap">
+                <span class="eyebrow"><b>◆</b> Rx-04 — Mari terhubung</span>
+                <h2 class="display" style="font-size: clamp(2.6rem, 12vw, 10rem); margin: 1rem 0 1.2rem;">Ayo ngobrol<span class="dot"></span></h2>
+                <p class="lead" style="margin-bottom: 2.5rem;">Punya ide untuk dikembangkan? Terbuka untuk proyek freelance, kerja/magang, maupun ngobrol soal farmasi &amp; teknologi.</p>
+
+                <div class="contact-card">
+                    <div class="flex justify-between items-center pb-3.5 mb-4" style="border-bottom: 1px dashed var(--line);">
+                        <span class="font-label text-xs tracking-wider" style="color: var(--fg-muted);">℞ CONTACT LABEL</span>
+                        <span class="badge-ok">● Available</span>
+                    </div>
+                    <dl>
+                        <dt>Nama</dt><dd class="font-display">Muhammad Ulul Albab</dd>
+                        <dt>Email</dt><dd class="font-display"><a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a></dd>
+                        <dt>GitHub</dt><dd class="font-display"><a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">github.com/ululbiasaajaa</a></dd>
+                        <dt>Respons</dt><dd class="font-display">&lt; 24 jam</dd>
+                    </dl>
+                </div>
+
+                <div class="flex flex-wrap gap-3 mt-8">
+                    <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg> Hubungi via WhatsApp</a>
+                    <a href="CV_MuhammadUlulAlbab (1).pdf" download class="btn btn-ghost">Unduh CV (PDF)</a>
+                    <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="btn btn-ghost">Portofolio (PPT)</a>
+                </div>
             </div>
         </section>
 
@@ -688,98 +738,41 @@
                 </div>
             </div>
         </div>
-
-        <!-- 5. Kontak -->
-        <section id="contact" class="section section-alt">
-            <div class="wrap text-center" style="max-width: 36rem;">
-                <span class="eyebrow"><b>◆</b> Rx-04 — Mari terhubung</span>
-                <h2 class="h2 reveal">Punya ide untuk <em>dikembangkan?</em></h2>
-                <p class="lead reveal" style="margin: 0 auto 2rem;">Terbuka untuk proyek freelance, kerja/magang, maupun ngobrol soal farmasi &amp; teknologi.</p>
-
-                <div class="contact-card reveal">
-                    <div class="flex justify-between items-center pb-3.5 mb-4" style="border-bottom: 1px dashed var(--border-hover);">
-                        <span class="font-label text-xs tracking-wider" style="color: var(--text-muted);">℞ CONTACT LABEL</span>
-                        <span class="badge-ok">● Available</span>
-                    </div>
-                    <dl>
-                        <dt>Nama</dt><dd class="font-display">Muhammad Ulul Albab</dd>
-                        <dt>Email</dt><dd class="font-display"><a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a></dd>
-                        <dt>GitHub</dt><dd class="font-display"><a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">github.com/ululbiasaajaa</a></dd>
-                        <dt>Respons</dt><dd class="font-display">&lt; 24 jam</dd>
-                    </dl>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-3 mt-8 reveal">
-                    <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg> Hubungi via WhatsApp</a>
-                    <a href="CV_MuhammadUlulAlbab (1).pdf" download class="btn btn-ghost">Unduh CV (PDF)</a>
-                    <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="btn btn-ghost">Portofolio (PPT)</a>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="py-8 text-center text-xs" style="border-top: 1px solid var(--border); color: var(--text-muted);">
-        <p class="font-label">&copy; 2026 Muhammad Ulul Albab</p>
+    <footer class="site-footer sec-dark">
+        <div class="wrap font-label">&copy; 2026 Muhammad Ulul Albab</div>
     </footer>
 
     <script>
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.body.style.overflow = 'auto'; }
         document.addEventListener('click', function (e) { var b = e.target.closest('[data-modal]'); if (b) openModal(b.dataset.modal); });
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') document.querySelectorAll('[id^="modal"]:not(.hidden)').forEach(function (m) { closeModal(m.id); });
-        });
 
         (function () {
-            var root = document.documentElement, btn = document.getElementById('theme-toggle');
-            btn.addEventListener('click', function () {
-                var light = root.getAttribute('data-theme') === 'light';
-                if (light) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'light');
-                try { localStorage.setItem('ulul-theme', light ? 'dark' : 'light'); } catch (e) { }
+            var btn = document.getElementById('menu-btn'), menu = document.getElementById('menu');
+            function setMenu(open) { btn.setAttribute('aria-expanded', open ? 'true' : 'false'); btn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu'); menu.hidden = !open; }
+            btn.addEventListener('click', function () { setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
+            menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Escape') return;
+                setMenu(false);
+                document.querySelectorAll('[id^="modal"]:not(.hidden)').forEach(function (m) { closeModal(m.id); });
             });
         })();
 
-        (function () {
-            var els = document.querySelectorAll('.reveal');
-            if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('is-visible'); }); return; }
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } });
-            }, { threshold: 0.12 });
-            els.forEach(function (el) { io.observe(el); });
-        })();
-
-        /* Molecule network: hero only, subtle, pauses off-screen, off for reduced motion */
-        (function () {
-            var canvas = document.getElementById('molecule-canvas'), hero = document.getElementById('hero');
-            if (!canvas || !hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            var ctx = canvas.getContext('2d'), w, h, nodes = [], running = false, raf;
-            var COLORS = ['34,230,181', '139,127,255', '255,184,77'];
-            function resize() {
-                w = canvas.width = hero.clientWidth; h = canvas.height = hero.clientHeight;
-                var n = Math.min(45, Math.floor((w * h) / 24000));
-                nodes = Array.from({ length: n }, function () {
-                    return { x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .2, vy: (Math.random() - .5) * .2, r: Math.random() * 1.4 + .6, c: COLORS[Math.floor(Math.random() * 3)] };
-                });
-            }
-            function step() {
-                ctx.clearRect(0, 0, w, h);
-                nodes.forEach(function (n) { n.x += n.vx; n.y += n.vy; if (n.x < 0 || n.x > w) n.vx *= -1; if (n.y < 0 || n.y > h) n.vy *= -1; });
-                for (var i = 0; i < nodes.length; i++) for (var j = i + 1; j < nodes.length; j++) {
-                    var a = nodes[i], b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
-                    if (d < 130) { ctx.strokeStyle = 'rgba(' + a.c + ',' + (0.14 * (1 - d / 130)) + ')'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
-                }
-                nodes.forEach(function (n) { ctx.beginPath(); ctx.fillStyle = 'rgba(' + n.c + ',0.6)'; ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill(); });
-                if (running) raf = requestAnimationFrame(step);
-            }
-            resize(); window.addEventListener('resize', resize);
-            if ('IntersectionObserver' in window) {
-                new IntersectionObserver(function (en) {
-                    var vis = en[0].isIntersecting;
-                    if (vis && !running) { running = true; raf = requestAnimationFrame(step); }
-                    if (!vis) { running = false; cancelAnimationFrame(raf); }
-                }).observe(hero);
-            } else { running = true; raf = requestAnimationFrame(step); }
-        })();
+        /* Split the pharmacy statement into words so each can light up on scroll (CSS only does the animating). */
+        document.querySelectorAll('.statement').forEach(function (el) {
+            var words = el.textContent.trim().split(/\s+/), n = words.length;
+            el.textContent = '';
+            words.forEach(function (w, i) {
+                var s = document.createElement('span');
+                s.className = 'w';
+                s.style.setProperty('--p', Math.round(i * (60 / Math.max(n - 1, 1))));
+                s.textContent = w + (i < n - 1 ? ' ' : '');
+                el.appendChild(s);
+            });
+        });
     </script>
 </body>
 
