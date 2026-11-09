@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#13162b">
+<meta name="description" content="Roda undian ide proyek untuk series TikTok 1 Prompt 1 Projek. Putar rodanya, ide yang keluar jadi episode berikutnya.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23ffc145'/%3E%3Cpath d='M32 32 L32 4 A28 28 0 0 1 56 18 Z' fill='%23ff5d73'/%3E%3Cpath d='M32 32 L56 46 A28 28 0 0 1 32 60 Z' fill='%232ec4b6'/%3E%3Cpath d='M32 32 L8 46 A28 28 0 0 1 8 18 Z' fill='%235b8cff'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%2313162b'/%3E%3C/svg%3E">
+<title>Roda 1 Prompt 1 Projek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: roda undian pasar malam di kiri, kartu hasil + daftar ide di kanan; di HP jadi satu kolom */
+:root{
+  color-scheme: dark;
+  --bg:#13162b;
+  --panel:#1d2140;
+  --line:#2e3360;
+  --fg:#f3efe4;
+  --muted:#a9a8c4;
+  --gold:#ffc145;
+  --c-farmasi:#2ec4b6;
+  --c-kampus:#5b8cff;
+  --c-ojol:#ff9f1c;
+  --c-umkm:#ff5d73;
+  --c-konten:#b57bff;
+  --c-game:#8bd450;
+  --c-nyeleneh:#ff8fd8;
+  --display:"Bungee", "Arial Black", Impact, sans-serif;
+  --body:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{
+  font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:20px 40px;
+  background-image:radial-gradient(circle at 20% 0%, #23285a 0, transparent 45%), radial-gradient(circle at 90% 100%, #2a1f45 0, transparent 40%);
+  background-attachment:fixed;
+}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,48px);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--gold)}
+.sub{color:var(--muted);margin:0}
+
+.stage{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:820px){.stage{grid-template-columns:minmax(0,1fr)}}
+
+.wheel-box{position:relative;width:100%;max-width:540px;margin:0 auto;aspect-ratio:1/1}
+canvas{width:100%;height:100%;display:block}
+.pointer{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;
+  border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid var(--gold);
+  filter:drop-shadow(0 3px 0 #a5740a);z-index:2}
+.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22%;aspect-ratio:1/1;border-radius:50%;
+  background:var(--gold);color:#3a2700;border:6px solid var(--bg);font-family:var(--display);font-size:clamp(13px,2.4vw,18px);
+  cursor:pointer;display:grid;place-items:center;box-shadow:0 0 0 3px var(--gold),0 6px 0 #a5740a;transition:transform .12s}
+.hub:hover{transform:translate(-50%,-50%) scale(1.04)}
+.hub:active{transform:translate(-50%,-48%)}
+.hub:disabled{cursor:wait;opacity:.85}
+.hub:focus-visible{outline:3px dashed var(--fg);outline-offset:6px}
+
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.result{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px;min-height:220px}
+.result.win{border-color:var(--gold);animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+.tag{align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;color:#141414;background:var(--muted)}
+.result h2{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.6vw,30px);line-height:1.1;margin:0;text-wrap:balance}
+.hook{font-size:17px;font-weight:600;margin:0;color:var(--gold)}
+.desc{color:var(--muted);margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+button.btn{font-family:var(--body);font-weight:800;font-size:14px;border-radius:10px;padding:10px 14px;cursor:pointer;border:2px solid var(--line);background:transparent;color:var(--fg)}
+button.btn.primary{background:var(--gold);border-color:var(--gold);color:#3a2700}
+button.btn:hover{border-color:var(--gold)}
+button.btn:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.prompt{font-family:var(--mono);font-size:12.5px;background:#0e1022;border:1px solid var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;color:#d9d6ea;user-select:all;margin:0}
+
+.list{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.list-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.list-head h3{margin:0;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.items{max-height:360px;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;list-style:none;margin:0;padding:0}
+.items label{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:13.5px}
+.items label:hover{background:#262b52}
+.items input{accent-color:var(--gold);width:16px;height:16px;flex:none}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.num{font-family:var(--mono);font-size:11px;color:var(--muted);width:20px;flex:none;font-variant-numeric:tabular-nums}
+.items input:not(:checked) ~ .name{text-decoration:line-through;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--gold);color:#3a2700;font-weight:800;padding:10px 16px;border-radius:999px;z-index:5}
+@media (prefers-reduced-motion:reduce){.result.win{animation:none}}
+</style>
+<style>html{min-height:100%} :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} *{box-sizing:border-box} body{margin:0} [hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Series TikTok @lulsniffs</div>
+    <h1>1 Prompt <span>1 Projek</span></h1>
+    <p class="sub">Putar rodanya. Ide yang kepilih jadi episode berikutnya, gak boleh protes.</p>
+  </header>
+
+  <section class="stage">
+    <div class="wheel-box">
+      <div class="pointer" aria-hidden="true"></div>
+      <canvas id="wheel" aria-label="Roda berisi ide proyek"></canvas>
+      <button class="hub" id="spin" type="button">PUTAR</button>
+    </div>
+
+    <div class="side">
+      <article class="result" id="result" aria-live="polite">
+        <span class="tag" id="r-tag">Siap diputar</span>
+        <h2 id="r-name">Episode berikutnya apa ya?</h2>
+        <p class="hook" id="r-hook">Tekan PUTAR di tengah roda.</p>
+        <p class="desc" id="r-desc">Ada 50 ide dari 7 kategori, urutannya diacak tiap halaman dibuka. Ide yang udah dibikin bisa dicoret biar gak keluar lagi.</p>
+        <div id="r-extra" hidden>
+          <pre class="prompt" id="r-prompt"></pre>
+          <div class="actions">
+            <button class="btn primary" id="copy" type="button">Salin prompt</button>
+            <button class="btn" id="remove" type="button">Coret dari roda</button>
+            <button class="btn" id="again" type="button">Putar lagi</button>
+          </div>
+        </div>
+      </article>
+
+      <section class="list">
+        <div class="list-head">
+          <h3>Isi roda</h3>
+          <span class="count" id="count"></span>
+          <button class="btn" id="reset" type="button">Isi ulang semua</button>
+        </div>
+        <div class="legend" id="legend"></div>
+        <ul class="items" id="items"></ul>
+      </section>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const CATS = {
+  Farmasi:"--c-farmasi", Kampus:"--c-kampus", Ojol:"--c-ojol",
+  UMKM:"--c-umkm", Konten:"--c-konten", Game:"--c-game", Nyeleneh:"--c-nyeleneh"
+};
+const IDEAS = [
+  {n:"Kalkulator Pengenceran", s:"Pengenceran", c:"Farmasi", h:"Ngitung pengenceran gak perlu corat-coret lagi.", d:"Kalkulator pengenceran larutan dan konversi satuan lab (M, mM, %b/v, ppm, mg/mL) dengan rumus V1·C1 = V2·C2 dan langkah hitung yang ditampilkan."},
+  {n:"Duolingo Obat", s:"Duolingo Obat", c:"Farmasi", h:"Hafalan obat jadi kayak main game.", d:"Flashcard hafalan golongan dan indikasi obat ala Duolingo: ada streak harian, nyawa, level, dan kuis pilihan ganda."},
+  {n:"Game Skrining Resep", s:"Skrining Resep", c:"Farmasi", h:"Bisa nemu resep yang salah sebelum waktu habis?", d:"Game skrining resep: pemain dikasih resep fiktif, tebak apakah ada kesalahan (dosis, kelengkapan, aturan pakai) sebelum timer habis, ada skor dan pembahasan."},
+  {n:"Pengingat Obat Ortu", s:"Pengingat Obat", c:"Farmasi", h:"Alarm minum obat yang gampang dipakai orang tua.", d:"Aplikasi pengingat minum obat dengan tombol dan huruf besar, jadwal harian, tanda sudah diminum, dan riwayat sederhana."},
+  {n:"Pembagi Tugas Kelompok", s:"Tugas Kelompok", c:"Kampus", h:"Ketahuan siapa yang beban kelompok.", d:"Pembagi tugas kelompok: input anggota dan daftar tugas, bagi otomatis, centang progres, lalu rekap persentase kontribusi tiap anggota."},
+  {n:"Split Bill dari Struk", s:"Split Bill", c:"Kampus", h:"Nongkrong selesai, tagihan langsung kebagi.", d:"Split bill dari foto struk: baca teks struk dengan OCR (tesseract.js), pilih siapa pesan apa, hitung pajak dan service, hasil siap dibagikan."},
+  {n:"Tracker Pendapatan Ojol", s:"Tracker Ojol", c:"Ojol", h:"Sebenarnya sehari ngojol dapet bersih berapa?", d:"Tracker pendapatan bersih driver ojol: catat order, bensin, potongan aplikasi, dan biaya servis; tampilkan grafik harian dan mingguan."},
+  {n:"Peta Titik Orderan", s:"Peta Orderan", c:"Ojol", h:"Area mana yang paling rame, versi data sendiri.", d:"Log titik orderan pribadi di peta (Leaflet): tandai lokasi jemput dan jamnya, lalu tampilkan heatmap area dan jam paling ramai."},
+  {n:"Pengingat Servis Motor", s:"Servis Motor", c:"Ojol", h:"Motor kapan harus servis? Biar app yang ngitung.", d:"Kalkulator jadwal servis motor dari rata-rata kilometer harian: ganti oli, kampas rem, busi, dan rantai, dengan hitung mundur."},
+  {n:"Kasir Warung", s:"Kasir Warung", c:"UMKM", h:"Warung kecil punya kasir sendiri, struknya ke WA.", d:"Kasir warung berbentuk PWA: daftar produk, keranjang, kembalian, rekap penjualan harian, dan kirim struk lewat WhatsApp."},
+  {n:"Buku Kasbon Digital", s:"Buku Kasbon", c:"UMKM", h:"Gak ada lagi utang pelanggan yang kelupaan.", d:"Buku kasbon digital untuk warung: catat utang per pelanggan, cicilan, total sisa, dan tombol tagih yang membuka pesan WhatsApp."},
+  {n:"Menu Digital via WA", s:"Menu Digital", c:"UMKM", h:"Scan QR di meja, pesanan langsung masuk WA.", d:"Menu digital untuk warung makan: pelanggan scan QR, pilih menu dan jumlah, lalu pesanan terkirim rapi ke WhatsApp penjual."},
+  {n:"Antrian QR", s:"Antrian QR", c:"UMKM", h:"Gak perlu nunggu di tempat, cek antrian dari HP.", d:"Sistem antrian digital untuk bengkel atau barbershop: ambil nomor lewat QR, layar admin untuk panggil, pelanggan cek posisi antrian."},
+  {n:"Kuis Parfum Kepribadian", s:"Kuis Parfum", c:"Konten", h:"Parfum apa yang cocok sama kepribadianmu?", d:"Kuis kepribadian 8 pertanyaan yang menghasilkan keluarga aroma parfum yang cocok, dengan kartu hasil yang enak di-screenshot."},
+  {n:"Simulator Layering Parfum", s:"Layering Parfum", c:"Konten", h:"Campur 2 parfum, kira-kira jadinya gimana?", d:"Simulator layering parfum: pilih dua profil aroma (top, middle, base notes), tampilkan perkiraan profil gabungan dalam diagram yang menarik."},
+  {n:"Teleprompter Suara", s:"Teleprompter", c:"Konten", h:"Teleprompter yang scroll ngikutin suara kamu.", d:"Teleprompter di browser HP yang menggulir teks mengikuti suara lewat Web Speech API, ada mode cermin dan pengatur ukuran huruf."},
+  {n:"Tamagotchi Belajar", s:"Tamagotchi", c:"Game", h:"Peliharaannya lapar kalau kamu gak belajar.", d:"Peliharaan virtual yang tumbuh kalau kamu menyelesaikan sesi Pomodoro dan jadi lapar atau sedih kalau ditinggal, progres tersimpan."},
+  {n:"Ojol Simulator Bogor", s:"Ojol Simulator", c:"Game", h:"Kejar orderan, hindari macet Puncak.", d:"Game 2D top-down: jadi driver ojol di peta Bogor, ambil dan antar penumpang, hindari macet, kejar target pendapatan harian."},
+  {n:"Tebak Daerah Indonesia", s:"Tebak Daerah", c:"Game", h:"Tebak daerah Indonesia dalam 60 detik.", d:"Game tebak provinsi atau kota di peta Indonesia dengan waktu 60 detik, skor, combo, dan papan skor lokal."},
+  {n:"Generator CV ATS", s:"CV ATS", c:"Kampus", h:"Isi form, keluar CV rapi yang lolos ATS.", d:"Generator CV ramah ATS: isi form data diri, pengalaman, dan skill, pratinjau langsung dengan layout bersih yang siap disalin."},
+  {n:"Kartu Koleksi Obat", s:"Kartu Obat", c:"Farmasi", h:"Obat jadi kartu koleksi, lengkap sama stat-nya.", d:"Generator kartu koleksi obat bergaya trading card: tiap obat punya stat onset, durasi, golongan, dan efek samping, bisa dibuka dari booster pack acak."},
+  {n:"Tebak Tanaman Obat", s:"Tanaman Obat", c:"Farmasi", h:"Daun ini buat obat apa? Tebak cepet!", d:"Kuis tebak tanaman obat Indonesia dari ilustrasi dan ciri-cirinya, ada nama latin, khasiat tradisional, skor, dan mode cepat."},
+  {n:"Timer Praktikum Multi", s:"Timer Lab", c:"Farmasi", h:"Praktikum pakai 5 timer sekaligus tanpa panik.", d:"Timer praktikum lab dengan banyak stopwatch dan hitung mundur bernama (refluks, inkubasi, sentrifus), alarm beda bunyi, tampilan besar."},
+  {n:"Generator Etiket Obat", s:"Etiket Obat", c:"Farmasi", h:"Etiket praktikum resep rapi dalam 10 detik.", d:"Generator etiket obat untuk praktikum resep: etiket putih dan biru, nama pasien, aturan pakai, tanggal, siap disalin sebagai gambar."},
+  {n:"Kalkulator Target IPK", s:"Target IPK", c:"Kampus", h:"Semester depan butuh nilai berapa biar cumlaude?", d:"Kalkulator IPK dan target: input nilai per semester dan SKS, hitung IPK sekarang, lalu nilai rata-rata yang dibutuhkan untuk target IPK."},
+  {n:"Absen Anti Titip", s:"Absen QR", c:"Kampus", h:"Absen titip? Gak bakal bisa lagi.", d:"Absensi kelas dengan QR yang berganti tiap 10 detik di layar dosen, mahasiswa scan untuk hadir, rekap otomatis."},
+  {n:"Catatan Jadi Mind Map", s:"Mind Map", c:"Kampus", h:"Catatan kuliah berantakan jadi mind map dalam sekejap.", d:"Pengubah catatan berbentuk poin atau markdown menjadi mind map interaktif yang bisa digeser, dilipat, dan diwarnai."},
+  {n:"Countdown Skripsi", s:"Countdown", c:"Kampus", h:"Sisa berapa hari lagi sebelum sidang?", d:"Countdown skripsi dengan milestone (proposal, penelitian, bab 4, sidang), progres bar, dan kata-kata penyemangat acak."},
+  {n:"Urut Rute Antar Paket", s:"Rute Paket", c:"Ojol", h:"Antar 10 paket, urutan mana yang paling hemat?", d:"Pengurut rute antar paket: masukkan beberapa titik di peta, app mengurutkan rute terdekat dan menghitung perkiraan jarak."},
+  {n:"Cek Cuaca Sebelum Narik", s:"Cuaca Narik", c:"Ojol", h:"Hujan jam berapa? Biar tahu kapan narik.", d:"Dashboard cuaca per jam untuk driver (Open-Meteo API): peluang hujan, rekomendasi jam narik, dan pengingat bawa jas hujan."},
+  {n:"Template Chat Penumpang", s:"Chat Cepat", c:"Ojol", h:"Satu ketukan, chat ke penumpang langsung beres.", d:"Kumpulan template chat cepat untuk driver ojol yang bisa dikustom, satu ketukan langsung tersalin, ada kategori jemput, macet, dan sampai."},
+  {n:"Generator Label Harga", s:"Label Harga", c:"UMKM", h:"Label harga warung jadi kece kayak minimarket.", d:"Generator label harga produk untuk warung: input nama dan harga, pilih gaya, keluar banyak label sekaligus siap dicetak di kertas A4."},
+  {n:"Rekap Stok Barang", s:"Stok Barang", c:"UMKM", h:"Stok barang gak perlu Excel berantakan lagi.", d:"Aplikasi rekap stok barang: barang masuk dan keluar, peringatan stok menipis, riwayat, dan ekspor rekap bulanan."},
+  {n:"Kalkulator HPP Makanan", s:"HPP Makanan", c:"UMKM", h:"Jualan seblak untungnya sebenernya berapa?", d:"Kalkulator HPP untuk usaha makanan: input bahan dan porsi, hitung modal per porsi, lalu saran harga jual sesuai target untung."},
+  {n:"Kartu Stempel Digital", s:"Stempel", c:"UMKM", h:"Beli 10 kali gratis 1, tanpa kartu kertas.", d:"Kartu stempel loyalitas digital: pelanggan punya kartu di HP, penjual tambah stempel lewat kode, hadiah otomatis saat penuh."},
+  {n:"Generator Hook TikTok", s:"Hook TikTok", c:"Konten", h:"Bingung buka video? Biar mesin yang mikir.", d:"Generator hook TikTok: gabungkan pola hook, topik, dan emosi secara acak, simpan hook favorit, dan salin dengan satu ketukan."},
+  {n:"Papan Skor Live", s:"Papan Skor", c:"Konten", h:"Konten duel jadi seru pakai papan skor sendiri.", d:"Papan skor besar untuk konten duel atau tebak-tebakan: dua tim, tombol tambah poin, timer, efek menang, enak direkam layar."},
+  {n:"Kalender Upload Konten", s:"Kalender", c:"Konten", h:"Konsisten upload tanpa lupa ide.", d:"Kalender rencana upload konten per platform (TikTok, Reels, Shorts), status ide-rekam-edit-upload, dan tampilan mingguan."},
+  {n:"Pembuat Cover Video", s:"Cover Video", c:"Konten", h:"Cover TikTok yang bikin orang berhenti scroll.", d:"Pembuat cover video vertikal: judul besar, warna latar, stiker teks, beberapa template, hasil bisa diunduh sebagai gambar."},
+  {n:"Flappy Ojol", s:"Flappy Ojol", c:"Game", h:"Motor ojol terbang lewatin tiang listrik.", d:"Game satu tombol: motor ojol terbang menghindari tiang listrik dan kabel kusut, skor tertinggi tersimpan, makin lama makin cepat."},
+  {n:"Ngetik Bahasa Sunda", s:"Ngetik Sunda", c:"Game", h:"Seberapa cepet kamu ngetik bahasa Sunda?", d:"Game mengetik cepat dengan kata dan kalimat bahasa Sunda sehari-hari, ada WPM, akurasi, dan arti tiap kata setelah selesai."},
+  {n:"Tebak Harga Gorengan", s:"Harga Gorengan", c:"Game", h:"Harga gorengan di Puncak berapa? Tebak!", d:"Game tebak harga jajanan pinggir jalan: lebih mahal atau lebih murah, skor beruntun, dan fakta lucu tiap jajanan."},
+  {n:"Snake Angkot", s:"Snake Angkot", c:"Game", h:"Angkot ngetem ngumpulin penumpang, jangan nabrak!", d:"Game ala ular klasik versi angkot: makin banyak penumpang makin panjang antrean, hindari polisi tidur dan diri sendiri."},
+  {n:"Tangkap Kucing Oren", s:"Kucing Oren", c:"Game", h:"Kucing oren kabur, tangkap sebelum dia bikin rusuh!", d:"Game ketuk cepat: kucing oren muncul acak di layar dan bikin rusuh, tangkap secepat mungkin sebelum waktu habis."},
+  {n:"Generator Alasan Telat", s:"Alasan Telat", c:"Nyeleneh", h:"Alasan telat paling masuk akal, dijamin dosen percaya.", d:"Generator alasan telat yang absurd tapi terdengar meyakinkan, ada tingkat kepercayaan dan tombol acak ulang."},
+  {n:"Ramalan Jodoh dari Nama", s:"Ramal Jodoh", c:"Nyeleneh", h:"Masukin dua nama, cocok gak kalian?", d:"Ramalan kecocokan nama yang jelas-jelas cuma hiburan: persentase cocok, ramalan lucu, dan kartu hasil yang bisa di-screenshot."},
+  {n:"Translator Alay 2016", s:"Alay 2016", c:"Nyeleneh", h:"Ubah kalimat biasa jadi tulisan alay jaman 2016.", d:"Penerjemah dua arah teks biasa ke tulisan alay gaya 2016 (huruf besar kecil, angka, singkatan), lengkap dengan level ke-alay-an."},
+  {n:"Simulator Ditanya Kapan Nikah", s:"Kapan Nikah", c:"Nyeleneh", h:"Latihan jawab pertanyaan keluarga pas lebaran.", d:"Simulator obrolan keluarga saat lebaran: pertanyaan acak dari om dan tante, pilih jawaban, dapat skor kesabaran dan reaksi lucu."},
+  {n:"Pengukur Level Mager", s:"Level Mager", c:"Nyeleneh", h:"Seberapa mager kamu hari ini? Cek di sini.", d:"Kuis singkat untuk mengukur level mager dengan hasil bertingkat yang lucu dan satu tantangan kecil buat melawan mager."},
+  {n:"Generator Nama Warung", s:"Nama Warung", c:"Nyeleneh", h:"Nama warung yang bikin orang mampir karena penasaran.", d:"Generator nama warung dan usaha kecil yang unik dan lucu, digabung dari kata acak, lengkap dengan slogan dan logo teks."}
+];
+IDEAS.forEach((it,i)=>it.id=i+1);
+const ORDER = IDEAS.slice();
+for(let i=ORDER.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [ORDER[i],ORDER[j]]=[ORDER[j],ORDER[i]]; }
+
+const KEY="roda1p1p-off";
+let off = new Set();
+try{ off = new Set(JSON.parse(localStorage.getItem(KEY)||"[]")); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify([...off])); }catch(e){} }
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const colorOf = it => css(CATS[it.c]);
+const active = () => ORDER.filter(it=>!off.has(it.id));
+
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+let rot = 0, spinning = false, current = null;
+
+function shade(hex, amt){
+  const n = parseInt(hex.slice(1),16);
+  let r=(n>>16)+amt, g=((n>>8)&255)+amt, b=(n&255)+amt;
+  r=Math.max(0,Math.min(255,r)); g=Math.max(0,Math.min(255,g)); b=Math.max(0,Math.min(255,b));
+  return `rgb(${r},${g},${b})`;
+}
+
+function draw(){
+  const box = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  const size = Math.round(box.width * dpr);
+  if(canvas.width !== size){ canvas.width = size; canvas.height = size; }
+  const W = size, R = W/2 - 10*dpr, cx = W/2, cy = W/2;
+  ctx.clearRect(0,0,W,W);
+  const list = active();
+  // rim
+  ctx.beginPath(); ctx.arc(cx,cy,R+8*dpr,0,Math.PI*2); ctx.fillStyle = css("--gold"); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx,cy,R+2*dpr,0,Math.PI*2); ctx.fillStyle = css("--bg"); ctx.fill();
+  if(!list.length){
+    ctx.fillStyle = css("--muted"); ctx.font = `600 ${16*dpr}px ${css("--body")}`;
+    ctx.textAlign="center"; ctx.fillText("Roda kosong. Isi ulang dulu.", cx, cy + R*0.55);
+    return;
+  }
+  const seg = Math.PI*2/list.length;
+  const arc = (box.width/2) * seg;
+  const fontPx = Math.max(7, Math.min(15, box.width/34, arc*0.62)) * dpr;
+  list.forEach((it,i)=>{
+    const a0 = rot + i*seg - Math.PI/2, a1 = a0 + seg;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,a0,a1); ctx.closePath();
+    ctx.fillStyle = shade(colorOf(it), i%2 ? -22 : 0); ctx.fill();
+    ctx.strokeStyle = css("--bg"); ctx.lineWidth = 2*dpr; ctx.stroke();
+    ctx.save();
+    ctx.translate(cx,cy); ctx.rotate(a0 + seg/2);
+    ctx.textAlign="right"; ctx.textBaseline="middle"; ctx.fillStyle="#14121c";
+    ctx.font = `800 ${fontPx}px ${css("--body")}`;
+    const showNum = list.length <= 30;
+    const maxW = showNum ? R*0.62 : R*0.74;
+    let label = it.s;
+    while(ctx.measureText(label).width > maxW && label.length > 4) label = label.slice(0,-2) + "…";
+    ctx.fillText(label, R - 14*dpr, 0);
+    if(showNum){
+      ctx.font = `500 ${fontPx*0.8}px ${css("--mono")}`;
+      ctx.globalAlpha = .6;
+      ctx.fillText(String(it.id).padStart(2,"0"), R*0.3, 0);
+    }
+    ctx.restore();
+  });
+  // bulbs
+  const bulbs = 24;
+  for(let k=0;k<bulbs;k++){
+    const a = k/bulbs*Math.PI*2;
+    ctx.beginPath(); ctx.arc(cx+Math.cos(a)*(R+5*dpr), cy+Math.sin(a)*(R+5*dpr), 2.6*dpr, 0, Math.PI*2);
+    ctx.fillStyle = (k + Math.floor(rot*3))%2 ? "#fff6d6" : "#a5740a"; ctx.fill();
+  }
+}
+
+// sound
+let ac = null;
+function tick(){
+  try{
+    ac = ac || new (window.AudioContext||window.webkitAudioContext)();
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type="square"; o.frequency.value = 1400;
+    g.gain.setValueAtTime(.05, ac.currentTime); g.gain.exponentialRampToValueAtTime(.0001, ac.currentTime+.04);
+    o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime+.05);
+  }catch(e){}
+}
+function ding(){
+  try{
+    ac = ac || new (window.AudioContext||window.webkitAudioContext)();
+    [880,1320].forEach((f,i)=>{
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + i*.12;
+      o.type="triangle"; o.frequency.value=f;
+      g.gain.setValueAtTime(.12,t); g.gain.exponentialRampToValueAtTime(.0001,t+.5);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t+.5);
+    });
+  }catch(e){}
+}
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function spin(){
+  const list = active();
+  if(spinning || !list.length) return;
+  spinning = true; spinBtn.disabled = true;
+  const pick = Math.floor(Math.random()*list.length);
+  const seg = Math.PI*2/list.length;
+  // slice center must land at pointer (top). Slice i center angle = rot + i*seg + seg/2 - PI/2 → want ≡ -PI/2
+  const jitter = (Math.random()-.5)*seg*0.7;
+  const base = -(pick*seg + seg/2) + jitter;
+  const norm = ((base - rot) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+  const turns = reduce ? 0 : 6 + Math.floor(Math.random()*3);
+  const start = rot, delta = norm + turns*Math.PI*2;
+  const dur = reduce ? 300 : 5200 + Math.random()*1200;
+  const t0 = performance.now();
+  let lastSlice = Math.floor(start/seg);
+  resultEl.classList.remove("win");
+  function frame(now){
+    const p = Math.min(1,(now-t0)/dur);
+    const e = 1 - Math.pow(1-p, 4);
+    rot = start + delta*e;
+    const s = Math.floor(rot/seg);
+    if(s !== lastSlice){ tick(); lastSlice = s; }
+    draw();
+    if(p<1) requestAnimationFrame(frame);
+    else { spinning=false; spinBtn.disabled=false; ding(); show(list[pick]); }
+  }
+  requestAnimationFrame(frame);
+}
+
+const resultEl = document.getElementById("result");
+const spinBtn = document.getElementById("spin");
+function promptFor(it){
+  return `1 prompt 1 projek: buatkan "${it.n}".\n${it.d}\nBikin dalam satu file HTML (CSS + JS di dalamnya), tampilan menarik dan enak dipakai di HP, siap langsung dibuka di browser.`;
+}
+function show(it){
+  current = it;
+  const tag = document.getElementById("r-tag");
+  tag.textContent = `#${String(it.id).padStart(2,"0")} · ${it.c}`;
+  tag.style.background = colorOf(it);
+  document.getElementById("r-name").textContent = it.n;
+  document.getElementById("r-hook").textContent = `“${it.h}”`;
+  document.getElementById("r-desc").textContent = "Hook pembuka buat videonya ada di atas. Prompt starter di bawah tinggal disalin.";
+  document.getElementById("r-prompt").textContent = promptFor(it);
+  document.getElementById("r-extra").hidden = false;
+  void resultEl.offsetWidth; resultEl.classList.add("win");
+}
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.hidden = false;
+  clearTimeout(toast._t); toast._t = setTimeout(()=>t.hidden=true, 1800);
+}
+
+function renderList(){
+  const ul = document.getElementById("items");
+  ul.innerHTML = "";
+  IDEAS.forEach(it=>{
+    const li = document.createElement("li");
+    li.innerHTML = `<label for="it-${it.id}"><input type="checkbox" id="it-${it.id}" ${off.has(it.id)?"":"checked"}><span class="num">${String(it.id).padStart(2,"0")}</span><span class="dot" style="background:${colorOf(it)}"></span><span class="name"></span></label>`;
+    li.querySelector(".name").textContent = it.n;
+    li.querySelector("input").addEventListener("change", e=>{
+      if(spinning){ e.target.checked = !e.target.checked; return; }
+      e.target.checked ? off.delete(it.id) : off.add(it.id);
+      save(); renderCount(); draw();
+    });
+    ul.appendChild(li);
+  });
+  renderCount();
+}
+function renderCount(){
+  document.getElementById("count").textContent = `${active().length} dari ${IDEAS.length} ide`;
+}
+function renderLegend(){
+  document.getElementById("legend").innerHTML = Object.keys(CATS)
+    .map(c=>`<span><i class="dot" style="background:${css(CATS[c])}"></i>${c}</span>`).join("");
+}
+
+spinBtn.addEventListener("click", spin);
+document.getElementById("again").addEventListener("click", spin);
+document.getElementById("remove").addEventListener("click", ()=>{
+  if(!current || spinning) return;
+  off.add(current.id); save(); renderList(); draw();
+  toast(`${current.s} dicoret dari roda`);
+});
+document.getElementById("reset").addEventListener("click", ()=>{
+  if(spinning) return;
+  off.clear(); save(); renderList(); draw(); toast("Roda diisi ulang");
+});
+document.getElementById("copy").addEventListener("click", ()=>{
+  const pre = document.getElementById("r-prompt");
+  const fallback = ()=>{ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast("Teks sudah diblok, tinggal salin"); };
+  try{
+    navigator.clipboard.writeText(pre.textContent).then(()=>toast("Prompt tersalin"), fallback);
+  }catch(e){ fallback(); }
+});
+document.addEventListener("keydown", e=>{ if(e.code==="Space" && e.target===document.body){ e.preventDefault(); spin(); } });
+window.addEventListener("resize", draw);
+
+renderLegend(); renderList();
+document.fonts && document.fonts.ready.then(draw);
+draw();
+</script>
+</body>
+</html>
