@@ -11,290 +11,377 @@
     <meta property="og:description" content="Mahasiswa farmasi yang membangun web, aplikasi, AI, dan game. Lihat Pharmacy 3D Simulator, ScentDNA, dan otomatisasi n8n.">
     <meta property="og:image" content="og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#0b0d12">
+    <meta name="theme-color" content="#dbe2ce">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link rel="preload" href="assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/geist-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        /* Opt in to the hero intro before first paint, so nothing flashes. Skipped for reduced motion / data saver. */
+        (function () { try { var c = navigator.connection; if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !(c && c.saveData)) document.documentElement.classList.add('js-intro'); } catch (e) { } })();
+    </script>
     <link rel="stylesheet" href="assets/site.css">
 </head>
 
-<body class="antialiased">
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+            <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+            <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+            <symbol id="i-replay" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+            <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></symbol>
+            <symbol id="i-capsule" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-38 12 12)"><rect x="2.5" y="8" width="19" height="8" rx="4"/><path d="M12 8v8"/></g></symbol>
+        </defs>
+    </svg>
 
-    <header class="pill-wrap">
-        <nav class="pill" aria-label="Navigasi utama">
-            <a href="#hero" class="pill-brand">Ulul<span class="dot"></span></a>
-            <div class="pill-links">
+    <a href="#projects" class="skip-link">Lewati ke konten</a>
+
+    <header class="site-header" id="top">
+        <nav class="nav" aria-label="Navigasi utama">
+            <a href="#hero" class="brand" aria-label="Ulul Albab, ke atas"><svg aria-hidden="true"><use href="#i-capsule"/></svg>Ulul Albab</a>
+            <div class="nav-links">
                 <a href="#projects">Proyek</a>
-                <a href="#about">Kenapa Farmasi</a>
+                <a href="#about">Farmasi</a>
                 <a href="#services">Layanan</a>
                 <a href="#contact">Kontak</a>
             </div>
-            <a href="#contact" class="pill-cta">Hubungi saya</a>
-            <button id="menu-btn" class="pill-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Buka menu">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+            <div class="nav-end">
+                <a href="CV_MuhammadUlulAlbab (1).pdf" download class="nav-cv">Unduh CV</a>
+                <a href="#contact" class="btn btn-dark">Hubungi saya</a>
+            </div>
+            <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Buka menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
             </button>
         </nav>
-        <div id="menu" class="pill-panel" hidden>
+        <div id="menu" class="menu-panel" hidden>
             <a href="#projects">Proyek</a>
-            <a href="#about">Kenapa Farmasi</a>
+            <a href="#about">Kenapa farmasi</a>
             <a href="#services">Layanan</a>
             <a href="#contact">Kontak</a>
         </div>
     </header>
 
     <main>
-        <!-- 1. Hero -->
-        <section id="hero" class="hero sec-dark">
-            <div class="wrap">
-                <div class="hero-top">
+        <!-- 1. Hero: Ulul walks in (video), then the giant name settles behind him -->
+        <section id="hero" class="hero" aria-labelledby="hero-title">
+            <div class="hero-stage-wrap">
+                <div class="hero-stage" aria-hidden="true">
+                    <picture class="hero-poster">
+                        <source media="(max-width: 1023px)" srcset="assets/hero/hero-m-final.webp" width="1080" height="1350">
+                        <img src="assets/hero/hero-d-final.webp" width="1920" height="1080" alt="" fetchpriority="high">
+                    </picture>
+                    <video class="hero-video" muted playsinline disablepictureinpicture preload="none" tabindex="-1"
+                        data-src-d="assets/hero/hero-d.mp4" data-src-m="assets/hero/hero-m.mp4"></video>
+                    <p class="hero-giant">ULUL</p>
+                    <picture class="hero-cutout">
+                        <source media="(max-width: 1023px)" srcset="assets/hero/hero-m-cutout.webp" width="1080" height="1350">
+                        <img src="assets/hero/hero-d-cutout.webp" width="1920" height="1080" alt="">
+                    </picture>
+                </div>
+                <button class="hero-replay" type="button"><svg aria-hidden="true"><use href="#i-replay"/></svg>Putar ulang</button>
+            </div>
+
+            <div class="hero-body">
+                <div class="hero-grid">
                     <div class="hero-copy">
-                        <span class="eyebrow"><b>◆</b> Farmasi × Software</span>
-                        <p class="hero-position">Mahasiswa farmasi yang membangun <em>web, aplikasi, AI, dan game.</em></p>
-                        <p class="lead">Saya Muhammad Ulul Albab, solo developer yang merancang dan membangun produk digital, dari tampilan sampai sistem di baliknya, lalu meluncurkannya.</p>
-                        <div class="flex flex-wrap gap-3">
+                        <p class="label hero-eyebrow" data-in style="--i:0">Farmasi × Software</p>
+                        <h1 id="hero-title" data-in style="--i:1"><span class="sr-only">Muhammad Ulul Albab — </span>Meracik resep, <em>meracik kode.</em></h1>
+                        <p class="lead" data-in style="--i:2">Saya Muhammad Ulul Albab, mahasiswa farmasi yang membangun web, aplikasi, AI, dan game. Saya merancang tampilannya, membangun sistem di baliknya, lalu meluncurkannya.</p>
+                        <div class="hero-actions" data-in style="--i:3">
                             <a href="#projects" class="btn btn-primary">Lihat proyek</a>
-                            <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg> Chat WhatsApp</a>
+                            <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="link-arrow"><svg aria-hidden="true"><use href="#i-chat"/></svg>Chat WhatsApp</a>
                         </div>
-                        <div class="hero-links">
+                        <div class="hero-links" data-in style="--i:4">
                             <a href="CV_MuhammadUlulAlbab (1).pdf" download>Unduh CV</a>
                             <a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">GitHub</a>
                             <a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a>
                         </div>
-                        <div class="hero-stats">
-                            <div><div class="hero-stat-num">12</div><div class="hero-stat-label">Proyek</div></div>
-                            <div><div class="hero-stat-num">25 ribu+</div><div class="hero-stat-label">Baris TypeScript · Pharmacy 3D</div></div>
-                            <div><div class="hero-stat-num">40</div><div class="hero-stat-label">Modul · SchoolCom</div></div>
-                        </div>
-                        <p class="hero-tagline">From molecules to meaningful code.</p>
                     </div>
-                    <div class="photo-frame">
-                        <img class="photo-hero" src="ulul-foto-lg.webp" width="1000" height="1250" alt="Muhammad Ulul Albab">
-                        <span class="orbit" aria-hidden="true"></span>
+
+                    <div class="hero-side" data-in style="--i:6">
+                        <p class="hero-proof">
+                            <span class="thumbs" aria-hidden="true">
+                                <img src="project4.webp" width="922" height="956" alt="">
+                                <img src="project10.webp" width="1094" height="561" alt="">
+                                <img src="project8.webp" width="1280" height="686" alt="">
+                            </span>
+                            <span><span class="hero-stat-num">12</span> proyek dirilis</span>
+                        </p>
+                        <div class="hero-cards">
+                            <a class="stat-card" href="#case-pharmacy3d">
+                                <span class="sc-media">
+                                    <img src="project9.webp" width="1600" height="802" alt="">
+                                    <span class="sc-tag">Game 3D</span>
+                                    <span class="sc-cap">Pharmacy 3D Simulator</span>
+                                </span>
+                                <span class="sc-text">
+                                    <span class="hero-stat-num">25 ribu+</span>
+                                    <span class="hero-stat-label">baris TypeScript</span>
+                                    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                </span>
+                            </a>
+                            <button type="button" class="stat-card" data-modal="modalSchoolCom">
+                                <span class="sc-media">
+                                    <img src="project7.webp" width="575" height="1280" alt="" style="object-position: top;">
+                                    <span class="sc-tag">Mobile</span>
+                                    <span class="sc-cap">SchoolCom</span>
+                                </span>
+                                <span class="sc-text">
+                                    <span class="hero-stat-num">40</span>
+                                    <span class="hero-stat-label">modul, 3 role</span>
+                                    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <h1 class="hero-giant">Halo<span class="dot"></span><span class="sr-only"> — saya Muhammad Ulul Albab</span></h1>
             </div>
         </section>
 
         <!-- 2. Proyek unggulan -->
-        <section id="projects" class="sec-dark panel" style="border-top: 1px solid var(--line);">
+        <section id="projects" class="sec-light panel">
             <div class="wrap">
-                <span class="eyebrow"><b>◆</b> Rx-01 — Proyek unggulan</span>
-                <h2 class="display h-xl" style="margin: 1rem 0 1.2rem;">Empat proyek, dari ide sampai jalan<span class="dot"></span></h2>
-                <p class="lead" style="margin-bottom: 4rem;">Pilihan yang paling menunjukkan cara saya bekerja: domain yang dipahami, keputusan teknis yang bisa dijelaskan, dan hasil yang bisa dicoba.</p>
-                <article class="case" data-project="pharmacy3d">
-                    <div class="case-head">
-                        <div class="case-no">01 / 04</div>
-                        <span class="case-kind">Game 3D web · Simulasi apotek</span>
-                        <h3 class="case-title display">Pharmacy 3D Simulator<span class="dot"></span></h3>
+                <div class="sec-head split">
+                    <div>
+                        <p class="label"><span class="no">01</span> Proyek unggulan</p>
+                        <h2 class="display h-xl" style="margin-top: 1.2rem;">Empat proyek, dari ide <em>sampai jalan</em></h2>
+                    </div>
+                    <p class="lead">Pilihan yang paling menunjukkan cara saya bekerja: domain yang dipahami, keputusan teknis yang bisa dijelaskan, dan hasil yang bisa dicoba.</p>
+                </div>
+
+                <article class="case" id="case-pharmacy3d" data-project="pharmacy3d">
+                    <header class="case-head">
+                        <p class="case-no">01 / 04</p>
+                        <p class="case-kind">Game 3D web · Simulasi apotek</p>
+                        <h3 class="case-title display">Pharmacy 3D Simulator</h3>
                         <p class="case-summary">Apotek yang bisa dijelajahi dan dikelola langsung di browser: melayani pasien, memproses resep, menjaga stok, dan mengembangkan usaha.</p>
-                    </div>
-                    <img class="case-media" src="project9.webp" width="1600" height="802" loading="lazy" alt="Tangkapan layar Pharmacy 3D Simulator">
-                    <div class="case-body">
-                        <div>
-                            <h4>Masalah</h4>
-                            <p>Pengelolaan apotek biasanya berhenti di teori. Game ini membuat prosesnya bisa dimainkan: resep harus diperiksa, stok harus tertib, dan kesalahan ada akibatnya.</p>
-                            <h4>Yang dibangun</h4>
-                            <ul>
-                                <li>Dunia 3D orang pertama/ketiga dengan antrean <b>7 kategori pasien</b>.</li>
-                                <li>Wizard resep 5 langkah dengan deteksi masalah resep, plus lab racik (timbang dan campur).</li>
-                                <li>Ekonomi: kasir, laporan keuangan, pegawai otomatis, 19 misi, 18 pencapaian.</li>
-                            </ul>
+                        <div class="case-links">
+                            <a href="https://pharmacy-3-d-simulator.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Main sekarang <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                            <a href="https://github.com/ululbiasaajaa/pharmacy-3d-simulator" target="_blank" rel="noopener noreferrer" class="link-arrow">Kode di GitHub <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                         </div>
-                        <div>
-                            <h4>Keputusan teknis</h4>
-                            <ul>
-                                <li>Stok dikelola <b>per batch dengan FEFO</b> plus kedaluwarsa dan stock opname, sesuai praktik apotek.</li>
-                                <li>Progres tersimpan di <b>3 slot + autosave (IndexedDB)</b>, tanpa backend.</li>
-                                <li><b>25 ribu+ baris TypeScript</b>, diuji otomatis.</li>
-                            </ul>
-                            <h4 style="margin-top: 1.5rem;">Stack</h4>
+                        <p class="note">Paling nyaman di laptop/PC dengan Chrome. Semua data obat dan pasien fiktif.</p>
+                        <div class="stack">
+                            <h4>Stack</h4>
                             <div class="chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Three.js</span><span class="chip">React Three Fiber</span><span class="chip">Zustand</span></div>
-                            <div class="case-links">
-                                <a href="https://pharmacy-3-d-simulator.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Main sekarang <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-                                <a href="https://github.com/ululbiasaajaa/pharmacy-3d-simulator" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">Kode di GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                        </div>
+                    </header>
+                    <div class="case-main">
+                        <img class="case-media" src="project9.webp" width="1600" height="802" loading="lazy" alt="Tangkapan layar Pharmacy 3D Simulator: meja pelayanan dan resep di dalam apotek 3D">
+                        <div class="case-body">
+                            <div>
+                                <h4>Masalah</h4>
+                                <p>Pengelolaan apotek biasanya berhenti di teori. Game ini membuat prosesnya bisa dimainkan: resep harus diperiksa, stok harus tertib, dan kesalahan ada akibatnya.</p>
+                                <div class="block">
+                                    <h4>Yang dibangun</h4>
+                                    <ul>
+                                        <li>Dunia 3D orang pertama/ketiga dengan antrean <b>7 kategori pasien</b>.</li>
+                                        <li>Wizard resep 5 langkah dengan deteksi masalah resep, plus lab racik (timbang dan campur).</li>
+                                        <li>Ekonomi: kasir, laporan keuangan, pegawai otomatis, 19 misi, 18 pencapaian.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <p class="note" style="margin-top: .8rem;">Paling nyaman di laptop/PC dengan Chrome. Semua data obat dan pasien fiktif.</p>
+                            <div>
+                                <h4>Keputusan teknis</h4>
+                                <ul>
+                                    <li>Stok dikelola <b>per batch dengan FEFO</b> plus kedaluwarsa dan stock opname, sesuai praktik apotek.</li>
+                                    <li>Progres tersimpan di <b>3 slot + autosave (IndexedDB)</b>, tanpa backend.</li>
+                                    <li><b>25 ribu+ baris TypeScript</b>, diuji otomatis.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </article>
-            </div>
-        </section>
-        <section class="sec-paper panel" style="border-top: 1px solid var(--line);">
-            <div class="wrap">
-                <article class="case" data-project="scentdna">
-                    <div class="case-head">
-                        <div class="case-no">02 / 04</div>
-                        <span class="case-kind">AI · Pencarian vektor</span>
-                        <h3 class="case-title display">ScentDNA<span class="dot"></span></h3>
+
+                <article class="case" id="case-scentdna" data-project="scentdna">
+                    <header class="case-head">
+                        <p class="case-no">02 / 04</p>
+                        <p class="case-kind">AI · Pencarian vektor</p>
+                        <h3 class="case-title display">ScentDNA</h3>
                         <p class="case-summary">Mesin penemu parfum: ketik aroma yang kamu bayangkan, dapatkan parfum yang mirip beserta rekomendasi dari konsultan virtual.</p>
-                    </div>
-                    <img class="case-media" src="project4.webp" width="922" height="956" loading="lazy" alt="Tangkapan layar ScentDNA">
-                    <div class="case-body">
-                        <div>
-                            <h4>Masalah</h4>
-                            <p>Orang menjelaskan aroma dengan kalimat, bukan filter. Pencarian kata kunci sering meleset dari yang dimaksud.</p>
-                            <h4>Yang dibangun</h4>
-                            <ul>
-                                <li>Model transformer NLP yang mengubah deskripsi aroma jadi <b>vektor L2-normalized</b>.</li>
-                                <li>Pencarian kemiripan kosinus di <b>PostgreSQL pgvector</b>.</li>
-                                <li>Penasihat RAG dengan <b>Gemini 2.5 Flash</b> untuk racikan rekomendasi real-time.</li>
-                            </ul>
+                        <div class="case-links">
+                            <a href="https://scentdna-5646.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Coba live <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                         </div>
-                        <div>
-                            <h4>Keputusan teknis</h4>
-                            <ul>
-                                <li>Pola <b>singleton</b> di FastAPI <code>lifespan</code> agar model HuggingFace tidak dimuat ganda di RAM.</li>
-                                <li>Pencegahan OOM: profiling memori Linux cgroups, PyTorch CPU single-thread, garbage collection aktif.</li>
-                                <li>Backend dikemas di <b>Docker</b> supaya deploy cloud konsisten.</li>
-                            </ul>
-                            <h4 style="margin-top: 1.5rem;">Stack</h4>
+                        <div class="stack">
+                            <h4>Stack</h4>
                             <div class="chips"><span class="chip">FastAPI</span><span class="chip">PostgreSQL pgvector</span><span class="chip">HuggingFace</span><span class="chip">Gemini API</span><span class="chip">Docker</span></div>
-                            <div class="case-links">
-                                <a href="https://scentdna-5646.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Coba live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                        </div>
+                    </header>
+                    <div class="case-main">
+                        <img class="case-media is-contain" src="project4.webp" width="922" height="956" loading="lazy" alt="Tangkapan layar ScentDNA: kolom pencarian aroma dan hasil parfum yang mirip">
+                        <div class="case-body">
+                            <div>
+                                <h4>Masalah</h4>
+                                <p>Orang menjelaskan aroma dengan kalimat, bukan filter. Pencarian kata kunci sering meleset dari yang dimaksud.</p>
+                                <div class="block">
+                                    <h4>Yang dibangun</h4>
+                                    <ul>
+                                        <li>Model transformer NLP yang mengubah deskripsi aroma jadi <b>vektor L2-normalized</b>.</li>
+                                        <li>Pencarian kemiripan kosinus di <b>PostgreSQL pgvector</b>.</li>
+                                        <li>Penasihat RAG dengan <b>Gemini 2.5 Flash</b> untuk racikan rekomendasi real-time.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h4>Keputusan teknis</h4>
+                                <ul>
+                                    <li>Pola <b>singleton</b> di FastAPI <code>lifespan</code> agar model HuggingFace tidak dimuat ganda di RAM.</li>
+                                    <li>Pencegahan OOM: profiling memori Linux cgroups, PyTorch CPU single-thread, garbage collection aktif.</li>
+                                    <li>Backend dikemas di <b>Docker</b> supaya deploy cloud konsisten.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </article>
-            </div>
-        </section>
-        <section class="sec-dark panel" style="border-top: 1px solid var(--line);">
-            <div class="wrap">
-                <article class="case" data-project="n8n">
-                    <div class="case-head">
-                        <div class="case-no">03 / 04</div>
-                        <span class="case-kind">Otomatisasi · AI workflow</span>
-                        <h3 class="case-title display">n8n Automation Suite<span class="dot"></span></h3>
+
+                <article class="case" id="case-n8n" data-project="n8n">
+                    <header class="case-head">
+                        <p class="case-no">03 / 04</p>
+                        <p class="case-kind">Otomatisasi · AI workflow</p>
+                        <h3 class="case-title display">n8n Automation Suite</h3>
                         <p class="case-summary">Tiga workflow yang mengurangi kerjaan repetitif harian dan mempercepat pencarian kerja, berjalan 24/7 di server sendiri.</p>
-                    </div>
-                    <video class="case-media" src="n8n-demo.mp4" poster="project8.webp" width="1280" height="686" controls muted playsinline preload="none" aria-label="Rekaman layar canvas workflow n8n"></video>
-                    <div class="case-body">
-                        <div>
-                            <h4>Masalah</h4>
-                            <p>Membuat ide konten harian dan menyaring lowongan kerja itu repetitif dan menyita waktu.</p>
-                            <h4>Yang dibangun</h4>
-                            <ul>
-                                <li><b>AI Content Idea Generator</b>: ide konten harian via Gemini, tersimpan di Google Sheets, terkirim ke Telegram terjadwal.</li>
-                                <li><b>LinkedIn Job Matcher</b>: scraping lowongan, skor kecocokan resume 0-100 oleh AI, cover letter otomatis, notifikasi Telegram.</li>
-                                <li><b>Asisten pribadi</b> terhubung Gmail, Calendar, dan Tasks lewat Telegram.</li>
-                            </ul>
+                        <div class="case-links">
+                            <a href="#contact" class="btn btn-ghost btn-sm">Minta peragaan</a>
                         </div>
-                        <div>
-                            <h4>Keputusan teknis</h4>
-                            <ul>
-                                <li><b>Self-hosted</b> di Google Cloud VM dengan HTTPS penuh, bukan layanan berbayar per eksekusi.</li>
-                                <li>Telegram sebagai antarmuka, jadi tidak perlu membangun front-end.</li>
-                            </ul>
-                            <h4 style="margin-top: 1.5rem;">Stack</h4>
+                        <p class="note">Demo privat (butuh login). Bisa diperagakan lewat call.</p>
+                        <div class="stack">
+                            <h4>Stack</h4>
                             <div class="chips"><span class="chip">n8n</span><span class="chip">Gemini API</span><span class="chip">Google Cloud</span><span class="chip">Google Sheets</span><span class="chip">Telegram</span></div>
-                            <div class="case-links">
-                                <a href="#contact" class="btn btn-ghost btn-sm">Minta peragaan</a>
+                        </div>
+                    </header>
+                    <div class="case-main">
+                        <video class="case-media" src="n8n-demo.mp4" poster="project8.webp" width="1280" height="686" controls muted playsinline preload="none" aria-label="Rekaman layar canvas workflow n8n"></video>
+                        <div class="case-body">
+                            <div>
+                                <h4>Masalah</h4>
+                                <p>Membuat ide konten harian dan menyaring lowongan kerja itu repetitif dan menyita waktu.</p>
+                                <div class="block">
+                                    <h4>Yang dibangun</h4>
+                                    <ul>
+                                        <li><b>AI Content Idea Generator</b>: ide konten harian via Gemini, tersimpan di Google Sheets, terkirim ke Telegram terjadwal.</li>
+                                        <li><b>LinkedIn Job Matcher</b>: scraping lowongan, skor kecocokan resume 0-100 oleh AI, cover letter otomatis, notifikasi Telegram.</li>
+                                        <li><b>Asisten pribadi</b> terhubung Gmail, Calendar, dan Tasks lewat Telegram.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <p class="note" style="margin-top: .8rem;">Demo privat (butuh login). Bisa diperagakan lewat call.</p>
+                            <div>
+                                <h4>Keputusan teknis</h4>
+                                <ul>
+                                    <li><b>Self-hosted</b> di Google Cloud VM dengan HTTPS penuh, bukan layanan berbayar per eksekusi.</li>
+                                    <li>Telegram sebagai antarmuka, jadi tidak perlu membangun front-end.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </article>
-            </div>
-        </section>
-        <section class="sec-paper panel" style="border-top: 1px solid var(--line);">
-            <div class="wrap">
-                <article class="case" data-project="roblox">
-                    <div class="case-head">
-                        <div class="case-no">04 / 04</div>
-                        <span class="case-kind">Game map · Roblox Studio</span>
-                        <h3 class="case-title display">Roblox City Map<span class="dot"></span></h3>
+
+                <article class="case" id="case-roblox" data-project="roblox">
+                    <header class="case-head">
+                        <p class="case-no">04 / 04</p>
+                        <p class="case-kind">Game map · Roblox Studio</p>
+                        <h3 class="case-title display">Roblox City Map</h3>
                         <p class="case-summary">Map kota di Roblox: gedung apartemen bertingkat, jalan, dan lingkungan, dengan HUD status pemain yang saya skrip sendiri.</p>
-                    </div>
-                    <img class="case-media" src="project10.webp" width="1094" height="561" loading="lazy" alt="Map kota Roblox dengan gedung apartemen bertingkat dan HUD uang, energi, lapar">
-                    <div class="case-body">
-                        <div>
-                            <h4>Masalah</h4>
-                            <p>Game bertema kehidupan butuh dunia yang terasa hidup dan sistem status yang jelas bagi pemain: uang, energi, dan rasa lapar.</p>
-                            <h4>Yang dibangun</h4>
-                            <ul>
-                                <li>Gedung apartemen bertingkat dengan balkon dan detail fasad.</li>
-                                <li>Jalan dengan zebra cross, vegetasi, serta pencahayaan dan atmosfer.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Keputusan teknis</h4>
-                            <ul>
-                                <li>HUD status pemain (uang, energi, lapar) <b>diskrip sendiri dengan Luau</b>.</li>
-                                <li>Level design dan environment dikerjakan langsung di Roblox Studio.</li>
-                            </ul>
-                            <h4 style="margin-top: 1.5rem;">Stack</h4>
+                        <div class="stack">
+                            <h4>Stack</h4>
                             <div class="chips"><span class="chip">Roblox Studio</span><span class="chip">Luau</span><span class="chip">Level design</span></div>
                         </div>
+                    </header>
+                    <div class="case-main">
+                        <img class="case-media" src="project10.webp" width="1094" height="561" loading="lazy" alt="Map kota Roblox dengan gedung apartemen bertingkat dan HUD uang, energi, lapar">
+                        <div class="case-body">
+                            <div>
+                                <h4>Masalah</h4>
+                                <p>Game bertema kehidupan butuh dunia yang terasa hidup dan sistem status yang jelas bagi pemain: uang, energi, dan rasa lapar.</p>
+                                <div class="block">
+                                    <h4>Yang dibangun</h4>
+                                    <ul>
+                                        <li>Gedung apartemen bertingkat dengan balkon dan detail fasad.</li>
+                                        <li>Jalan dengan zebra cross, vegetasi, serta pencahayaan dan atmosfer.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h4>Keputusan teknis</h4>
+                                <ul>
+                                    <li>HUD status pemain (uang, energi, lapar) <b>diskrip sendiri dengan Luau</b>.</li>
+                                    <li>Level design dan environment dikerjakan langsung di Roblox Studio.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </div>
         </section>
-        <section id="more" class="sec-dark panel" style="border-top: 1px solid var(--line);">
+
+        <!-- Proyek lainnya -->
+        <section id="more" class="sec-dark panel">
             <div class="wrap">
-                <span class="eyebrow"><b>◆</b> Proyek lainnya</span>
-                <h2 class="display h-lg" style="margin: 1rem 0 0;">Dan delapan lagi<span class="dot"></span></h2>
+                <div class="sec-head split">
+                    <div>
+                        <p class="label"><span class="no">02</span> Proyek lainnya</p>
+                        <h2 class="display h-lg" style="margin-top: 1.2rem;">Dan delapan <em>lagi</em></h2>
+                    </div>
+                    <p class="lead">Dari aplikasi sekolah sampai bot Telegram. Klik baris untuk melihat detail dan tautan uji coba.</p>
+                </div>
                 <ul class="project-list">
                     <li><button type="button" class="project-row" data-modal="modalSchoolCom">
                         <span class="name">SchoolCom MVP</span>
                         <span class="meta">Mobile &amp; web · Expo, Firebase, RBAC · 3 role, 40 modul</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modalWedding">
                         <span class="name">Digital Wedding Invitation</span>
                         <span class="meta">Frontend · React, Vite</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modalLdr">
                         <span class="name">LDR Anchor</span>
-                        <span class="meta">Aplikasi mobile</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <span class="meta">Aplikasi mobile · React Native, Firebase</span>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modal1">
                         <span class="name">Clinical Suite Dashboard</span>
-                        <span class="meta">Web app · Dashboard</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <span class="meta">Web app · Dashboard klinis</span>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modalInventory">
                         <span class="name">Cloud Inventory System</span>
                         <span class="meta">Web app · Google Apps Script</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modalPodlearn">
                         <span class="name">PodLearn AI<span class="tag-soft">Sedang migrasi server</span></span>
                         <span class="meta">Fullstack AI · podcast edukasi</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modalTelegram">
                         <span class="name">Telegram AI Assistant</span>
-                        <span class="meta">Bot AI</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <span class="meta">Bot AI · Python, Llama 3.3</span>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                     <li><button type="button" class="project-row" data-modal="modalDomain">
                         <span class="name">Domain Explorer</span>
                         <span class="meta">Web app · Laravel, MySQL</span>
-                        <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        <svg class="go" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button></li>
                 </ul>
-                <p class="note" style="margin-top: 1rem;">Klik baris untuk melihat detail dan tautan uji coba.</p>
             </div>
         </section>
 
         <!-- 3. Kenapa farmasi -->
-        <section id="about" class="sec-paper panel">
+        <section id="about" class="sec-sage panel">
             <div class="wrap">
-                <span class="eyebrow"><b>◆</b> Rx-02 — Kenapa farmasi</span>
-                <div class="about-grid" style="margin-top: 2rem;">
+                <div class="about-grid">
                     <div class="about-photo">
-                        <div class="photo-frame">
-                            <img class="photo-about" src="ulul-foto-lg.webp" width="1000" height="1250" alt="Muhammad Ulul Albab" loading="lazy">
-                            <span class="orbit" aria-hidden="true"></span>
-                        </div>
+                        <figure>
+                            <img class="photo-about" src="ulul-foto-lg.webp" width="1000" height="1250" alt="Potret Muhammad Ulul Albab" loading="lazy">
+                            <figcaption>Muhammad Ulul Albab — mahasiswa farmasi &amp; developer</figcaption>
+                        </figure>
                     </div>
                     <div>
-                        <h2 class="display h-lg">Paham apoteknya, makanya sistemnya masuk akal<span class="dot"></span></h2>
+                        <p class="label"><span class="no">03</span> Kenapa farmasi</p>
+                        <h2 class="display h-lg" style="margin-top: 1.2rem;">Paham apoteknya, <em>makanya sistemnya masuk akal</em></h2>
                         <p class="statement">Saya mahasiswa farmasi. Di Pharmacy 3D Simulator, stok dikelola per batch dengan FEFO, resep diperiksa langkah demi langkah, dan racikan ditimbang, karena begitulah apotek bekerja. Domain yang dipahami membuat software meniru proses nyata, bukan sekadar tampilan.</p>
                         <p class="lead">Latar eksakta juga membentuk cara kerja saya: teliti, sistematis, dan terbiasa memeriksa hasil sebelum dirilis.</p>
                         <div class="skill-grid">
@@ -312,14 +399,18 @@
         <!-- 4. Layanan -->
         <section id="services" class="sec-dark panel">
             <div class="wrap">
-                <span class="eyebrow"><b>◆</b> Rx-03 — Layanan</span>
-                <h2 class="display h-xl" style="margin: 1rem 0 1.2rem;">Yang bisa saya kerjakan untuk Anda<span class="dot"></span></h2>
-                <p class="lead">Terbuka untuk proyek freelance. Brief singkat lewat WhatsApp sudah cukup untuk memulai.</p>
+                <div class="sec-head split">
+                    <div>
+                        <p class="label"><span class="no">04</span> Layanan</p>
+                        <h2 class="display h-xl" style="margin-top: 1.2rem;">Yang bisa saya kerjakan <em>untuk Anda</em></h2>
+                    </div>
+                    <p class="lead">Terbuka untuk proyek freelance. Brief singkat lewat WhatsApp sudah cukup untuk memulai.</p>
+                </div>
                 <ul class="service-list">
-                    <li class="service"><h3>Web &amp; landing page</h3><p>React/Tailwind atau Laravel. Responsif, cepat, dan siap deploy.</p></li>
-                    <li class="service"><h3>Aplikasi mobile</h3><p>React Native/Expo dengan backend Firebase atau Laravel.</p></li>
-                    <li class="service"><h3>Otomatisasi &amp; AI</h3><p>Workflow n8n, integrasi Gemini/RAG, dan bot Telegram.</p></li>
-                    <li class="service"><h3>Game &amp; map Roblox</h3><p>Level design di Roblox Studio dan scripting Luau.</p></li>
+                    <li class="service"><span class="n" aria-hidden="true">01</span><h3>Web &amp; landing page</h3><p>React/Tailwind atau Laravel. Responsif, cepat, dan siap deploy.</p></li>
+                    <li class="service"><span class="n" aria-hidden="true">02</span><h3>Aplikasi mobile</h3><p>React Native/Expo dengan backend Firebase atau Laravel.</p></li>
+                    <li class="service"><span class="n" aria-hidden="true">03</span><h3>Otomatisasi &amp; AI</h3><p>Workflow n8n, integrasi Gemini/RAG, dan bot Telegram.</p></li>
+                    <li class="service"><span class="n" aria-hidden="true">04</span><h3>Game &amp; map Roblox</h3><p>Level design di Roblox Studio dan scripting Luau.</p></li>
                 </ul>
                 <ol class="process">
                     <li><b>Brief</b>Ceritakan kebutuhan lewat WhatsApp.</li>
@@ -331,424 +422,238 @@
         </section>
 
         <!-- 5. Kontak -->
-        <section id="contact" class="sec-paper panel">
+        <section id="contact" class="sec-light panel">
             <div class="wrap">
-                <span class="eyebrow"><b>◆</b> Rx-04 — Mari terhubung</span>
-                <h2 class="display" style="font-size: clamp(2.6rem, 12vw, 10rem); margin: 1rem 0 1.2rem;">Ayo ngobrol<span class="dot"></span></h2>
-                <p class="lead" style="margin-bottom: 2.5rem;">Punya ide untuk dikembangkan? Terbuka untuk proyek freelance, kerja/magang, maupun ngobrol soal farmasi &amp; teknologi.</p>
-
-                <div class="contact-card">
-                    <div class="flex justify-between items-center pb-3.5 mb-4" style="border-bottom: 1px dashed var(--line);">
-                        <span class="font-label text-xs tracking-wider" style="color: var(--fg-muted);">℞ CONTACT LABEL</span>
-                        <span class="badge-ok">● Available</span>
+                <p class="label"><span class="no">05</span> Mari terhubung</p>
+                <h2 class="display contact-title" style="margin-top: 1.2rem;">Ayo <em>ngobrol</em></h2>
+                <div class="contact-grid">
+                    <div>
+                        <p class="lead">Punya ide untuk dikembangkan? Terbuka untuk proyek freelance, kerja/magang, maupun ngobrol soal farmasi &amp; teknologi.</p>
+                        <div class="hero-actions" style="margin-top: 2rem;">
+                            <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg aria-hidden="true"><use href="#i-chat"/></svg> Hubungi via WhatsApp</a>
+                            <a href="CV_MuhammadUlulAlbab (1).pdf" download class="btn btn-ghost"><svg aria-hidden="true"><use href="#i-download"/></svg> Unduh CV (PDF)</a>
+                            <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="link-arrow">Portofolio (PPT)</a>
+                        </div>
                     </div>
-                    <dl>
-                        <dt>Nama</dt><dd class="font-display">Muhammad Ulul Albab</dd>
-                        <dt>Email</dt><dd class="font-display"><a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a></dd>
-                        <dt>GitHub</dt><dd class="font-display"><a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">github.com/ululbiasaajaa</a></dd>
-                        <dt>Respons</dt><dd class="font-display">&lt; 24 jam</dd>
-                    </dl>
-                </div>
-
-                <div class="flex flex-wrap gap-3 mt-8">
-                    <a href="https://wa.me/62895414781707?text=Halo%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20web%20dan%20aplikasi%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg> Hubungi via WhatsApp</a>
-                    <a href="CV_MuhammadUlulAlbab (1).pdf" download class="btn btn-ghost">Unduh CV (PDF)</a>
-                    <a href="Portfolio_Muhammad_Ulul_Albab.pptx" download class="btn btn-ghost">Portofolio (PPT)</a>
+                    <div class="etiket">
+                        <div class="etiket-head">
+                            <span class="t">℞ ETIKET KONTAK</span>
+                            <span class="badge-ok">Tersedia</span>
+                        </div>
+                        <dl>
+                            <dt>Nama</dt><dd>Muhammad Ulul Albab</dd>
+                            <dt>Email</dt><dd><a href="mailto:sfarmlul@gmail.com">sfarmlul@gmail.com</a></dd>
+                            <dt>GitHub</dt><dd><a href="https://github.com/ululbiasaajaa" target="_blank" rel="noopener noreferrer">github.com/ululbiasaajaa</a></dd>
+                            <dt>Respons</dt><dd>&lt; 24 jam</dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Modal proyek lainnya -->
-        <!-- MODAL POPUP SCHOOLCOM MVP -->
-        <div id="modalSchoolCom"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalSchoolCom')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">Mobile
-                    & Web Management System</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">SchoolCom — School Management System</h3>
-
-                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
-                    style="border: 1px solid var(--border); background: var(--bg);">
-                    <img src="project7.webp" width="575" height="1280" loading="lazy" alt="SchoolCom Dashboard Screenshot"
-                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-                </div>
-
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Aplikasi sistem pengelolaan & komunikasi sekolah terintegrasi berbasis React Native / Expo SDK 54
-                    dan Firebase. Dirancang untuk menghubungkan Admin, Guru, dan Orang Tua dalam satu ekosistem yang
-                    terstruktur melalui kontrol akses ketat (RBAC) dan 40 modul teraudit.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">FITUR UTAMA
-                        & ARSITEKTUR SIKLUS PROSES:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li>✓ <span class="text-white font-semibold">Admin Control Center:</span> Manajemen akun
-                            pengguna, alokasi kelas guru, dan pendelegasian hubungan siswa-orang tua.</li>
-                        <li>✓ <span class="text-white font-semibold">Presensi & Assessment Guru:</span> Pencatatan
-                            kehadiran sekelas sekali sentuh, input nilai rapor, dan pencatatan insiden/perilaku.</li>
-                        <li>✓ <span class="text-white font-semibold">Parent Portal Visibility:</span> Pemantauan
-                            statistik kehadiran anak, riwayat nilai, dan catatan insiden secara transparan.</li>
-                        <li>✓ <span class="text-white font-semibold">Role-Based Security & Audit:</span> Pengamanan
-                            backend dengan Firestore Security Rules dan 40 modul teruji.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalSchoolCom')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="https://landing-page-schoolcom.vercel.app/" target="_blank"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                        🚀 Buka Landing Page Live
-                    </a>
+        <!-- ===== Detail proyek lainnya (modal) ===== -->
+        <div id="modalSchoolCom" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalSchoolCom-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalSchoolCom')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Mobile &amp; web · Sistem manajemen sekolah</p>
+                <h3 id="modalSchoolCom-title" class="modal-title">SchoolCom — School Management System</h3>
+                <div class="modal-shot"><img src="project7.webp" width="575" height="1280" loading="lazy" alt="Tangkapan layar dasbor SchoolCom"></div>
+                <p class="modal-text">Aplikasi sistem pengelolaan &amp; komunikasi sekolah terintegrasi berbasis React Native / Expo SDK 54 dan Firebase. Dirancang untuk menghubungkan Admin, Guru, dan Orang Tua dalam satu ekosistem yang terstruktur melalui kontrol akses ketat (RBAC) dan 40 modul teraudit.</p>
+                <h4 class="modal-sub">Fitur utama &amp; alur proses</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Admin Control Center:</b> manajemen akun pengguna, alokasi kelas guru, dan pendelegasian hubungan siswa-orang tua.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Presensi &amp; assessment guru:</b> pencatatan kehadiran sekelas sekali sentuh, input nilai rapor, dan pencatatan insiden/perilaku.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Parent portal:</b> pemantauan statistik kehadiran anak, riwayat nilai, dan catatan insiden secara transparan.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Role-based security &amp; audit:</b> pengamanan backend dengan Firestore Security Rules dan 40 modul teruji.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalSchoolCom')">Tutup</button>
+                    <a href="https://landing-page-schoolcom.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Buka landing page <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP WEDDING INVITATION -->
-        <div id="modalWedding"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalWedding')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">Frontend
-                    Prototype Project</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">Digital Wedding Invitation Premium</h3>
-
-                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
-                    style="border: 1px solid var(--border); background: var(--bg);">
-                    <img src="project5.webp" width="676" height="954" loading="lazy" alt="Digital Wedding Invitation Screenshot"
-                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-                </div>
-
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Prototipe aplikasi undangan pernikahan digital premium berbasis React & Tailwind CSS. Dirancang
-                    dengan pendekatan <i>Mobile-First Design</i>, tata letak elegan & romantis, serta arsitektur
-                    komponen modular yang siap dikembangkan menjadi platform generator template undangan digital
-                    komersialisasi.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">HIGHLIGHT
-                        FITUR & TEKNIS:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li>✓ <span class="text-white font-semibold">Opening Screen & Cover:</span> Tampilan pembuka
-                            personalisasi nama tamu undangan.</li>
-                        <li>✓ <span class="text-white font-semibold">Hero & Real-Time Countdown:</span> Timer hitung
-                            mundur otomatis menuju hari H pernikahan.</li>
-                        <li>✓ <span class="text-white font-semibold">Interactive Section:</span> Timeline perjalanan
-                            cinta (Our Story), integrasi Google Maps lokasi acara, dan Pre-wedding Gallery Grid.</li>
-                        <li>✓ <span class="text-white font-semibold">Simulasi RSVP & Digital Wishes:</span> Form
-                            konfirmasi kehadiran & papan ucapan doa restu interaktif.</li>
-                        <li>✓ <span class="text-white font-semibold">Wedding Gift & Copy Action:</span> Fitur salin
-                            nomor rekening bank otomatis untuk kado pernikahan.</li>
-                        <li>✓ <span class="text-white font-semibold">Reusable Data Architecture:</span> Seluruh data
-                            terpusat di `weddingData.js` untuk kemudahan kustomisasi antar klien.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalWedding')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="https://wedding-invitation-gamma-nine-24.vercel.app/" target="_blank"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                        🚀 Buka Live App
-                    </a>
+        <div id="modalWedding" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalWedding-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalWedding')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Frontend · Prototipe produk</p>
+                <h3 id="modalWedding-title" class="modal-title">Digital Wedding Invitation Premium</h3>
+                <div class="modal-shot"><img src="project5.webp" width="676" height="954" loading="lazy" alt="Tangkapan layar undangan pernikahan digital"></div>
+                <p class="modal-text">Prototipe aplikasi undangan pernikahan digital premium berbasis React &amp; Tailwind CSS. Dirancang dengan pendekatan <i>mobile-first</i>, tata letak elegan, serta arsitektur komponen modular yang siap dikembangkan menjadi platform generator template undangan digital.</p>
+                <h4 class="modal-sub">Highlight fitur &amp; teknis</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Opening screen &amp; cover:</b> tampilan pembuka dengan nama tamu undangan.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Hero &amp; countdown:</b> timer hitung mundur otomatis menuju hari H.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Section interaktif:</b> timeline Our Story, Google Maps lokasi acara, dan galeri pre-wedding.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>RSVP &amp; ucapan:</b> form konfirmasi kehadiran dan papan ucapan doa restu.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Wedding gift:</b> salin nomor rekening untuk kado dengan satu ketukan.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Data terpusat:</b> seluruh data di <code>weddingData.js</code> agar mudah disesuaikan per klien.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalWedding')">Tutup</button>
+                    <a href="https://wedding-invitation-gamma-nine-24.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Buka live app <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP LDR ANCHOR -->
-        <div id="modalLdr"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalLdr')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">Mobile
-                    Application Project</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">LDR Anchor — Hubungan Jarak Jauh</h3>
-
-                <!-- Box Tampilan QR Code APK -->
-                <div class="mb-6 p-4 rounded-xl flex flex-col md:flex-row items-center gap-4"
-                    style="background: var(--bg); border: 1px solid var(--border);">
-                    <img src="qrcodeapk.jpg" width="288" height="344" loading="lazy" alt="QR Code Download APK LDR Anchor"
-                        class="w-32 h-32 object-contain bg-white p-2 rounded-lg shadow-md"
-                        style="border: 1px solid var(--border-hover);">
-                    <div class="text-center md:text-left">
-                        <span
-                            class="text-xs font-bold font-mono text-teal-400 uppercase tracking-wider block mb-1">Scan
-                            untuk Download APK</span>
-                        <p class="text-xs leading-relaxed" style="color: var(--text-muted);">
-                            Arahkan kamera HP Anda ke QR Code ini untuk langsung mengunduh dan menginstal berkas APK
-                            Android terbaru di perangkat Anda.
-                        </p>
-                    </div>
+        <div id="modalLdr" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalLdr-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalLdr')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Aplikasi mobile · Android</p>
+                <h3 id="modalLdr-title" class="modal-title">LDR Anchor — Hubungan Jarak Jauh</h3>
+                <div class="modal-qr">
+                    <img src="qrcodeapk.jpg" width="288" height="344" loading="lazy" alt="Kode QR untuk mengunduh APK LDR Anchor">
+                    <p><strong>Scan untuk unduh APK</strong>Arahkan kamera HP ke kode QR ini untuk langsung mengunduh dan memasang APK Android terbaru.</p>
                 </div>
-
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Aplikasi mobile berbasis Android yang dikembangkan menggunakan React Native, Firebase Firestore, dan
-                    Expo Notifications. Dirancang khusus untuk membantu pasangan jarak jauh (LDR) tetap terhubung secara
-                    emosional melalui fitur sinkronisasi suasana hati (Mood) real-time, pelukan virtual interaktif,
-                    serta integrasi Push Notification langsung saat pesan/interaksi dikirim.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">FITUR
-                        UTAMA & INFRASTRUCTURE:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li>✓ Sistem pairing akun unik antar pasangan secara aman via Firebase Auth & Firestore.</li>
-                        <li>✓ Berbagi status suasana hati (Mood) real-time dengan catatan khusus.</li>
-                        <li>✓ Fitur kirim pelukan virtual interaktif antar perangkat.</li>
-                        <li>✓ Integrasi <span class="text-white font-semibold">Firebase Cloud Messaging (FCM V1
-                                API)</span> via <span class="text-white font-semibold">Expo Push Service</span>.</li>
-                        <li>✓ Manajemen kredensial native Android terintegrasi menggunakan <span
-                                class="text-white font-semibold">EAS Build Credentials</span>.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalLdr')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="https://landing-page-my-ldr-app.vercel.app/" target="_blank"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                        🚀 Buka Landing Page
-                    </a>
+                <p class="modal-text">Aplikasi mobile Android yang dikembangkan dengan React Native, Firebase Firestore, dan Expo Notifications. Dirancang untuk membantu pasangan jarak jauh tetap terhubung lewat sinkronisasi suasana hati real-time, pelukan virtual interaktif, dan push notification saat pesan/interaksi dikirim.</p>
+                <h4 class="modal-sub">Fitur utama &amp; infrastruktur</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Pairing akun unik antar pasangan secara aman via Firebase Auth &amp; Firestore.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Berbagi status suasana hati (mood) real-time dengan catatan khusus.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Kirim pelukan virtual interaktif antar perangkat.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Integrasi <b>Firebase Cloud Messaging (FCM V1 API)</b> via <b>Expo Push Service</b>.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Kredensial native Android dikelola dengan <b>EAS Build Credentials</b>.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalLdr')">Tutup</button>
+                    <a href="https://landing-page-my-ldr-app.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Buka landing page <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP CLINICAL SUITE DASHBOARD -->
-        <div id="modal1"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modal1')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">Detail
-                    Proyek & Screenshot Full</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">Clinical Suite Dashboard</h3>
-                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
-                    style="border: 1px solid var(--border); background: var(--bg);">
-                    <img src="project1.webp" width="610" height="1356" loading="lazy" alt="Full Screenshot Clinical Suite Dashboard"
-                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-                </div>
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Sistem manajemen klinis berbasis web yang dirancang khusus untuk mempercepat rekapitulasi data medis
-                    pasien dan menyediakan alat hitung parameter fungsional secara otomatis.
-                </p>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modal1')" class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="https://landing-page-ulul.vercel.app/" target="_blank"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                        🚀 Buka Landing Page
-                    </a>
+        <div id="modal1" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal1-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modal1')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Web app · Klinis</p>
+                <h3 id="modal1-title" class="modal-title">Clinical Suite Dashboard</h3>
+                <div class="modal-shot"><img src="project1.webp" width="610" height="1356" loading="lazy" alt="Tangkapan layar penuh Clinical Suite Dashboard"></div>
+                <p class="modal-text">Sistem manajemen klinis berbasis web untuk mempercepat rekapitulasi data medis pasien dan menyediakan alat hitung parameter fungsional secara otomatis.</p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modal1')">Tutup</button>
+                    <a href="https://landing-page-ulul.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Buka landing page <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP INVENTORY SYSTEM -->
-        <div id="modalInventory"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalInventory')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">Enterprise-Grade
-                    Web App</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">Cloud Inventory Management System</h3>
-                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
-                    style="border: 1px solid var(--border); background: var(--bg);">
-                    <img src="project3.webp" width="1600" height="833" loading="lazy" alt="Full Screenshot Inventory System"
-                        class="w-full h-auto max-h-[75vh] object-cover object-top rounded-lg">
-                </div>
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Aplikasi manajemen inventaris serverless berskala produksi. Memanfaatkan <b>Google Apps Script</b>
-                    sebagai backend engine dan Google Sheets sebagai database. Sistem ini dirancang untuk ketahanan
-                    tinggi dengan proteksi tingkat lanjut layaknya aplikasi skala enterprise.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">Fitur &
-                        Arsitektur Utama:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li><span class="text-teal-400 font-bold">✓ Interactive Dashboard:</span> Real-time filtering,
-                            search, & client-side pagination.</li>
-                        <li><span class="text-teal-400 font-bold">✓ Concurrency Protection:</span> Implementasi <code
-                                class="text-xs px-1 rounded"
-                                style="background: var(--surface-hover);">LockService</code> untuk mencegah <i>race
-                                condition</i> stok minus.</li>
-                        <li><span class="text-teal-400 font-bold">✓ Security Hardening:</span> Role-Based Access Control
-                            (RBAC) & Anti-XSS Sanitization.</li>
-                        <li><span class="text-teal-400 font-bold">✓ Immutable Audit Trail:</span> Pencatatan otomatis log
-                            aktivitas & riwayat transaksi pengguna.</li>
-                        <li><span class="text-teal-400 font-bold">✓ Data Recovery:</span> Trigger otomatis penjadwalan
-                            snapshot full backup ke Google Drive.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalInventory')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="https://script.google.com/macros/s/AKfycbyW7R5AyM4FYccVJZsCxH4YcUwK6uwme2urJjglOF2WjfA5tUI7lgKViLY4vz7sBXg/exec"
-                        target="_blank"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                        🚀 Buka Web App Live
-                    </a>
+        <div id="modalInventory" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalInventory-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalInventory')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Web app · Serverless</p>
+                <h3 id="modalInventory-title" class="modal-title">Cloud Inventory Management System</h3>
+                <div class="modal-shot"><img src="project3.webp" width="1600" height="833" loading="lazy" alt="Tangkapan layar dasbor inventaris"></div>
+                <p class="modal-text">Aplikasi manajemen inventaris serverless. Memakai <b>Google Apps Script</b> sebagai backend dan Google Sheets sebagai database, dengan perlindungan yang biasa ada di aplikasi skala enterprise.</p>
+                <h4 class="modal-sub">Fitur &amp; arsitektur utama</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Dashboard interaktif:</b> filter real-time, pencarian, dan paginasi sisi klien.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Proteksi konkurensi:</b> <code>LockService</code> untuk mencegah <i>race condition</i> stok minus.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Security hardening:</b> role-based access control (RBAC) &amp; sanitasi anti-XSS.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Audit trail:</b> log aktivitas dan riwayat transaksi tercatat otomatis.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Data recovery:</b> snapshot full backup terjadwal ke Google Drive.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalInventory')">Tutup</button>
+                    <a href="https://script.google.com/macros/s/AKfycbyW7R5AyM4FYccVJZsCxH4YcUwK6uwme2urJjglOF2WjfA5tUI7lgKViLY4vz7sBXg/exec" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Buka web app <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP PODLEARN AI -->
-        <div id="modalPodlearn"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalPodlearn')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">AI
-                    Application • Fullstack Project</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">PodLearn — AI Podcast & Interactive Quiz
-                    Generator</h3>
-                <div class="mb-6 rounded-xl overflow-hidden flex items-center justify-center p-2"
-                    style="border: 1px solid var(--border); background: var(--bg);">
-                    <img src="project2.webp" width="826" height="951" loading="lazy" alt="Full Screenshot PodLearn AI"
-                        class="w-full h-auto max-h-[75vh] object-contain rounded-lg">
-                </div>
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Aplikasi kecerdasan buatan end-to-end yang mengubah dokumen PDF/materi teks panjang menjadi audio
-                    percakapan podcast 2 orang (Host & Expert) secara otomatis dengan teknologi Neural Text-to-Speech,
-                    penggabungan audio FFmpeg, serta 10 kuis evaluasi interaktif secara dinamis.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">Arsitektur
-                        & Fitur Utama:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li>✓ Parsing dokumen otomatis dari file `.pdf` & `.txt`.</li>
-                        <li>✓ Naskah percakapan santai Rian (Host) & Maya (Expert) via Gemini AI.</li>
-                        <li>✓ Pengisian suara multi-karakter realistis menggunakan Microsoft Edge Neural TTS.</li>
-                        <li>✓ Penggabungan otomatis berkas MP3 di server menggunakan FFmpeg Concat.</li>
-                        <li>✓ Evaluasi kuis 10 soal interaktif dengan perhitungan skor dinamis.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalPodlearn')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <span title="Demo sementara offline karena server sedang dipindahkan"
-                        class="bg-teal-400/15 text-teal-400 border border-teal-400/30 font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 cursor-not-allowed">
-                        🛠️ Sedang migrasi server
-                    </span>
+        <div id="modalPodlearn" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalPodlearn-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalPodlearn')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Fullstack AI · Podcast edukasi</p>
+                <h3 id="modalPodlearn-title" class="modal-title">PodLearn — AI Podcast &amp; Interactive Quiz Generator</h3>
+                <div class="modal-shot"><img src="project2.webp" width="826" height="951" loading="lazy" alt="Tangkapan layar PodLearn AI"></div>
+                <p class="modal-text">Aplikasi AI end-to-end yang mengubah PDF atau materi teks panjang menjadi audio percakapan podcast dua orang (host &amp; expert) dengan neural text-to-speech, penggabungan audio FFmpeg, serta 10 kuis evaluasi interaktif.</p>
+                <h4 class="modal-sub">Arsitektur &amp; fitur utama</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Parsing dokumen otomatis dari file <code>.pdf</code> &amp; <code>.txt</code>.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Naskah percakapan santai Rian (host) &amp; Maya (expert) via Gemini AI.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Suara multi-karakter dengan Microsoft Edge Neural TTS.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Penggabungan berkas MP3 di server dengan FFmpeg concat.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Kuis 10 soal interaktif dengan skor dinamis.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalPodlearn')">Tutup</button>
+                    <span class="btn btn-ghost btn-sm" aria-disabled="true" title="Demo sementara offline karena server sedang dipindahkan">Sedang migrasi server</span>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP TELEGRAM AI ASSISTANT -->
-        <div id="modalTelegram"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalTelegram')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">AI
-                    Bot Project • Live on Cloud</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">Telegram AI Personal Assistant</h3>
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Asisten virtual Telegram interaktif yang dikembangkan menggunakan Python, memanfaatkan model AI
-                    canggih Llama-3.3 70B via Groq API, dan di-hosting secara permanen di Railway (24/7 online).
-                    Dilengkapi system prompt kustom agar responsif, cerdas, dan santai.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">Arsitektur
-                        & Fitur:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li>✓ Integrasi real-time Telegram Bot API (pyTelegramBotAPI).</li>
-                        <li>✓ Performa tinggi berkat integrasi model LLM Llama-3.3.</li>
-                        <li>✓ Aktif 24/7 di cloud server tanpa henti.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalTelegram')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="https://t.me/BotasikBot" target="_blank"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md flex items-center gap-2">
-                        🤖 Coba Langsung (@BotasikBot)
-                    </a>
+        <div id="modalTelegram" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTelegram-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalTelegram')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Bot AI · Online di cloud</p>
+                <h3 id="modalTelegram-title" class="modal-title">Telegram AI Personal Assistant</h3>
+                <p class="modal-text">Asisten virtual Telegram yang dibangun dengan Python, memakai model Llama-3.3 70B via Groq API, dan di-hosting di Railway (online 24/7). Dilengkapi system prompt kustom agar responsif dan santai.</p>
+                <h4 class="modal-sub">Arsitektur &amp; fitur</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Integrasi real-time Telegram Bot API (pyTelegramBotAPI).</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Respons cepat berkat model LLM Llama-3.3 lewat Groq.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Aktif 24/7 di cloud server.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalTelegram')">Tutup</button>
+                    <a href="https://t.me/BotasikBot" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm">Coba @BotasikBot <svg aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POPUP DOMAIN EXPLORER -->
-        <div id="modalDomain"
-            class="fixed inset-0 z-50 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto"
-            style="background: rgba(6,9,16,0.88);">
-            <div class="rounded-2xl max-w-xl w-full p-6 md:p-8 relative shadow-2xl my-8"
-                style="background: var(--bg-alt); border: 1px solid var(--border-hover);">
-                <button onclick="closeModal('modalDomain')"
-                    class="absolute top-4 right-4 hover:text-white p-2.5 rounded-full transition z-10"
-                    style="background: var(--surface-hover); color: var(--text-secondary);">✕</button>
-                <span
-                    class="text-xs font-semibold px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full border border-teal-500/20 inline-block mb-3">Fullstack
-                    Web Project</span>
-                <h3 class="text-2xl font-display font-bold text-white mb-4">Domain Explorer — Laravel App</h3>
-                <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
-                    Aplikasi manajemen dan eksplorasi domain yang dibangun menggunakan framework Laravel dan Tailwind
-                    CSS. Dirancang untuk mengelola data domain, mengecek status ketersediaan/ekstensi, serta membantu
-                    riset infrastruktur website secara terstruktur.
-                </p>
-                <div class="mb-6">
-                    <h4 class="text-xs font-semibold font-mono uppercase tracking-wider text-teal-400 mb-2">Fitur
-                        Utama:</h4>
-                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
-                        <li>✓ Manajemen basis data domain lokal (CRUD interaktif).</li>
-                        <li>✓ Integrasi tautan langsung ke URL eksternal secara real-time.</li>
-                        <li>✓ Desain antarmuka modern menggunakan Tailwind CSS.</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap justify-end gap-3">
-                    <button onclick="closeModal('modalDomain')"
-                        class="font-medium px-5 py-2.5 rounded-xl transition text-sm"
-                        style="background: var(--surface-hover); color: var(--text-primary);">Tutup</button>
-                    <a href="#contact" onclick="closeModal('modalDomain')"
-                        class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm shadow-md">Diskusikan
-                        Proyek</a>
+        <div id="modalDomain" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalDomain-title">
+            <div class="modal-card">
+                <button type="button" class="modal-close" onclick="closeModal('modalDomain')" aria-label="Tutup detail"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                <p class="modal-tag">Fullstack web · Laravel</p>
+                <h3 id="modalDomain-title" class="modal-title">Domain Explorer — Laravel App</h3>
+                <p class="modal-text">Aplikasi manajemen dan eksplorasi domain yang dibangun dengan Laravel dan Tailwind CSS, untuk mengelola data domain, mengecek status ketersediaan/ekstensi, dan membantu riset infrastruktur website secara terstruktur.</p>
+                <h4 class="modal-sub">Fitur utama</h4>
+                <ul class="feature-list">
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Manajemen basis data domain lokal (CRUD interaktif).</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Tautan langsung ke URL eksternal secara real-time.</span></li>
+                    <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Antarmuka dengan Tailwind CSS.</span></li>
+                </ul>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalDomain')">Tutup</button>
+                    <a href="#contact" onclick="closeModal('modalDomain')" class="btn btn-dark btn-sm">Diskusikan proyek</a>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="site-footer sec-dark">
-        <div class="wrap font-label">&copy; 2026 Muhammad Ulul Albab</div>
+        <div class="wrap">
+            <span>&copy; 2026 Muhammad Ulul Albab</span>
+            <span class="tag">From molecules to meaningful code.</span>
+            <a href="#hero">Kembali ke atas</a>
+        </div>
     </footer>
 
     <script>
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-        function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.body.style.overflow = 'auto'; }
-        document.addEventListener('click', function (e) { var b = e.target.closest('[data-modal]'); if (b) openModal(b.dataset.modal); });
+        /* ---- Modals: open/close, focus in and back, Esc, click outside, Tab stays inside ---- */
+        var lastFocus = null;
+        function openModal(id) {
+            var m = document.getElementById(id); if (!m) return;
+            lastFocus = document.activeElement;
+            m.classList.remove('hidden'); document.body.style.overflow = 'hidden';
+            var c = m.querySelector('.modal-close'); if (c) c.focus();
+        }
+        function closeModal(id) {
+            var m = document.getElementById(id); if (!m) return;
+            m.classList.add('hidden'); document.body.style.overflow = '';
+            if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+        }
+        document.addEventListener('click', function (e) {
+            var b = e.target.closest('[data-modal]'); if (b) { openModal(b.dataset.modal); return; }
+            if (e.target.classList && e.target.classList.contains('modal')) closeModal(e.target.id);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Tab') return;
+            var m = document.querySelector('.modal:not(.hidden)'); if (!m) return;
+            var f = m.querySelectorAll('a[href], button:not([disabled])'); if (!f.length) return;
+            var first = f[0], last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
 
+        /* ---- Mobile menu ---- */
         (function () {
             var btn = document.getElementById('menu-btn'), menu = document.getElementById('menu');
             function setMenu(open) { btn.setAttribute('aria-expanded', open ? 'true' : 'false'); btn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu'); menu.hidden = !open; }
@@ -757,11 +662,45 @@
             document.addEventListener('keydown', function (e) {
                 if (e.key !== 'Escape') return;
                 setMenu(false);
-                document.querySelectorAll('[id^="modal"]:not(.hidden)').forEach(function (m) { closeModal(m.id); });
+                document.querySelectorAll('.modal:not(.hidden)').forEach(function (m) { closeModal(m.id); });
             });
         })();
 
-        /* Split the pharmacy statement into words so each can light up on scroll (CSS only does the animating). */
+        /* ---- Header gets a solid backing as soon as the page scrolls, so text never runs under the links ---- */
+        (function () {
+            var h = document.querySelector('.site-header'), hero = document.getElementById('hero'); if (!h || !hero) return;
+            var ticking = false;
+            function update() { ticking = false; h.classList.toggle('is-solid', window.scrollY > 24); }
+            window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+            update();
+        })();
+
+        /* ---- Hero intro: Ulul walks in, copy rises, then the giant name settles behind him ----
+           Without JS (or with reduced motion / data saver) the final frame is shown as a still. */
+        (function () {
+            var root = document.documentElement, hero = document.getElementById('hero');
+            if (!hero || !root.classList.contains('js-intro')) return;
+            var v = hero.querySelector('.hero-video'), replay = hero.querySelector('.hero-replay');
+            var uiTimer, guard, started = false;
+            function land() { clearTimeout(uiTimer); hero.classList.add('ui-in', 'is-landed'); }
+            function fallback() { if (started) return; hero.classList.add('is-fallback'); land(); }
+            function run() {
+                started = true; clearTimeout(guard); clearTimeout(uiTimer);
+                hero.classList.remove('is-landed', 'is-fallback', 'ui-in');
+                uiTimer = setTimeout(function () { hero.classList.add('ui-in'); }, 650);
+            }
+            function play() { var p = v.play(); if (p && p.then) p.then(run).catch(fallback); else run(); }
+
+            v.src = matchMedia('(max-width: 1023px)').matches ? v.dataset.srcM : v.dataset.srcD;
+            v.preload = 'auto';
+            v.addEventListener('ended', land);
+            v.addEventListener('error', fallback);
+            guard = setTimeout(fallback, 2200);
+            play();
+            replay.addEventListener('click', function () { hero.classList.remove('is-landed'); v.currentTime = 0; started = false; play(); });
+        })();
+
+        /* ---- Split the pharmacy statement into words so each can light up on scroll (CSS does the animating) ---- */
         document.querySelectorAll('.statement').forEach(function (el) {
             var words = el.textContent.trim().split(/\s+/), n = words.length;
             el.textContent = '';
